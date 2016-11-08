@@ -8,7 +8,19 @@
 
 import UIKit
 
-class FilterStoryViewController: BaseViewController {
+let kTagTypeListTag = 1
+let kTagStatusListTag = 2
+let kTagCategoryListTag = 3
+let kTagSortOrderTag = 4
+
+
+let keycategoryparam = "keycategoryparam"
+let keytypeparam = "keytypeparam"
+let keystatusparam = "keystatusparam"
+let keyorderparam = "keyorderparam"
+
+
+class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
 
  
     @IBOutlet weak var typeListTag: TagListView!
@@ -24,17 +36,15 @@ class FilterStoryViewController: BaseViewController {
     
     @IBOutlet weak var contraitSort: NSLayoutConstraint!
     
-    var arrType:[StoryInfoModel]!
-    var block:((StoryInfoModel)->())?
-   
     
-//    @IBOutlet weak var cellType: FilterTableViewCell!
-//    
-//    @IBOutlet weak var cellStatus: FilterTableViewCell!
-//    
-//    @IBOutlet weak var cellCatalog: FilterTableViewCell!
-//    
-//    @IBOutlet weak var cellSortOrder: FilterTableViewCell!
+     var arrParamCate = [0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0   ,0,0,0  ,0,0,0 ,0]
+     var block:((NSMutableDictionary)->())?
+     var category:String = ""
+     var status:String = ""
+     var order:String = ""
+     var rd:String = ""
+ 
+    var param:NSMutableDictionary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +56,7 @@ class FilterStoryViewController: BaseViewController {
     
     }
 
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
+ 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -59,78 +67,133 @@ class FilterStoryViewController: BaseViewController {
     func setupLayout(){
         categoryListTag.alignment = .Center
         
-        categoryListTag.addTag("Action")
-        categoryListTag.addTag("Adventure")
-        categoryListTag.addTag("Comedy")
-        categoryListTag.addTag("Demons")
-        categoryListTag.addTag("Drama")
-        categoryListTag.addTag("Ecchi")
-        categoryListTag.addTag("Fantasy")
-        categoryListTag.addTag("Gender Bender")
-        categoryListTag.addTag("Harem")
-        categoryListTag.addTag("Historical")
-        categoryListTag.addTag("Horror")
-        categoryListTag.addTag("Horror")
-        categoryListTag.addTag("Josei")
-        categoryListTag.addTag("Magic")
-        categoryListTag.addTag("Martial Arts")
-        categoryListTag.addTag("Mature")
-        categoryListTag.addTag("Mecha")
-        categoryListTag.addTag("Molitary")
-        categoryListTag.addTag("Mystery")
-        categoryListTag.addTag("One Shot")
-        categoryListTag.addTag("Psychological")
-        categoryListTag.addTag("Romance")
-        categoryListTag.addTag("School Life")
-        categoryListTag.addTag("Sci-Fi")
-        categoryListTag.addTag("Seinen")
-        categoryListTag.addTag("Shoujo")
-        categoryListTag.addTag("Shoujoai")
-        categoryListTag.addTag("Shounen")
-        categoryListTag.addTag("Shounenai")
-        categoryListTag.addTag("Slice of Life")
-        categoryListTag.addTag("Smut")
-        categoryListTag.addTag("Sports")
-        categoryListTag.addTag("Super Power")
-        categoryListTag.addTag("Supernatural")
-        categoryListTag.addTag("Tragedy")
-        categoryListTag.addTag("Vampire")
-        categoryListTag.addTag("Yaoi")
-        categoryListTag.addTag("Yuri")
+        categoryListTag.addTag("Action").numTag = 37
+        categoryListTag.addTag("Adventure").numTag = 36
+        categoryListTag.addTag("Comedy").numTag = 35
+        categoryListTag.addTag("Demons").numTag = 34
+        categoryListTag.addTag("Drama").numTag =  33
+        categoryListTag.addTag("Ecchi").numTag =  32
+        categoryListTag.addTag("Fantasy").numTag = 31
+        
+        categoryListTag.addTag("Gender Bender").numTag = 30
+        categoryListTag.addTag("Harem").numTag = 29
+        categoryListTag.addTag("Historical").numTag = 28
+        categoryListTag.addTag("Horror").numTag = 27
+        categoryListTag.addTag("Josei").numTag =  26
+        categoryListTag.addTag("Magic").numTag = 25
+        categoryListTag.addTag("Martial Arts").numTag = 24
+        categoryListTag.addTag("Mature").numTag = 23
+        categoryListTag.addTag("Mecha").numTag = 22
+        categoryListTag.addTag("Molitary").numTag = 21
+        categoryListTag.addTag("Mystery").numTag = 20
+        categoryListTag.addTag("One Shot").numTag = 19
+        categoryListTag.addTag("Psychological").numTag = 18
+        categoryListTag.addTag("Romance").numTag = 17
+        categoryListTag.addTag("School Life").numTag = 16
+        categoryListTag.addTag("Sci-Fi").numTag = 15
+        categoryListTag.addTag("Seinen").numTag = 14
+        categoryListTag.addTag("Shoujo").numTag = 13
+        categoryListTag.addTag("Shoujoai").numTag = 12
+        categoryListTag.addTag("Shounen").numTag = 11
+        categoryListTag.addTag("Shounenai").numTag = 10
+        categoryListTag.addTag("Slice of Life").numTag = 9
+        categoryListTag.addTag("Smut").numTag = 8
+        categoryListTag.addTag("Sports").numTag = 7
+        categoryListTag.addTag("Super Power").numTag = 6
+        categoryListTag.addTag("Supernatural").numTag = 5
+        categoryListTag.addTag("Tragedy").numTag = 4
+        categoryListTag.addTag("Vampire").numTag = 3
+        categoryListTag.addTag("Yaoi").numTag = 2
+        categoryListTag.addTag("Yuri").numTag = 1
+        
+        categoryListTag.delegate = self
         
         print("categoryListTag.rows")
         print(categoryListTag.rows)
         print("tagViewHeight")
         print(categoryListTag.tagViewHeight)
         
-        contraitCategory.constant = CGFloat(categoryListTag.rows) * categoryListTag.tagViewHeight
+        contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight + categoryListTag.paddingY)
         
         typeListTag.alignment = .Center
-        typeListTag.addTag("Both(Manga and Manhwa)")
-        typeListTag.addTag("Manhwa(Reading Left to Right")
-        typeListTag.addTag("Manga(Reading Right to Left")
+        typeListTag.addTag("Both(Manga and Manhwa)").numTag =  0
+        typeListTag.addTag("Manhwa(Reading Left to Right").numTag =  1
+        typeListTag.addTag("Manga(Reading Right to Left").numTag =  2
+        
+        typeListTag.delegate = self
         
         print("typeListTag.rows")
         print(typeListTag.rows)
         print("typeListTag.tagViewHeight")
         print(typeListTag.tagViewHeight)
         
-        contraitType.constant = CGFloat(typeListTag.rows) * typeListTag.tagViewHeight
+        contraitType.constant = CGFloat(typeListTag.rows) * (typeListTag.tagViewHeight + typeListTag.paddingY)
         
         statusListTag.alignment = .Center
-        statusListTag.addTag("Both(Ongoing and Complete)")
-        statusListTag.addTag("Ongoing")
-        statusListTag.addTag("Complete")
+        statusListTag.addTag("Both(Ongoing and Complete)").numTag =  0
+        statusListTag.addTag("Ongoing").numTag =  1
+        statusListTag.addTag("Complete").numTag =  2
         
-        contraitStatus.constant = CGFloat(statusListTag.rows) * statusListTag.tagViewHeight
+        statusListTag.delegate = self
+        
+        contraitStatus.constant = CGFloat(statusListTag.rows) * (statusListTag.tagViewHeight + statusListTag.paddingY )
         
         sortOrder.alignment = .Center
-        sortOrder.addTag("Similarity")
-        sortOrder.addTag("Alphabetical")
-        sortOrder.addTag("Popularity")
+        sortOrder.addTag("Similarity").numTag =  0
+        sortOrder.addTag("Alphabetical").numTag =  1
+        sortOrder.addTag("Popularity").numTag =  2
         
-        contraitSort.constant = CGFloat(sortOrder.rows) * sortOrder.tagViewHeight
-
+        sortOrder.delegate = self
+        
+        contraitSort.constant = CGFloat(sortOrder.rows) * (sortOrder.tagViewHeight + sortOrder.paddingY )
+        
+        
+        categoryListTag.tag = kTagCategoryListTag
+        sortOrder.tag = kTagSortOrderTag
+        typeListTag.tag = kTagTypeListTag
+        statusListTag.tag =  kTagStatusListTag
+    }
+    
+    
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+        if sender.tag == kTagCategoryListTag {
+            for tag in sender.tagViews {
+                tag.selected = (tag == tagView)
+                
+            }
+              
+            
+            for tag in sender.tagViews {
+               if tag.selected == true {
+                   arrParamCate[tag.numTag - 1] = 1 //tag.numTag
+               }else{
+                  arrParamCate[tag.numTag - 1] = 0
+                }
+            }
+            
+            self.category = ""
+            for item  in arrParamCate {
+                category = String(format:"%@%d",category,item)
+                
+            }
+        }else{
+            var stringValue = "0"
+                for tag in sender.tagViews {
+                        tag.selected = (tag == tagView)
+                    if tag.selected == true {
+                        stringValue = "\( tag.numTag)"
+                    }
+                    }
+            
+             if sender.tag == kTagStatusListTag {
+                status = stringValue
+             }else if sender.tag == kTagSortOrderTag{
+                  order = stringValue
+             }else if  sender.tag == kTagTypeListTag{
+                 rd = stringValue
+            }
+        }
+        print("Tag pressed: \(title), \(sender)")
     }
 
 }
@@ -146,7 +209,7 @@ extension FilterStoryViewController {
    
      override func setUpNavigationBar() {
   
-        navigationController?.navigationBar.setDefault(UINavigationBar.State.Back, vc: self)
+        navigationController?.navigationBar.setDefault(UINavigationBar.State.BackAndSave, vc: self)
        
         navigationItem.title = "Filter Story"
         self.navigationController?.hidesBarsOnTap = true
@@ -159,6 +222,21 @@ extension FilterStoryViewController {
         
         
 }
+    
+    override func btnSaveTouch() {
+        super.btnSaveTouch()
+        self.param?.setValue(category, forKey: keycategoryparam)
+        self.param?.setValue(rd, forKey: keytypeparam)
+        self.param?.setValue(status, forKey: keystatusparam)
+        self.param?.setValue(order, forKey: keyorderparam)
+       
+        if block != nil {
+            block!(self.param!)
+        }
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
 
 }
 

@@ -309,11 +309,11 @@ public class TagListView: UIView {
         tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         // On long press, deselect all tags except this one
-        tagView.onLongPress = { this in
-            for tag in self.tagViews {
-                tag.selected = (tag == this)
-            }
-        }
+//        tagView.onLongPress = { this in
+//            for tag in self.tagViews {
+//                tag.selected = (tag == this)
+//            }
+//        }
         
         return tagView
     }
@@ -380,6 +380,8 @@ public class TagListView: UIView {
     
     func tagPressed(sender: TagView!) {
         sender.onTap?(sender)
+        
+      
         delegate?.tagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
     }
     

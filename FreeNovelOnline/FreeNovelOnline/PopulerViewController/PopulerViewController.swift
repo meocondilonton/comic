@@ -217,16 +217,16 @@ extension PopulerViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("FilterStoryViewController") as! FilterStoryViewController
         vc.hidesBottomBarWhenPushed = true
-        vc.arrType = self.arrFilterDTO()
+//        vc.arrType = self.arrFilterDTO()
         vc.block = {[weak self] (result)->() in
-            let url = String(format: "%@%@",BaseUrl,result.storyUrl ?? "")
-            self?.loadData(url,isRefresh: true)
-            let pa = NSMutableDictionary()
-            pa.setObject(result, forKey: "story")
-            Utils.saveFilterParams(pa)
-            let title = result.storyName ?? ""
-            self?.fakeNavi.lblTitle.text =  title
-            self?.collectionViewStory.scrollsToTop = true
+//            let url = String(format: "%@%@",BaseUrl,result.storyUrl ?? "")
+//            self?.loadData(url,isRefresh: true)
+//            let pa = NSMutableDictionary()
+//            pa.setObject(result, forKey: "story")
+//            Utils.saveFilterParams(pa)
+//            let title = result.storyName ?? ""
+//            self?.fakeNavi.lblTitle.text =  title
+//            self?.collectionViewStory.scrollsToTop = true
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

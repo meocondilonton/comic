@@ -12,7 +12,7 @@ import GoogleMobileAds
 import Firebase
 
 let BaseUrl = "http://www.mangareader.net"
-let UrlSearch = "http://freenovelonline.com/?mod=search&act=list&name="
+let UrlSearch = "http://www.mangareader.net/search/?w=%@&rd=%@&status=%@&order=%@&genre=%@&p=%d"
 
 let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 

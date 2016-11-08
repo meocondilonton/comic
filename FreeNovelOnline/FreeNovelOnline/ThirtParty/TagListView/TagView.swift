@@ -82,6 +82,7 @@ public class TagView: UIButton {
         }
     }
     
+    var numTag:Int = 0
     private func reloadStyles() {
         if highlighted {
             if let highlightedBackgroundColor = highlightedBackgroundColor {

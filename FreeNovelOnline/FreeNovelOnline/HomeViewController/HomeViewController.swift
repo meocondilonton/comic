@@ -27,6 +27,9 @@ class HomeViewController: BaseViewController {
 //    var currentLink:String = ""
     var numAd:Int = 0
     
+    var catelogyName = ["37":"Action" ,"36":"Adventure" ,"35":"Comedy" ,"34":"Demons" ,"33":"Drama" ,"32":"Ecchi" ,"31":"Fantasy" ,"30":"Gender Bender" ,"29":"Harem" ,"28":"Historical" ,"27":"Horror" ,"26":"Josei" ,"25":"Magic" ,"24":"Martial Arts" ,"23":"Mature" ,"22":"Mecha" ,"21":"Molitary" ,"20":"Mystery" ,"19":"One Shot" ,"18":"Psychological" ,"17":"Romance" ,"16":"School Life" ,"15":"Sci-Fi" ,"14":"Seinen" ,"13":"Shoujo" ,"12":"Shoujoai" ,"11":"Shounen" ,"10":"Shounenai" ,"9":"Slice of Life" ,"8":"Smut" ,"7":"Sports" ,"6":"Super Power" ,"5":"Supernatural" ,"4":"Tragedy" ,"3":"Vampire" ,"2":"Yaoi" ,"1":"Yuri"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         request = GADRequest()
@@ -40,30 +43,73 @@ class HomeViewController: BaseViewController {
 
     func getDefaultData() { // get hot book list
         
-//            let url = String(format: "%@%@",BaseUrl,item.storyUrl ?? "")
-//            self.loadData(param:NSMutableDictionary   ,isRefresh: true)
-//            let title = item.storyName ?? ""
-//            self.fakeNavi.lblTitle.text =  title
         
-        self.param = NSMutableDictionary()
-        
+        self.param = self.getPriviosParam()
+        self.loadData(self.param!,isRefresh: true)
+        self.updateHeader(false, isTittle: false)
         
     }
     
-    func getPriviosParam() -> StoryInfoModel?{
+    func updateHeader( isSearch:Bool, isTittle:Bool){
+        
+        if isSearch == true {
+             let keyWord = self.param?.valueForKey(keywordparam) as? String
+             self.fakeNavi.stringDes =  keyWord!
+        }else{
+            var condition = "Filter by: "
+            if let string = self.param?.valueForKey(keycategorynameparam) as? String {
+                
+                condition.appendContentsOf(string)
+            }
+            
+            if let string = self.param?.valueForKey(keytypeparam)  as? String{
+                if string == "0" {
+                     condition.appendContentsOf(", Both")
+                }else if string == "1" {
+                     condition.appendContentsOf(", Manhwa")
+                }else if string == "2" {
+                     condition.appendContentsOf(", Manga")
+                }
+                 
+            }
+           
+            if let string = self.param?.valueForKey(keystatusparam)  as? String{
+                if string == "0" {
+                     condition.appendContentsOf(", Both")
+                }else if string == "1" {
+                     condition.appendContentsOf(", Ongoing")
+                }else if string == "2" {
+                     condition.appendContentsOf(", Complete")
+                }
+                
+            }
+      
+            if let string = self.param?.valueForKey(keyorderparam)  as? String{
+                if string == "0" {
+                      condition.appendContentsOf(", Similarity")
+                }else if string == "1" {
+                       condition.appendContentsOf(", Alphabetical")
+                }else if string == "2" {
+                       condition.appendContentsOf(", Popularity")
+                }
+                
+            }
+            
+             self.fakeNavi.stringDes = condition
+        }
+        
+    }
+    
+    func getPriviosParam() -> NSMutableDictionary{
         var pa = Utils.getFilterParams()
         if pa == nil {
             pa = NSMutableDictionary()
-            let item = StoryInfoModel()
-            item.storyImgUrl = ""
-            item.storyUrl = ""
-            item.storyName = "NEW BOOKS"
-            pa!.setObject(item, forKey: "story")
+            
             Utils.saveFilterParams(pa!)
-            return item
+            return pa!
         }else{
-            let item = pa?.valueForKey("story") as? StoryInfoModel
-            return item
+            
+            return pa!
         }
     }
     
@@ -117,54 +163,71 @@ class HomeViewController: BaseViewController {
         
      
             let elements = doc.searchWithXPathQuery("//div[@class='mangaresultitem']")
-             print("elements")
-            print(elements)
-            for eleItem in elements {
+//             print("elements")
+//            print(elements)
+              for eleItem in elements {
                 let e0 = eleItem as! TFHppleElement
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
-//                     print("e.content")
-//                     print(e.content)
-                    for eleItem1 in e.children {
-                        let e1 = eleItem1 as! TFHppleElement
-//                        print("e1.content")
-//                        print(e1.content)
-                        for eleItem2 in e1.children {
-                            let e2 = eleItem2 as! TFHppleElement
-//                            print("e2.content")
-//                            print(e2.content)
-                            for eleItem3 in e2.children {
-                                let e3 = eleItem3 as! TFHppleElement
+                    //            print(e.attributes["class"])
+                    //            print("e.raw")
+                    //            print(e.content)
+                    if e.attributes["class"]?.isEqualToString("mangaresultinner") == true   {
+                        //                      print("e.content")
+                        //                      print(e.content)
+                        let itemStory = StoryInfoModel()
+                        for eleItem1 in e.children {
+                            let e1 =  eleItem1 as! TFHppleElement
+                            if e1.attributes["class"]?.isEqualToString("imgsearchresults") == true   {
                                 
-                                for eleItem4 in e3.children {
-                                    let e4 = eleItem4 as! TFHppleElement
-//                                    print("e4.content")
-//                                    print(e4.content)
-                                    if let href4 = e4.objectForKey("href") {
-//                                        print("href4")
-//                                        print(href4)
-                                        for eleItem5 in e4.children {
-                                            let e5 = eleItem5 as! TFHppleElement
-                                            if let src = e5.objectForKey("src"){
- 
-                                                let itemStory = StoryInfoModel()
-                                                 let urlSourceString :String = src.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                                                let urlString :String = href4.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                                                    itemStory.storyUrl = urlString
-                                                    itemStory.storyImgUrl = urlSourceString
-                                                if  let title = e5.objectForKey("title"){
-                                                     itemStory.storyName = title
+                                if let href = e1.objectForKey("style") {
+                                    
+                                    let imgUrlArr = href.characters.split{$0 == "'"}.map(String.init)
+                                    if imgUrlArr.count >= 2 {
+                                        
+                                        itemStory.storyImgUrl = imgUrlArr[1]
+                                    }
+                                    
+                                }
+                                
+                            }else if  e1.attributes["class"]?.isEqualToString("result_info c4") == true  {
+                                for eleItem2 in e1.children {
+                                    let e2 =  eleItem2 as! TFHppleElement
+                                    if e2.attributes["class"]?.isEqualToString("manga_name") == true{
+                                        for eleItem3 in e2.children {
+                                            let e3 =  eleItem3 as! TFHppleElement
+                                            for eleItem4 in e3.children {
+                                                let e5 =  eleItem4 as! TFHppleElement
+                                                print("e5.content")
+                                                 if e5.raw != nil {
+                                                print(e5.raw)
+                                                }
+                                                for eleItem6 in e5.children {
+                                                    let e6 =  eleItem6 as! TFHppleElement
+                                                    
+                                                    if e6.raw != nil {
+                                                        print("e6.content")
+                                                        print(e6.raw)
+                                                        if let href = e6.objectForKey("href") {
+                                                            itemStory.storyUrl = href
+                                                        }
+                                                        
                                                     }
-                                                    self?.arrStory?.append(itemStory)
+                                                }
+                                                if e5.raw != nil {
+                                                    itemStory.storyName = e5.content
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        self?.arrStory?.append(itemStory)
                     }
                 }
-            }
+                
+        }
         
            self?.collectionViewStory.reloadData()
         }
@@ -199,58 +262,59 @@ extension HomeViewController {
 //            Utils.saveFilterParams(pa)
 //            let title = result.storyName ?? ""
 //            self?.fakeNavi.lblTitle.text =  title
+            self?.updateHeader(false, isTittle: false)
             self?.collectionViewStory.scrollsToTop = true
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func arrTest()->[StoryInfoModel]{
-         var result = [StoryInfoModel]()
-        
-        let itemNew = StoryInfoModel()
-        itemNew.storyName = "Airport"
-        itemNew.storyUrl = "/241269-airport.html"
-        itemNew.storyImgUrl = "/uploads/truyen/Airport.jpg"
-        result.append(itemNew)
-        
-        let itemNew2 = StoryInfoModel()
-        itemNew2.storyName = "The Historian"
-        itemNew2.storyUrl = "/241337-the-historian.html"
-        itemNew2.storyImgUrl = "/uploads/truyen/The-Historian.jpg"
-        result.append(itemNew2)
-        
-        let itemNew3 = StoryInfoModel()
-        itemNew3.storyName = "Teenage Mermaid"
-        itemNew3.storyUrl = "/241217-teenage-mermaid.html"
-        itemNew3.storyImgUrl = "/uploads/truyen/Teenage-Mermaid.jpg"
-        result.append(itemNew3)
-        
-        let itemNew4 = StoryInfoModel()
-        itemNew4.storyName = "Our Lady of Darkness"
-        itemNew4.storyUrl = "/241960-our-lady-of-darkness.html"
-        itemNew4.storyImgUrl = "/uploads/truyen/Our-Lady-of-Darkness.jpg"
-        result.append(itemNew4)
-        
-        let itemNew5 = StoryInfoModel()
-        itemNew5.storyName = "Boy's Life"
-        itemNew5.storyUrl = "/241659-boys-life.html"
-        itemNew5.storyImgUrl = "/uploads/truyen/Boys-Life.jpg"
-        result.append(itemNew5)
-        
-        let itemNew6 = StoryInfoModel()
-        itemNew6.storyName = "Of Swine and Roses"
-        itemNew6.storyUrl = "/241518-of-swine-and-roses.html"
-        itemNew6.storyImgUrl = "/uploads/truyen/Of-Swine-and-Roses.jpg"
-        result.append(itemNew6)
-        
-        let itemNew7 = StoryInfoModel()
-        itemNew7.storyName = "Questing Beast"
-        itemNew7.storyUrl = "/241519-questing-beast.html"
-        itemNew7.storyImgUrl = "/uploads/truyen/Questing-Beast.jpg"
-        result.append(itemNew7)
-        
-        return result
-    }
+//    func arrTest()->[StoryInfoModel]{
+//         var result = [StoryInfoModel]()
+//        
+//        let itemNew = StoryInfoModel()
+//        itemNew.storyName = "Airport"
+//        itemNew.storyUrl = "/241269-airport.html"
+//        itemNew.storyImgUrl = "/uploads/truyen/Airport.jpg"
+//        result.append(itemNew)
+//        
+//        let itemNew2 = StoryInfoModel()
+//        itemNew2.storyName = "The Historian"
+//        itemNew2.storyUrl = "/241337-the-historian.html"
+//        itemNew2.storyImgUrl = "/uploads/truyen/The-Historian.jpg"
+//        result.append(itemNew2)
+//        
+//        let itemNew3 = StoryInfoModel()
+//        itemNew3.storyName = "Teenage Mermaid"
+//        itemNew3.storyUrl = "/241217-teenage-mermaid.html"
+//        itemNew3.storyImgUrl = "/uploads/truyen/Teenage-Mermaid.jpg"
+//        result.append(itemNew3)
+//        
+//        let itemNew4 = StoryInfoModel()
+//        itemNew4.storyName = "Our Lady of Darkness"
+//        itemNew4.storyUrl = "/241960-our-lady-of-darkness.html"
+//        itemNew4.storyImgUrl = "/uploads/truyen/Our-Lady-of-Darkness.jpg"
+//        result.append(itemNew4)
+//        
+//        let itemNew5 = StoryInfoModel()
+//        itemNew5.storyName = "Boy's Life"
+//        itemNew5.storyUrl = "/241659-boys-life.html"
+//        itemNew5.storyImgUrl = "/uploads/truyen/Boys-Life.jpg"
+//        result.append(itemNew5)
+//        
+//        let itemNew6 = StoryInfoModel()
+//        itemNew6.storyName = "Of Swine and Roses"
+//        itemNew6.storyUrl = "/241518-of-swine-and-roses.html"
+//        itemNew6.storyImgUrl = "/uploads/truyen/Of-Swine-and-Roses.jpg"
+//        result.append(itemNew6)
+//        
+//        let itemNew7 = StoryInfoModel()
+//        itemNew7.storyName = "Questing Beast"
+//        itemNew7.storyUrl = "/241519-questing-beast.html"
+//        itemNew7.storyImgUrl = "/uploads/truyen/Questing-Beast.jpg"
+//        result.append(itemNew7)
+//        
+//        return result
+//    }
     
     
 }

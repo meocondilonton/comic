@@ -13,11 +13,12 @@ let kTagStatusListTag = 2
 let kTagCategoryListTag = 3
 let kTagSortOrderTag = 4
 
-
+let keywordparam = "keywordparam"
 let keycategoryparam = "keycategoryparam"
 let keytypeparam = "keytypeparam"
 let keystatusparam = "keystatusparam"
 let keyorderparam = "keyorderparam"
+let keycategorynameparam = "keycategorynameparam"
 
 
 class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
@@ -43,6 +44,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
      var status:String = ""
      var order:String = ""
      var rd:String = ""
+     var categorySelectName:String = ""
  
     var param:NSMutableDictionary?
     
@@ -108,10 +110,10 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         categoryListTag.delegate = self
         
-        print("categoryListTag.rows")
-        print(categoryListTag.rows)
-        print("tagViewHeight")
-        print(categoryListTag.tagViewHeight)
+//        print("categoryListTag.rows")
+//        print(categoryListTag.rows)
+//        print("tagViewHeight")
+//        print(categoryListTag.tagViewHeight)
         
         contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight + categoryListTag.paddingY)
         
@@ -162,10 +164,11 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                 
             }
               
-            
+            categorySelectName = title
             for tag in sender.tagViews {
                if tag.selected == true {
                    arrParamCate[tag.numTag - 1] = 1 //tag.numTag
+                
                }else{
                   arrParamCate[tag.numTag - 1] = 0
                 }
@@ -229,6 +232,8 @@ extension FilterStoryViewController {
         self.param?.setValue(rd, forKey: keytypeparam)
         self.param?.setValue(status, forKey: keystatusparam)
         self.param?.setValue(order, forKey: keyorderparam)
+        self.param?.setValue("", forKey: keywordparam)
+        self.param?.setValue(categorySelectName, forKey: keycategorynameparam)
        
         if block != nil {
             block!(self.param!)

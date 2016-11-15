@@ -154,9 +154,72 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         sortOrder.tag = kTagSortOrderTag
         typeListTag.tag = kTagTypeListTag
         statusListTag.tag =  kTagStatusListTag
+        
+        
+        self.updatePreviousSlection()
     }
     
-    
+    func updatePreviousSlection(){
+        if self.param != nil {
+            let rd = Int(self.param!.valueForKey(keytypeparam) as? String ?? "0")
+            for tag in typeListTag.tagViews {
+                tag.selected = (tag.numTag == rd)
+                if tag.selected == true {
+                    self.rd = "\( tag.numTag)"
+                }
+            }
+            let cate = self.param!.valueForKey(keycategoryparam) as? String ?? "0"
+            var indexCount = 1
+            for item in cate.characters {
+                if item == "1" {
+                    for tag in categoryListTag.tagViews {
+                        if tag.numTag == indexCount {
+                            tag.selected = true
+                        }
+                        if tag.selected == true {
+                            self.status = "\( tag.numTag)"
+                              categorySelectName = tag.titleLabel?.text ?? ""
+                        }
+                    }
+
+                }
+                indexCount += 1
+            }
+            
+          
+            for tag in categoryListTag.tagViews {
+                if tag.selected == true {
+                    arrParamCate[tag.numTag - 1] = 1 //tag.numTag
+                    
+                }else{
+                    arrParamCate[tag.numTag - 1] = 0
+                }
+            }
+            
+            self.category = ""
+            for item  in arrParamCate {
+                category = String(format:"%@%d",category,item)
+                
+            }
+            
+            let status = Int(self.param!.valueForKey(keystatusparam) as? String ?? "0")
+            for tag in statusListTag.tagViews {
+                tag.selected = (tag.numTag == status)
+                if tag.selected == true {
+                    self.status = "\( tag.numTag)"
+                }
+            }
+ 
+            let order = Int(self.param!.valueForKey(keyorderparam) as? String ?? "0")
+            for tag in sortOrder.tagViews {
+                tag.selected = (tag.numTag == order)
+                if tag.selected == true {
+                    self.order = "\( tag.numTag)"
+                }
+            }
+            
+        }
+    }
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == kTagCategoryListTag {
             for tag in sender.tagViews {

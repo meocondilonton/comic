@@ -183,7 +183,7 @@ class DetailInfoStoryViewController: BaseViewController {
                 }
             }
             
-    
+         self?.tbView.reloadData()
         }
         
     }
@@ -310,7 +310,7 @@ extension DetailInfoStoryViewController :UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 250
+        return self.view.frame.size.width
     }
     
     

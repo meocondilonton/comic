@@ -56,7 +56,7 @@ class HomeViewController: BaseViewController {
              let keyWord = self.param?.valueForKey(keywordparam) as? String
              self.fakeNavi.stringDes =  keyWord!
         }else{
-            var condition = "Filter by: "
+            var condition = ""
             if let string = self.param?.valueForKey(keycategorynameparam) as? String {
                 
                 condition.appendContentsOf(string)
@@ -64,7 +64,7 @@ class HomeViewController: BaseViewController {
             
             if let string = self.param?.valueForKey(keytypeparam)  as? String{
                 if string == "0" {
-                     condition.appendContentsOf(", Both")
+                     condition.appendContentsOf(", Manhwa & Manga")
                 }else if string == "1" {
                      condition.appendContentsOf(", Manhwa")
                 }else if string == "2" {
@@ -75,7 +75,7 @@ class HomeViewController: BaseViewController {
            
             if let string = self.param?.valueForKey(keystatusparam)  as? String{
                 if string == "0" {
-                     condition.appendContentsOf(", Both")
+                     condition.appendContentsOf("")
                 }else if string == "1" {
                      condition.appendContentsOf(", Ongoing")
                 }else if string == "2" {
@@ -104,7 +104,12 @@ class HomeViewController: BaseViewController {
         var pa = Utils.getFilterParams()
         if pa == nil {
             pa = NSMutableDictionary()
-            
+            pa!.setValue("0000000000000000000000000000000000000", forKey: keycategoryparam)
+            pa!.setValue("0", forKey: keytypeparam)
+            pa!.setValue("0", forKey: keystatusparam)
+            pa!.setValue("0", forKey: keyorderparam)
+            pa!.setValue("", forKey: keywordparam)
+            pa!.setValue("Most liked", forKey: keycategorynameparam)
             Utils.saveFilterParams(pa!)
             return pa!
         }else{
@@ -163,14 +168,14 @@ class HomeViewController: BaseViewController {
         
      
             let elements = doc.searchWithXPathQuery("//div[@class='mangaresultitem']")
-//             print("elements")
-//            print(elements)
+             print("elements")
+            print(elements)
               for eleItem in elements {
                 let e0 = eleItem as! TFHppleElement
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
                     //            print(e.attributes["class"])
-                    //            print("e.raw")
+                                print("e.raw")
                     //            print(e.content)
                     if e.attributes["class"]?.isEqualToString("mangaresultinner") == true   {
                         //                      print("e.content")
@@ -198,16 +203,16 @@ class HomeViewController: BaseViewController {
                                             let e3 =  eleItem3 as! TFHppleElement
                                             for eleItem4 in e3.children {
                                                 let e5 =  eleItem4 as! TFHppleElement
-                                                print("e5.content")
-                                                 if e5.raw != nil {
-                                                print(e5.raw)
-                                                }
+//                                                print("e5.content")
+//                                                 if e5.raw != nil {
+//                                                print(e5.raw)
+//                                                }
                                                 for eleItem6 in e5.children {
                                                     let e6 =  eleItem6 as! TFHppleElement
                                                     
                                                     if e6.raw != nil {
-                                                        print("e6.content")
-                                                        print(e6.raw)
+//                                                        print("e6.content")
+//                                                        print(e6.raw)
                                                         if let href = e6.objectForKey("href") {
                                                             itemStory.storyUrl = href
                                                         }

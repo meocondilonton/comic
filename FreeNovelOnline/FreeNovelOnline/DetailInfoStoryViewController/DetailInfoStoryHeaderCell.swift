@@ -26,7 +26,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
     
     @IBOutlet weak var lblAlterNameStory: UILabel!
     
-    @IBOutlet weak var lbldirection: FRHyperLabel!
+ 
     @IBOutlet weak var btnRead: UIButton!
 
     @IBOutlet weak var btnSave: UIButton!
@@ -51,7 +51,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
        
         
         let arrAuthor:NSArray =  NSArray(arrayLiteral: "Author: ", info.storyAuthor?.itemName ?? "")
-        let arrSeries:NSArray =  NSArray(arrayLiteral: "Genre: ", info.storySeries?.itemName ?? "")
+        let arrSeries:NSArray =  NSArray(arrayLiteral: "Reading Direction: ", info.storyReadingDerection ?? "")
         let arrStatus:NSArray =  NSArray(arrayLiteral: "Status: ", info.storyStatus?.itemName ?? "")
          let arrView:NSArray =  NSArray(arrayLiteral: "Alternate Name: ", info.storyAlterName  ?? "")
         
@@ -60,7 +60,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         let arrCategory = NSMutableArray()
          arrFontCategory.addObject(nomalTextFont)
          arrColorCategory.addObject(hyperTextColor)
-         arrCategory.addObject("Category: ")
+         arrCategory.addObject("Genre: ")
         if  info.storyCategory?.count > 0 {
         for item in info.storyCategory! {
             arrFontCategory.addObject(hyperTextFont)

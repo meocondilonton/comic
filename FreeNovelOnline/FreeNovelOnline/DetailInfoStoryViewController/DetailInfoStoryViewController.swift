@@ -146,6 +146,22 @@ class DetailInfoStoryViewController: BaseViewController {
       
             }
             
+            //read img
+            let elementsImg = doc.searchWithXPathQuery("//div[@id='mangaimg']")
+            self?.storyFullInfo.storyChapter = [Item]()
+            for eleItem in elementsImg {
+                let e = eleItem as! TFHppleElement
+               
+                for item in e.children {
+                    if let temp =  item as? TFHppleElement {
+                         if let link = temp.objectForKey("src") {
+                             print(link)
+                            self?.storyFullInfo.storyImgUrl = link
+                        }
+                    }
+                }
+            }
+            
             //read bot
             let elementsBot = doc.searchWithXPathQuery("//div[@id='chapterlist']")
               self?.storyFullInfo.storyChapter = [Item]()
@@ -166,8 +182,8 @@ class DetailInfoStoryViewController: BaseViewController {
                                                  if let link = temp4.objectForKey("href") {
 
                                                     let trimmed = (temp3.content as NSString).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-//                                                    print("name")
-//                                                    print(name)
+                                                    print("trimmed")
+                                                    print(trimmed)
                                                     let itemModel =  Item()
                                                      itemModel.itemName = trimmed
                                                      itemModel.itemUrl = link
@@ -192,22 +208,34 @@ class DetailInfoStoryViewController: BaseViewController {
                 if self.storyFullInfo.storyChapter == nil {
                     return
                 }
-        
-//        self.storyFullInfo.storyChapter = [Item]()
-//        let itemModel =  Item()
-//        itemModel.itemName = "test"
-//        itemModel.itemUrl = "/ajax/Reader_Main/get?id=565761&page=1&style=b&count=2"
-//        self.storyFullInfo.storyChapter?.append(itemModel)
+ 
         
         self.storyFullInfo.timeSaved = NSDate().timeIntervalSince1970
         self.storyFullInfo.storyIsRead = true
         DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("ReadStoryViewController") as! ReadStoryViewController
+//        vc.storyFullInfo = self.storyFullInfo
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ReadStoryViewController") as! ReadStoryViewController
-        vc.storyFullInfo = self.storyFullInfo
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
         vc.navigationController?.hidesBarsOnTap = true
         vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.chapSelected = 1
+        vc.arrChapter = self.storyFullInfo.storyChapter
+        vc.block = {[weak self] (index) in
+            if index < self?.storyFullInfo?.storyChapter?.count {
+                
+            }
+        }
+       
+//            vc.updateChapter(self.storyFullInfo.storyChapter, chapSelected:1) {[weak self] (index) in
+//                if index < self?.storyFullInfo?.storyChapter?.count {
+//                    self?.chapterIndex = index
+//                    self?.chapterOffset = 0
+//                    self?.loadChapterData(String(format:"%@%@",BaseUrl,(self?.storyFullInfo?.storyChapter![self?.chapterIndex ?? 0].itemUrl)!))
+//                }
+//        }
+         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func saveStory(){
@@ -235,7 +263,7 @@ class DetailInfoStoryViewController: BaseViewController {
                 dispatch_group_leave(dispatch_group)
                 if let owner = self {
                     owner.downloadProcess += Float(( 1 / Float(owner.storyFullInfo.storyChapter!.count))   )
-                    print( owner.downloadProcess)
+//                    print( owner.downloadProcess)
                     
                     SVProgressHUD.showProgress( owner.downloadProcess, status: "Loading" ,maskType:.Gradient)
                 }

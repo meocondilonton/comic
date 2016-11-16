@@ -39,7 +39,7 @@ class ReadStoryViewController: BaseViewController , SKPhotoBrowserDelegate {
         
      
         
-        print(storyFullInfo.storyChapter![self.chapterIndex].itemUrl)
+       
         self.loadChapterData(String(format:"%@%@",BaseUrl,storyFullInfo.storyChapter![self.chapterIndex].itemUrl!) )
         
        
@@ -60,19 +60,7 @@ class ReadStoryViewController: BaseViewController , SKPhotoBrowserDelegate {
         return true
     }
     
-    func menuStateEventOccurred(noti:NSNotification){
-        let event:UInt32 = UInt32(noti.userInfo!["eventType"]?.intValue ?? 0)
-        if event == MFSideMenuStateEventMenuWillOpen.rawValue {
-            (self.menuContainerViewController.leftMenuViewController!.childViewControllers[0] as! ChapterStoryViewController).updateChapter(self.storyFullInfo.storyChapter, chapSelected:self.chapterIndex) {[weak self] (index) in
-                if index < self?.storyFullInfo?.storyChapter?.count {
-                    self?.chapterIndex = index
-                    self?.chapterOffset = 0
-                    self?.loadChapterData(String(format:"%@%@",BaseUrl,(self?.storyFullInfo?.storyChapter![self?.chapterIndex ?? 0].itemUrl)!))
-                }
-            }
-        }
-        
-    }
+ 
     
     func loadPhotoBrowser(){
         arrPhoto = [SKPhoto]()

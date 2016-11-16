@@ -41,17 +41,17 @@ class SplashScreenViewController: UIViewController {
     
     func switchMainScreen(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let leftViewController = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
-        let leftNav = UINavigationController(rootViewController: leftViewController)
+//        let leftViewController = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
+//        let leftNav = UINavigationController(rootViewController: leftViewController)
         
      appdelegate.tabbar = storyboard.instantiateViewControllerWithIdentifier("TabbarViewController") as! TabbarViewController
         
-        appdelegate.slideMenuController = MFSideMenuContainerViewController.containerWithCenterViewController(appdelegate.tabbar, leftMenuViewController: leftNav, rightMenuViewController: nil)
-        appdelegate.slideMenuController.menuContainerViewController.panMode = MFSideMenuPanModeNone
-        if IS_IPHONE_5_OR_LESS {
-            appdelegate.slideMenuController.leftMenuWidth = CGFloat(280)
-        }
-        appdelegate.window?.rootViewController = appdelegate.slideMenuController
+//        appdelegate.slideMenuController = MFSideMenuContainerViewController.containerWithCenterViewController(appdelegate.tabbar, leftMenuViewController: leftNav, rightMenuViewController: nil)
+//        appdelegate.slideMenuController.menuContainerViewController.panMode = MFSideMenuPanModeNone
+//        if IS_IPHONE_5_OR_LESS {
+//            appdelegate.slideMenuController.leftMenuWidth = CGFloat(280)
+//        }
+        appdelegate.window?.rootViewController = appdelegate.tabbar
     }
 
     override func didReceiveMemoryWarning() {

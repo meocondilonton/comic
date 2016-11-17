@@ -8,17 +8,22 @@
 
 import UIKit
  
-class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
-    var instance:LoadImgWebservice?
+
+let keyUrl = "url"
+
+class BaseWebservice: NSObject , NSURLConnectionDelegate{
+    static var instance:BaseWebservice?
     var block:((NSData?)->())?
     var dataVal:NSMutableData!
     var isLoadFromCache:Bool = false
     var requestStr:String?
     var isShowIndicator:Bool = false
     
-    class func shareInstance()-> LoadImgWebservice {
-        return LoadImgWebservice()
-       
+    class func shareInstance()-> BaseWebservice {
+        if instance == nil {
+            instance = BaseWebservice()
+        }
+        return instance!
     }
     
     func loadCache(requestStr:String)->Bool{
@@ -31,7 +36,7 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
         if self.block != nil {
             self.isLoadFromCache = true
             self.block!(result?.result)
-            SVProgressHUD.dismiss()
+//            SVProgressHUD.dismiss()
         }
         return true
     }
@@ -44,7 +49,7 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
  
         }
          self.block = block
-        self.requestStr = param.valueForKey(keyUrl) as! String
+          self.requestStr = param.valueForKey(keyUrl) as! String
           self.loadCache(self.requestStr ?? "")
         
         do {
@@ -62,6 +67,7 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
             print(error)
         }
         
+        
     }
     
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
@@ -71,17 +77,18 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
     
     func connectionDidFinishLoading(connection: NSURLConnection!)
     {
+      
+       let item = RequestModel()
+        item.request = self.requestStr
+        item.result = dataVal
+        DatabaseHelper.shareInstall().insertOrUpdateRequest(item)
+        
         if self.isShowIndicator {
             SVProgressHUD.dismiss()
         }
         if self.block != nil && self.isLoadFromCache == false{
             self.block!(dataVal)
         }
-       let item = RequestModel()
-        item.request = self.requestStr
-        item.result = dataVal
-        DatabaseHelper.shareInstall().insertOrUpdateRequest(item)
-        
     }
     
     func connection(connection: NSURLConnection, didFailWithError error: NSError) {

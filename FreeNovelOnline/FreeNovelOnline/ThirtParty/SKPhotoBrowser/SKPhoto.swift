@@ -23,7 +23,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     public var underlyingImage: UIImage!
     public var photoURL: String!
     public var contentMode: UIViewContentMode = .ScaleAspectFill
-    public var shouldCachePhotoURLImage: Bool = false
+    public var shouldCachePhotoURLImage: Bool = true
     public var caption: String!
     public var index: Int = 0
     var loadImageManager: LoadImageManager?
@@ -79,12 +79,33 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
             loadImageManager = LoadImageManager()
               let urlString = String(format:"%@%@",BaseUrl,photoURL)
             loadImageManager!.loadImage(urlString, block: { (result) in
-                self.fetchImage(result)
+                self.fetchImage(result, block: { () -> () in
+                    
+                })
             })
         }
     }
 
-    private func fetchImage(link:String){
+    public func loadUnderlyingImageAndNotify(block:()->()) {
+        
+        if underlyingImage != nil {
+            loadUnderlyingImageComplete()
+            block()
+            return
+        }
+        
+        if photoURL != nil {
+            loadImageManager = LoadImageManager()
+            let urlString = String(format:"%@%@",BaseUrl,photoURL)
+            loadImageManager!.loadImage(urlString, block: { (result) in
+                self.fetchImage(result, block: block)
+            })
+        }else{
+            block()
+        }
+    }
+    
+    private func fetchImage(link:String , block:()->()){
         print("link ")
         print(link)
         print("photoURL ")
@@ -116,6 +137,9 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
                         }
                     }
                     session.finishTasksAndInvalidate()
+                  
+                         block()
+                    
                 }
                 })
             task.resume()

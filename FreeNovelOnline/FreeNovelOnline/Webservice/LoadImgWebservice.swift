@@ -8,22 +8,17 @@
 
 import UIKit
  
-
-let keyUrl = "url"
-
-class BaseWebservice: NSObject , NSURLConnectionDelegate{
-    static var instance:BaseWebservice?
+class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
+    var instance:LoadImgWebservice?
     var block:((NSData?)->())?
     var dataVal:NSMutableData!
     var isLoadFromCache:Bool = false
     var requestStr:String?
     var isShowIndicator:Bool = false
     
-    class func shareInstance()-> BaseWebservice {
-        if instance == nil {
-            instance = BaseWebservice()
-        }
-        return instance!
+    class func shareInstance()-> LoadImgWebservice {
+        return LoadImgWebservice()
+       
     }
     
     func loadCache(requestStr:String)->Bool{
@@ -50,8 +45,8 @@ class BaseWebservice: NSObject , NSURLConnectionDelegate{
         }
          self.block = block
         self.requestStr = param.valueForKey(keyUrl) as! String
-        if self.loadCache(self.requestStr ?? "") == false {
-        
+          
+         if self.loadCache(self.requestStr ?? "") == false {
         do {
            
             dataVal = NSMutableData()

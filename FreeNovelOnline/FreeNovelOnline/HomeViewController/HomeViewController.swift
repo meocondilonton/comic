@@ -143,9 +143,7 @@ class HomeViewController: BaseViewController {
             self.collectionViewStory.mj_footer.endRefreshing()
         }
       
-        if isRefresh == true {
-            self.collectionViewStory.setContentOffset(CGPointMake(0, -20), animated: true)
-        }
+        
         //test
 //        if appdelegate.isTest  == true {
 //            self.arrStory?.removeAll()
@@ -157,8 +155,8 @@ class HomeViewController: BaseViewController {
         
         let paramSend = NSMutableDictionary()
         paramSend.setValue(url, forKey: keyUrl)
-        print("url")
-        print(url)
+//        print("url")
+//        print(url)
        BaseWebservice.shareInstance().getData(paramSend, isShowIndicator: true) {[weak self] (result) in
         if isRefresh == true {
             self?.arrStory?.removeAll(keepCapacity: false)
@@ -168,14 +166,14 @@ class HomeViewController: BaseViewController {
         
      
             let elements = doc.searchWithXPathQuery("//div[@class='mangaresultitem']")
-             print("elements")
-            print(elements)
+//             print("elements")
+//            print(elements)
               for eleItem in elements {
                 let e0 = eleItem as! TFHppleElement
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
                     //            print(e.attributes["class"])
-                                print("e.raw")
+//                                print("e.raw")
                     //            print(e.content)
                     if e.attributes["class"]?.isEqualToString("mangaresultinner") == true   {
                         //                      print("e.content")
@@ -330,6 +328,7 @@ extension HomeViewController {
         self.navigationController?.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, kHeightDiscoverNavibar + 20  )
         self.fakeNavi = CommonMainNavigationView(frame: CGRectMake(0, -20, self.view.frame.size.width, kHeightDiscoverNavibar + 20  ))
 //        print(self.fakeNavi.frame)
+        
         self.navigationController?.navigationBar.addSubview(self.fakeNavi)
         self.fakeNavi.lblTitle.text =  "Discover"
         self.fakeNavi.naviHandleBlock = {[weak self] (type: NaviButtonClickType) -> () in
@@ -352,6 +351,7 @@ extension HomeViewController {
         self.fakeNavi.hidden = false
         
     }
+ 
     
     override func viewWillDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

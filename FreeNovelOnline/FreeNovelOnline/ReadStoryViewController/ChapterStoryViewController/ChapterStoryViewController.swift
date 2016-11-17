@@ -105,8 +105,8 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
-        
+          self.chapSelected = indexPath.row
+          self.loadChapterData(String(format:"%@%@",BaseUrl, arrChapter![self.chapSelected].itemUrl!) )
     }
  
 }
@@ -136,7 +136,7 @@ extension ChapterStoryViewController {
                     }
                 }
             }
-            //            self?.collectionView.reloadData()
+            
             self?.loadPhotoBrowser()
         }
         
@@ -146,6 +146,7 @@ extension ChapterStoryViewController {
     
     
     func loadPhotoBrowser(){
+        loadToCacheImg((self.arrChapter![self.chapSelected].arrImg)!)
         arrPhoto = [SKPhoto]()
         for item in (self.arrChapter![self.chapSelected].arrImg)! {
             //            let photoTemp = SKPhoto(url: "https://i4.mangareader.net/naruto/1/naruto-1564774.jpg" )
@@ -159,6 +160,25 @@ extension ChapterStoryViewController {
             
         }
     }
+    
+    func loadToCacheImg(arrPath:[String]){
+        let group = dispatch_group_create()
+       
+        for item in arrPath {
+             dispatch_group_enter(group)
+            
+                Utils.fetchImage(item, block: { 
+                     dispatch_group_leave(group)
+                })
+             
+            }
+ 
+        dispatch_group_notify(group, dispatch_get_main_queue()) {
+            // This block will be executed when all tasks are complete
+            print("All tasks complete")
+           
+        }
+        }
     
     
 }

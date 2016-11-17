@@ -93,4 +93,63 @@ class Utils: NSObject {
         return (isReachable && !needsConnection)
     }
     
+    class func fetchImage(url:String, block:()->()){
+          let link = String(format:"%@%@",BaseUrl,url)
+         print("Finish task ")
+         print(link)
+        print("Finish url ")
+        print(url)
+        // Fetch Image
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        if let nsURL = NSURL(string: link) {
+            var task: NSURLSessionDataTask!
+            task = session.dataTaskWithURL(nsURL, completionHandler: {  (response: NSData?, data: NSURLResponse?, error: NSError?) in
+           
+                    if let res = response, image = UIImage(data: res) {
+                        
+                            if SKCache.sharedCache.imageCache is SKRequestResponseCacheable {
+                                SKCache.sharedCache.setImageData(response!, response: data!, request: task.originalRequest!)
+                            } else {
+                                SKCache.sharedCache.setImage(image, forKey: url)
+                            }
+                        
+                        
+                    }
+                    session.finishTasksAndInvalidate()
+                   block()
+                
+                })
+            task.resume()
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

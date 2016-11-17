@@ -85,6 +85,10 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     }
 
     private func fetchImage(link:String){
+        print("link ")
+        print(link)
+        print("photoURL ")
+        print(photoURL)
         // Fetch Image
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         if let nsURL = NSURL(string: link) {

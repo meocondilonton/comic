@@ -71,7 +71,10 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     public func loadUnderlyingImageAndNotify() {
         
         if underlyingImage != nil {
-            loadUnderlyingImageComplete()
+            dispatch_async(dispatch_get_main_queue()) {
+               self.loadUnderlyingImageComplete()
+            }
+            
             return
         }
         
@@ -106,10 +109,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     }
     
     private func fetchImage(link:String , block:()->()){
-        print("link ")
-        print(link)
-        print("photoURL ")
-        print(photoURL)
+      
         // Fetch Image
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         if let nsURL = NSURL(string: link) {
@@ -124,6 +124,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
                     }
                     
                     if let res = response, image = UIImage(data: res) {
+                          dispatch_async(dispatch_get_main_queue()) {
                         if _self.shouldCachePhotoURLImage {
                             if SKCache.sharedCache.imageCache is SKRequestResponseCacheable {
                                 SKCache.sharedCache.setImageData(response!, response: data!, request: task.originalRequest!)
@@ -131,6 +132,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
                                 SKCache.sharedCache.setImage(image, forKey: _self.photoURL)
                             }
                         }
+                             }
                         dispatch_async(dispatch_get_main_queue()) {
                             _self.underlyingImage = image
                             _self.loadUnderlyingImageComplete()

@@ -54,17 +54,33 @@ class SKPagingScrollView: UIScrollView {
             // Previous
             if pageIndex > 0 {
                 let previousPhoto = browser.photos[pageIndex - 1]
+                previousPhoto.checkCache()
                 if previousPhoto.underlyingImage == nil {
                     previousPhoto.loadUnderlyingImageAndNotify()
                 }
             }
-            // Next
-            if pageIndex < numberOfPhotos - 1 {
-                let nextPhoto = browser.photos[pageIndex + 1]
-                if nextPhoto.underlyingImage == nil {
-                    nextPhoto.loadUnderlyingImageAndNotify()
+            
+//             dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)){
+                // Next
+                if pageIndex < self.numberOfPhotos - 1 {
+                    let nextPhoto = browser.photos[pageIndex + 1]
+                    nextPhoto.checkCache()
+                    if nextPhoto.underlyingImage == nil {
+                        nextPhoto.loadUnderlyingImageAndNotify()
+                    }
                 }
-            }
+                
+                if pageIndex < self.numberOfPhotos - 2 {
+                    let nextPhoto1 = browser.photos[pageIndex + 2]
+                    nextPhoto1.checkCache()
+                    if nextPhoto1.underlyingImage == nil {
+                        nextPhoto1.loadUnderlyingImageAndNotify()
+                    }
+                }
+//            }
+            
+           
+            
         }
     }
     

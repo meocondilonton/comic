@@ -36,8 +36,7 @@ class LoadImageManager: NSObject  {
                     for item2 in e2.children {
  
                         if let link = item2.objectForKey("src") {
-//                            print("element")
-//                            print(link)
+ 
                             if self?.block != nil {
                                 self?.block!(link as! String)
                             }

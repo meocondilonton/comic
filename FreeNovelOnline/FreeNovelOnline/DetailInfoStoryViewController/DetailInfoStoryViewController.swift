@@ -282,7 +282,7 @@ class DetailInfoStoryViewController: BaseViewController {
         
         dispatch_group_notify(dispatch_group, dispatch_get_main_queue()) {
             SVProgressHUD.dismiss()
-            self.header?.btnSave.hidden = true
+            
         }
         
     }
@@ -334,7 +334,7 @@ extension DetailInfoStoryViewController :UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.header = self.tbView.dequeueReusableHeaderFooterViewWithIdentifier("DetailInfoStoryHeaderCell") as! DetailInfoStoryHeaderCell
         if self.storyFullInfo.isSaved {
-            header?.btnSave.hidden = true
+           
         }
         header?.updateData(self.storyFullInfo) { [weak self](type) in
             if type == 0 {

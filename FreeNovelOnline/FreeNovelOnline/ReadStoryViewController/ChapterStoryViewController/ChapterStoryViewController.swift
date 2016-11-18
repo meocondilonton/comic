@@ -55,7 +55,7 @@ extension ChapterStoryViewController {
     }
     
    override func btnBackTouch() {
-        super.btnBackTouch()
+    
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
@@ -110,6 +110,11 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let idex = NSIndexPath(forRow:  self.chapSelected, inSection: 0)
+        if let cell = tableView.cellForRowAtIndexPath(idex) as? ChapterTableViewCell {
+            cell.setCellSelect(false )
+
+        }
           self.chapSelected = indexPath.row
           self.loadChapterData(String(format:"%@%@",BaseUrl, arrChapter![self.chapSelected].itemUrl!) )
     }
@@ -157,12 +162,10 @@ extension ChapterStoryViewController {
             let photoTemp = SKPhoto(url: item)
             arrPhoto?.append(photoTemp)
         }
-        loadToCacheImg(arrPhoto!)
-
-        let photoBrowser = SKPhotoBrowser(originImage: UIImage(named:"placeholder")!, photos: arrPhoto!, animatedFromView: self.view)
+ 
+        let photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
         photoBrowser.initializePageIndex(0)
         photoBrowser.delegate = self
-        
         self.presentViewController(photoBrowser, animated: true) {
             
         }

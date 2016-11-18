@@ -72,16 +72,17 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
     
     func connectionDidFinishLoading(connection: NSURLConnection!)
     {
+        let item = RequestModel()
+        item.request = self.requestStr
+        item.result = dataVal
+        DatabaseHelper.shareInstall().insertOrUpdateRequest(item)
         if self.isShowIndicator {
             SVProgressHUD.dismiss()
         }
         if self.block != nil && self.isLoadFromCache == false{
             self.block!(dataVal)
         }
-       let item = RequestModel()
-        item.request = self.requestStr
-        item.result = dataVal
-        DatabaseHelper.shareInstall().insertOrUpdateRequest(item)
+       
         
     }
     

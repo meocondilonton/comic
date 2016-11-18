@@ -38,11 +38,11 @@
                         <viewControllerLayoutGuide type="bottom" id="awA-Xf-gai"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WEg-Uj-2Dg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J7T-DJ-pzS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="zVd-t2-GPm">
                                     <size key="itemSize" width="190" height="222"/>
@@ -52,7 +52,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="CtE-za-jFG" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="190" height="250"/>
+                                        <rect key="frame" x="93" y="10" width="190" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="250"/>
@@ -112,7 +112,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeAdCollectionViewCell" id="P3t-Lg-stG" customClass="HomeAdCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="205" y="24" width="190" height="222"/>
+                                        <rect key="frame" x="93" y="270" width="190" height="222"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="222"/>
@@ -148,11 +148,12 @@
                         <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="awA-Xf-gai" firstAttribute="top" secondItem="J7T-DJ-pzS" secondAttribute="bottom" id="4Fj-ny-Yzv"/>
+                            <constraint firstItem="J7T-DJ-pzS" firstAttribute="top" secondItem="Gk9-Bj-AUh" secondAttribute="bottom" id="M48-Kw-9NI"/>
                             <constraint firstAttribute="trailing" secondItem="J7T-DJ-pzS" secondAttribute="trailing" id="iI6-sf-XRC"/>
                             <constraint firstItem="J7T-DJ-pzS" firstAttribute="leading" secondItem="WEg-Uj-2Dg" secondAttribute="leading" id="rMR-5e-Xcp"/>
-                            <constraint firstItem="J7T-DJ-pzS" firstAttribute="top" secondItem="WEg-Uj-2Dg" secondAttribute="top" id="tUF-af-QoL"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="collectionViewStory" destination="J7T-DJ-pzS" id="dGG-oP-Bec"/>
                     </connections>

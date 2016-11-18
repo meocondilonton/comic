@@ -23,7 +23,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     public var underlyingImage: UIImage!
     public var photoURL: String!
     public var contentMode: UIViewContentMode = .ScaleAspectFill
-    public var shouldCachePhotoURLImage: Bool = false
+    public var shouldCachePhotoURLImage: Bool = true
     public var caption: String!
     public var index: Int = 0
     var loadImageManager: LoadImageManager?
@@ -71,7 +71,10 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
     public func loadUnderlyingImageAndNotify() {
         
         if underlyingImage != nil {
-            loadUnderlyingImageComplete()
+            dispatch_async(dispatch_get_main_queue()) {
+               self.loadUnderlyingImageComplete()
+            }
+            
             return
         }
         
@@ -79,16 +82,34 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
             loadImageManager = LoadImageManager()
               let urlString = String(format:"%@%@",BaseUrl,photoURL)
             loadImageManager!.loadImage(urlString, block: { (result) in
-                self.fetchImage(result)
+                self.fetchImage(result, block: { () -> () in
+                    
+                })
             })
         }
     }
 
-    private func fetchImage(link:String){
-        print("link ")
-        print(link)
-        print("photoURL ")
-        print(photoURL)
+    public func loadUnderlyingImageAndNotify(block:()->()) {
+        
+        if underlyingImage != nil {
+            loadUnderlyingImageComplete()
+            block()
+            return
+        }
+        
+        if photoURL != nil {
+            loadImageManager = LoadImageManager()
+            let urlString = String(format:"%@%@",BaseUrl,photoURL)
+            loadImageManager!.loadImage(urlString, block: { (result) in
+                self.fetchImage(result, block: block)
+            })
+        }else{
+            block()
+        }
+    }
+    
+    private func fetchImage(link:String , block:()->()){
+      
         // Fetch Image
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         if let nsURL = NSURL(string: link) {
@@ -103,6 +124,7 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
                     }
                     
                     if let res = response, image = UIImage(data: res) {
+                          dispatch_async(dispatch_get_main_queue()) {
                         if _self.shouldCachePhotoURLImage {
                             if SKCache.sharedCache.imageCache is SKRequestResponseCacheable {
                                 SKCache.sharedCache.setImageData(response!, response: data!, request: task.originalRequest!)
@@ -110,12 +132,16 @@ public class SKPhoto: NSObject, SKPhotoProtocol {
                                 SKCache.sharedCache.setImage(image, forKey: _self.photoURL)
                             }
                         }
+                             }
                         dispatch_async(dispatch_get_main_queue()) {
                             _self.underlyingImage = image
                             _self.loadUnderlyingImageComplete()
                         }
                     }
                     session.finishTasksAndInvalidate()
+                  
+                         block()
+                    
                 }
                 })
             task.resume()

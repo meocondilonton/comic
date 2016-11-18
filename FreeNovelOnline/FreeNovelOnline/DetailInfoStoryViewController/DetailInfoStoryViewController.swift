@@ -155,12 +155,21 @@ class DetailInfoStoryViewController: BaseViewController {
                 for item in e.children {
                     if let temp =  item as? TFHppleElement {
                          if let link = temp.objectForKey("src") {
-                             print(link)
+//                             print(link)
                             self?.storyFullInfo.storyImgUrl = link
                         }
                     }
                 }
             }
+            
+            //read description
+            let elementsDescription = doc.searchWithXPathQuery("//div[@id='readmangasum']")
+            
+            for eleItem in elementsDescription {
+                let e = eleItem as! TFHppleElement
+                self?.storyFullInfo.storyDescription = e.content
+            }
+            
             
             //read bot
             let elementsBot = doc.searchWithXPathQuery("//div[@id='chapterlist']")
@@ -182,8 +191,8 @@ class DetailInfoStoryViewController: BaseViewController {
                                                  if let link = temp4.objectForKey("href") {
 
                                                     let trimmed = (temp3.content as NSString).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                                                    print("trimmed")
-                                                    print(trimmed)
+//                                                    print("trimmed")
+//                                                    print(trimmed)
                                                     let itemModel =  Item()
                                                      itemModel.itemName = trimmed
                                                      itemModel.itemUrl = link
@@ -273,7 +282,7 @@ class DetailInfoStoryViewController: BaseViewController {
         
         dispatch_group_notify(dispatch_group, dispatch_get_main_queue()) {
             SVProgressHUD.dismiss()
-            self.header?.btnSave.hidden = true
+            
         }
         
     }
@@ -325,7 +334,7 @@ extension DetailInfoStoryViewController :UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.header = self.tbView.dequeueReusableHeaderFooterViewWithIdentifier("DetailInfoStoryHeaderCell") as! DetailInfoStoryHeaderCell
         if self.storyFullInfo.isSaved {
-            header?.btnSave.hidden = true
+           
         }
         header?.updateData(self.storyFullInfo) { [weak self](type) in
             if type == 0 {

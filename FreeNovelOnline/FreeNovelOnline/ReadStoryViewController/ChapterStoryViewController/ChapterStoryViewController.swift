@@ -48,10 +48,15 @@ extension ChapterStoryViewController {
     
     override func setUpNavigationBar() {
         super.setUpNavigationBar()
-        navigationController?.navigationBar.setDefault(UINavigationBar.State.Empty, vc: self)
+        navigationController?.navigationBar.setDefault(UINavigationBar.State.Back, vc: self)
         let titleStory = "Chapters"
         navigationItem.title = titleStory
         
+    }
+    
+   override func btnBackTouch() {
+    
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
@@ -105,6 +110,11 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let idex = NSIndexPath(forRow:  self.chapSelected, inSection: 0)
+        if let cell = tableView.cellForRowAtIndexPath(idex) as? ChapterTableViewCell {
+            cell.setCellSelect(false )
+
+        }
           self.chapSelected = indexPath.row
           self.loadChapterData(String(format:"%@%@",BaseUrl, arrChapter![self.chapSelected].itemUrl!) )
     }
@@ -146,14 +156,14 @@ extension ChapterStoryViewController {
     
     
     func loadPhotoBrowser(){
-        loadToCacheImg((self.arrChapter![self.chapSelected].arrImg)!)
-        arrPhoto = [SKPhoto]()
+               arrPhoto = [SKPhoto]()
         for item in (self.arrChapter![self.chapSelected].arrImg)! {
             //            let photoTemp = SKPhoto(url: "https://i4.mangareader.net/naruto/1/naruto-1564774.jpg" )
             let photoTemp = SKPhoto(url: item)
             arrPhoto?.append(photoTemp)
         }
-        let photoBrowser = SKPhotoBrowser(originImage: UIImage(named:"placeholder")!, photos: arrPhoto!, animatedFromView: self.view)
+ 
+        let photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
         photoBrowser.initializePageIndex(0)
         photoBrowser.delegate = self
         self.presentViewController(photoBrowser, animated: true) {
@@ -161,21 +171,22 @@ extension ChapterStoryViewController {
         }
     }
     
-    func loadToCacheImg(arrPath:[String]){
+    func loadToCacheImg(arrPath:[SKPhoto]){
         let group = dispatch_group_create()
        
         for item in arrPath {
              dispatch_group_enter(group)
+             item.loadUnderlyingImageAndNotify({
+                  print("loadToCacheImg" + item.photoURL)
+                 dispatch_group_leave(group)
+             })
+ 
             
-                Utils.fetchImage(item, block: { 
-                     dispatch_group_leave(group)
-                })
-             
             }
  
         dispatch_group_notify(group, dispatch_get_main_queue()) {
             // This block will be executed when all tasks are complete
-            print("All tasks complete")
+            print("loadToCacheImg complete")
            
         }
         }

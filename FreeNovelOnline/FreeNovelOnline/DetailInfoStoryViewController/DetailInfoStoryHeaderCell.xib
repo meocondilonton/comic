@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -93,31 +92,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QtU-bl-x8A">
-                    <rect key="frame" x="177" y="206" width="77.5" height="33"/>
+                    <rect key="frame" x="177" y="206" width="182" height="33"/>
                     <color key="backgroundColor" red="0.14117647059999999" green="0.79607843140000001" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="QtU-bl-x8A" secondAttribute="height" multiplier="7:2" priority="250" id="BNM-d5-JoO"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Read">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="btnReadTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zsm-s1-Uvj"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVT-Wn-tpN">
-                    <rect key="frame" x="280.5" y="206" width="77.5" height="33"/>
-                    <color key="backgroundColor" red="0.14117647059999999" green="0.79607843140000001" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="VVT-Wn-tpN" secondAttribute="height" multiplier="7:2" priority="250" id="kc0-FH-MxJ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Save">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="btnSaveTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="X31-sd-tEQ"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12J-w0-mJc">
@@ -145,32 +127,28 @@
                 <constraint firstItem="Fvh-gT-YOa" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="8AI-AX-Xup"/>
                 <constraint firstItem="12J-w0-mJc" firstAttribute="top" secondItem="N7B-3T-szF" secondAttribute="bottom" constant="2" id="AlP-gA-CQN"/>
                 <constraint firstAttribute="bottom" secondItem="QtU-bl-x8A" secondAttribute="bottom" constant="11" id="Da4-df-oPu"/>
+                <constraint firstAttribute="trailing" secondItem="QtU-bl-x8A" secondAttribute="trailing" constant="16" id="EeF-xn-juR"/>
                 <constraint firstAttribute="trailing" secondItem="Fvh-gT-YOa" secondAttribute="trailing" constant="5" id="GoU-0c-ch4"/>
                 <constraint firstAttribute="trailing" secondItem="agk-HA-TUF" secondAttribute="trailing" constant="5" id="LZc-nH-Z3f"/>
                 <constraint firstItem="QtU-bl-x8A" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" priority="750" constant="17" id="M3N-gX-jSD"/>
-                <constraint firstAttribute="trailing" secondItem="VVT-Wn-tpN" secondAttribute="trailing" priority="750" constant="17" id="OMJ-Ao-EVP"/>
                 <constraint firstAttribute="trailing" secondItem="Dn3-5e-Ua4" secondAttribute="trailing" constant="5" id="PrJ-Pb-9gm"/>
                 <constraint firstAttribute="trailing" secondItem="Uts-wd-Ecz" secondAttribute="trailing" constant="5" id="SUd-tA-Axc"/>
                 <constraint firstItem="Dn3-5e-Ua4" firstAttribute="top" secondItem="Fvh-gT-YOa" secondAttribute="bottom" constant="2" id="W67-4h-8KR"/>
                 <constraint firstItem="Uts-wd-Ecz" firstAttribute="top" secondItem="12J-w0-mJc" secondAttribute="bottom" id="YsK-wV-Q1H"/>
-                <constraint firstAttribute="bottom" secondItem="VVT-Wn-tpN" secondAttribute="bottom" constant="11" id="Zor-LJ-PJ5"/>
                 <constraint firstItem="agk-HA-TUF" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="d92-5z-PQO"/>
                 <constraint firstItem="N7B-3T-szF" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="ezu-Xk-FeX"/>
                 <constraint firstItem="GRl-jq-IJ1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="f4b-QA-Bt4"/>
                 <constraint firstAttribute="trailing" secondItem="N7B-3T-szF" secondAttribute="trailing" constant="5" id="fxq-uX-jAa"/>
                 <constraint firstItem="Dn3-5e-Ua4" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="gHS-TM-ldl"/>
-                <constraint firstItem="VVT-Wn-tpN" firstAttribute="leading" secondItem="QtU-bl-x8A" secondAttribute="trailing" priority="750" constant="26" id="jLh-i7-Rek"/>
                 <constraint firstItem="agk-HA-TUF" firstAttribute="top" secondItem="Dn3-5e-Ua4" secondAttribute="bottom" constant="2" id="nFO-OX-VHF"/>
                 <constraint firstItem="12J-w0-mJc" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="oUR-no-XcO"/>
                 <constraint firstItem="Fvh-gT-YOa" firstAttribute="top" secondItem="Uts-wd-Ecz" secondAttribute="bottom" constant="2" id="pdr-Om-aVZ"/>
                 <constraint firstItem="N7B-3T-szF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="q5c-sM-He2"/>
-                <constraint firstItem="QtU-bl-x8A" firstAttribute="width" secondItem="VVT-Wn-tpN" secondAttribute="width" id="uin-iE-mkD"/>
                 <constraint firstItem="GRl-jq-IJ1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="v6x-Yb-HBe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnRead" destination="QtU-bl-x8A" id="zLa-Eg-4cD"/>
-                <outlet property="btnSave" destination="VVT-Wn-tpN" id="g0J-yP-vcp"/>
                 <outlet property="imgCover" destination="GRl-jq-IJ1" id="DKt-YI-0Kg"/>
                 <outlet property="lblAlterNameStory" destination="12J-w0-mJc" id="D1F-Bh-wtx"/>
                 <outlet property="lblAuthorStory" destination="Uts-wd-Ecz" id="JdA-OH-nvs"/>
@@ -179,7 +157,7 @@
                 <outlet property="lblStatusSory" destination="Dn3-5e-Ua4" id="15S-xZ-NUa"/>
                 <outlet property="lblTitleStory" destination="N7B-3T-szF" id="4bc-ET-nEd"/>
             </connections>
-            <point key="canvasLocation" x="478" y="163"/>
+            <point key="canvasLocation" x="477.5" y="163"/>
         </view>
     </objects>
 </document>

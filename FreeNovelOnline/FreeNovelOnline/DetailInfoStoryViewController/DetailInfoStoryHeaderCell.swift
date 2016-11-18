@@ -29,7 +29,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
  
     @IBOutlet weak var btnRead: UIButton!
 
-    @IBOutlet weak var btnSave: UIButton!
+ 
     
     private var block:((Int)->())?
     
@@ -80,9 +80,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         
         
         
-        self.btnSave.layer.cornerRadius = 5
-        self.btnSave.layer.masksToBounds = true
-        
+       
         self.btnRead.layer.cornerRadius = 5
         self.btnRead.layer.masksToBounds = true
         
@@ -94,12 +92,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         }
     }
     
-    @IBAction func btnSaveTouch(sender: AnyObject) {
-        if self.block != nil {
-            self.block!(1)
-        }
-    }
-    
+  
     
 
 }

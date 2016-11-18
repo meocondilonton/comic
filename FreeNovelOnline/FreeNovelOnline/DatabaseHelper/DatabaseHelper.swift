@@ -27,7 +27,7 @@ class DatabaseHelper: NSObject {
         let path = NSSearchPathForDirectoriesInDomains(
             .DocumentDirectory, .UserDomainMask, true
             ).first!
-        print("path: \(path) ")
+//        print("path: \(path) ")
         
         do {
             db = try Connection("\(path)/altp_tet.sqlite3")
@@ -112,7 +112,7 @@ class DatabaseHelper: NSObject {
         let query  = storyFullInfoSaved.filter(storyIsRead == 1).order(timeSaved.desc).limit(50)
         do {
             for item in try db.prepare(query) {
-                print("Xid: \(item[id]) ")
+//                print("Xid: \(item[id]) ")
                 
                 let itemStory = StoryFullInfoModel()
                 itemStory.storyImgUrl = item[storyImgUrl]
@@ -160,7 +160,7 @@ class DatabaseHelper: NSObject {
          let query  = storyFullInfoSaved.filter(  isSaved == 1)
         do {
             for item in try db.prepare(query) {
-                print("Xid: \(item[id]) ")
+//                print("Xid: \(item[id]) ")
                
                 let itemStory = StoryFullInfoModel()
                 itemStory.storyImgUrl = item[storyImgUrl]
@@ -208,7 +208,7 @@ class DatabaseHelper: NSObject {
         
         do {
             for item in try db.prepare(query) {
-                print("Xid: \(item[id]) ")
+//                print("Xid: \(item[id]) ")
                 
                 let itemStory = StoryFullInfoModel()
                 itemStory.storyImgUrl = item[storyImgUrl]
@@ -408,9 +408,9 @@ class DatabaseHelper: NSObject {
         
         do {
             for item in try db.prepare(query) {
-                print("Xid: \(item[id]) ")
-                print("id: \(item[request]) ")
-                print("id: \(item[result]) ")
+//                print("Xid: \(item[id]) ")
+//                print("id: \(item[request]) ")
+//                print("id: \(item[result]) ")
                
                 resultRequest.request = item[request]
                 resultRequest.result =  item[result]

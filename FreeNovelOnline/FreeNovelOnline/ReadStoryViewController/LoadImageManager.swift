@@ -15,15 +15,7 @@ class LoadImageManager: NSObject  {
     var wsImg:LoadImgWebservice?
     var block:(( String)->())?
     
-//    func updateData(url:String){
-//        let image = UIImage(named: "placeholder")
-//        let data = UIImageJPEGRepresentation(image!, 1.0)
-////         self.webView.loadData(data!, MIMEType: "image/jpeg", textEncodingName: "utf-8", baseURL: NSURL())
-//        
-//        let urlString = String(format:"%@%@",BaseUrl,url)
-////        self.loadChapterData(urlString)
-//        
-//    }
+ 
     
     func loadImage(page:String , block:(String)->() )  {
         let param = NSMutableDictionary()
@@ -44,13 +36,11 @@ class LoadImageManager: NSObject  {
                     for item2 in e2.children {
  
                         if let link = item2.objectForKey("src") {
-                            print("element")
-                            print(link)
+ 
                             if self?.block != nil {
                                 self?.block!(link as! String)
                             }
-//                           self?.loadImg(link as! String)
-//                             self?.webView.loadRequest(NSURLRequest(URL: NSURL(string: link as! String)!))
+ 
                         }
                     }
                 }
@@ -64,13 +54,6 @@ class LoadImageManager: NSObject  {
         
     }
     
-//    func loadImg(url:String){
-//        let param = NSMutableDictionary()
-//        param.setValue(url , forKey: keyUrl)
-//        self.wsImg =  LoadImgWebservice.shareInstance()
-//        self.wsImg?.getData(param, isShowIndicator: false, block: { (result) in
-////             self.webView.loadData(result!, MIMEType: "image/jpeg", textEncodingName: "utf-8", baseURL: NSURL())
-//        })
-//    }
+ 
     
 }

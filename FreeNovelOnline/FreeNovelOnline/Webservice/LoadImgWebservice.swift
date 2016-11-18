@@ -46,7 +46,7 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
          self.block = block
         self.requestStr = param.valueForKey(keyUrl) as! String
           
-         if self.loadCache(self.requestStr ?? "") == false {
+//         if self.loadCache(self.requestStr ?? "") == false {
         do {
            
             dataVal = NSMutableData()
@@ -60,7 +60,7 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
             
         }catch {
             print(error)
-        }
+//        }
         }
         
     }
@@ -72,10 +72,10 @@ class LoadImgWebservice: NSObject , NSURLConnectionDelegate{
     
     func connectionDidFinishLoading(connection: NSURLConnection!)
     {
-        let item = RequestModel()
-        item.request = self.requestStr
-        item.result = dataVal
-        DatabaseHelper.shareInstall().insertOrUpdateRequest(item)
+//        let item = RequestModel()
+//        item.request = self.requestStr
+//        item.result = dataVal
+//        DatabaseHelper.shareInstall().insertRequest(item)
         if self.isShowIndicator {
             SVProgressHUD.dismiss()
         }

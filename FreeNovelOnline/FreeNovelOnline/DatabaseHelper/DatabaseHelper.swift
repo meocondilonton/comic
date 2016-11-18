@@ -458,7 +458,33 @@ class DatabaseHelper: NSObject {
    
     }
   
-    
+    func insertRequest(requestModel:RequestModel) {
+        let cacheRequest = Table("cacherequest")
+        
+        let request = Expression<String>("request")
+        let result = Expression<NSData>("result")
+        
+        let query  = cacheRequest.filter(  request == requestModel.request!)
+            .limit(1)
+        do {
+            var size = 0
+            for _ in try db.prepare(query) {
+                size += 1
+                
+            }
+            if size > 0 {
+               return
+                
+            }else{
+                let insert = cacheRequest.insert(request <- (requestModel.request ?? ""), result <- (requestModel.result )!)
+                _ = try db.run(insert)
+                print("insert row cacheRequest")
+            }
+        } catch {
+            print(" failed: \(error)")
+        }
+        
+    }
     
 }
 

@@ -109,11 +109,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         categoryListTag.addTag("Yuri").numTag = 1
         
         categoryListTag.delegate = self
-        
-//        print("categoryListTag.rows")
-//        print(categoryListTag.rows)
-//        print("tagViewHeight")
-//        print(categoryListTag.tagViewHeight)
+ 
         
         contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight + categoryListTag.paddingY)
         
@@ -124,10 +120,10 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         typeListTag.delegate = self
         
-        print("typeListTag.rows")
-        print(typeListTag.rows)
-        print("typeListTag.tagViewHeight")
-        print(typeListTag.tagViewHeight)
+//        print("typeListTag.rows")
+//        print(typeListTag.rows)
+//        print("typeListTag.tagViewHeight")
+//        print(typeListTag.tagViewHeight)
         
         contraitType.constant = CGFloat(typeListTag.rows) * (typeListTag.tagViewHeight + typeListTag.paddingY)
         
@@ -259,7 +255,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                  rd = stringValue
             }
         }
-        print("Tag pressed: \(title), \(sender)")
+//        print("Tag pressed: \(title), \(sender)")
     }
 
 }

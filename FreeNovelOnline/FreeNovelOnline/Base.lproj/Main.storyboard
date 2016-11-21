@@ -1153,7 +1153,7 @@
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pH0-ig-fMX" customClass="TagListView" customModule="FreeNovelOnline" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="46" width="345" height="82"/>
-                                                        <color key="backgroundColor" red="0.99607843139999996" green="0.47843137250000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="82" id="eFs-sM-bdI"/>
                                                         </constraints>
@@ -1246,7 +1246,7 @@
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="102-9f-Vyx" customClass="TagListView" customModule="FreeNovelOnline" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="46" width="345" height="238"/>
-                                                        <color key="backgroundColor" red="0.99607843139999996" green="0.47843137250000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="238" id="fDs-Ds-uZi"/>
                                                         </constraints>
@@ -1339,7 +1339,7 @@
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ke-2x-UOC" customClass="TagListView" customModule="FreeNovelOnline" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="46" width="345" height="82"/>
-                                                        <color key="backgroundColor" red="0.99607843139999996" green="0.47843137250000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="82" id="wv5-H3-oxj"/>
                                                         </constraints>

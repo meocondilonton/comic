@@ -374,7 +374,7 @@ class DatabaseHelper: NSObject {
 
         do {
             for item in try db.prepare(query) {
-                print("Xid: \(item[id]) ")
+//                print("Xid: \(item[id]) ")
                 
                 let itemModel = Item()
                  itemModel.itemKey = item[itemKey]
@@ -442,15 +442,15 @@ class DatabaseHelper: NSObject {
             }
             if size > 0 {
                 if try db.run(cacheRequest.update(request <- requestModel.request!,result <- requestModel.result! )) > 0 {
-                    print("updated row cacheRequest")
+//                    print("updated row cacheRequest")
                 } else {
-                    print("row cacheRequest not found")
+//                    print("row cacheRequest not found")
                 }
                 
             }else{
                   let insert = cacheRequest.insert(request <- (requestModel.request ?? ""), result <- (requestModel.result )!)
                   _ = try db.run(insert)
-                 print("insert row cacheRequest")
+//                 print("insert row cacheRequest")
             }
         } catch {
             print(" failed: \(error)")
@@ -458,7 +458,33 @@ class DatabaseHelper: NSObject {
    
     }
   
-    
+    func insertRequest(requestModel:RequestModel) {
+        let cacheRequest = Table("cacherequest")
+        
+        let request = Expression<String>("request")
+        let result = Expression<NSData>("result")
+        
+        let query  = cacheRequest.filter(  request == requestModel.request!)
+            .limit(1)
+        do {
+            var size = 0
+            for _ in try db.prepare(query) {
+                size += 1
+                
+            }
+            if size > 0 {
+               return
+                
+            }else{
+                let insert = cacheRequest.insert(request <- (requestModel.request ?? ""), result <- (requestModel.result )!)
+                _ = try db.run(insert)
+//                print("insert row cacheRequest")
+            }
+        } catch {
+            print(" failed: \(error)")
+        }
+        
+    }
     
 }
 

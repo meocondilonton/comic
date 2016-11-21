@@ -143,20 +143,11 @@ class HomeViewController: BaseViewController {
             self.collectionViewStory.mj_footer.endRefreshing()
         }
       
-        
-        //test
-//        if appdelegate.isTest  == true {
-//            self.arrStory?.removeAll()
-//            self.arrStory = self.arrTest()
-//            self.collectionViewStory.reloadData()
-//            
-//            return
-//        }
+ 
         
         let paramSend = NSMutableDictionary()
         paramSend.setValue(url, forKey: keyUrl)
-//        print("url")
-//        print(url)
+ 
        BaseWebservice.shareInstance().getData(paramSend, isShowIndicator: true) {[weak self] (result) in
         if isRefresh == true {
             self?.arrStory?.removeAll(keepCapacity: false)
@@ -273,7 +264,7 @@ extension HomeViewController {
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+ 
 }
 extension HomeViewController {
       override func setUpNavigationBar() {

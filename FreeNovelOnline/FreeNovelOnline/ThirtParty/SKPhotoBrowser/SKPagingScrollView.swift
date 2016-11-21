@@ -157,7 +157,10 @@ class SKPagingScrollView: UIScrollView {
             let page: SKZoomingScrollView = SKZoomingScrollView(frame: frame, browser: browser)
             page.frame = frameForPageAtIndex(index)
             page.tag = index + pageIndexTagOffset
-            page.photo = browser.photos[index]
+            if browser.photos.count > 0 {
+                 page.photo = browser.photos[index]
+            }
+           
             
             visiblePages.append(page)
             addSubview(page)

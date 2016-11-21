@@ -22,9 +22,9 @@ typealias NaviButtonHandleBlock = (type: NaviButtonClickType) -> ()
 class CommonMainNavigationView: UIView {
 
     private var bgImage:UIImageView!
-    private var leftBtn1:UIButton!
-    private var rightBtn1:UIButton!
-    private var rightBtn2:UIButton!
+      var leftBtn1:UIButton!
+      var rightBtn1:UIButton!
+      var rightBtn2:UIButton!
     
     var lblTitle:UILabel!
     private var lblDes:UILabel!

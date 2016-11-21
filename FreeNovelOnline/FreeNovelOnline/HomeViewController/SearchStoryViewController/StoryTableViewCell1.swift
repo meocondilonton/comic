@@ -29,11 +29,15 @@ class StoryTableViewCell1: UITableViewCell {
 
     
     func uodateData( data:StoryInfoModel ) {
-        if let imgUrl = data.storyImgUrl {
-            let originalUrl = String(format: "%@%@", BaseUrl,imgUrl)
-            let imgCoverUrl = NSURL(string: originalUrl)
-            self.imgCover.sd_setImageWithURL(imgCoverUrl, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.RetryFailed)
-        }
+        
+            
+            if let imgUrl = data.storyImgUrl {
+                let originalUrl = String(format: "%@",imgUrl)
+                
+                let imgCoverUrl = NSURL(string: originalUrl)
+                self.imgCover.sd_setImageWithURL(imgCoverUrl, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.RetryFailed)
+            }
+       
         self.lblContent.text =  data.storyName ?? ""
         
     }

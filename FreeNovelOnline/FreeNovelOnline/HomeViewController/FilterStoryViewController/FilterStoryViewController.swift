@@ -109,9 +109,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         categoryListTag.addTag("Yuri").numTag = 1
         
         categoryListTag.delegate = self
-        
- 
-        
+   
         contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight +   categoryListTag.marginY)
         
         typeListTag.alignment = .Center
@@ -254,7 +252,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                  rd = stringValue
             }
         }
-        print("Tag pressed: \(title), \(sender)")
+//        print("Tag pressed: \(title), \(sender)")
     }
 
 }

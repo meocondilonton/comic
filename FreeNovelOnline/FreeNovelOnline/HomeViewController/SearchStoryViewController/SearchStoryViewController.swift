@@ -16,6 +16,9 @@ class SearchStoryViewController: BaseViewController {
     @IBOutlet weak var tfSearch: UITextField!
       var arrStory:[StoryInfoModel]? = [StoryInfoModel]()
     var cancel:Bool = false
+    var currentPage = 0
+    var timer:NSTimer?
+    var ws:LoadImgWebservice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,7 @@ class SearchStoryViewController: BaseViewController {
     }
     
     func setUpTextField() {
-        self.tfSearch.attributedPlaceholder = NSAttributedString(string:"Search by title or author",
+        self.tfSearch.attributedPlaceholder = NSAttributedString(string:"Search by title",
                                                                       attributes:[NSForegroundColorAttributeName: textWhiteBlurColor])
     }
     
@@ -48,127 +51,114 @@ extension SearchStoryViewController {
 }
 
 extension SearchStoryViewController {
-    func searchStoryWithKey(key:String){
+    func searchAfterDelay(key:String){
+        if timer != nil {
+            timer?.invalidate()
+        }
+        let userInfor = ["value":key]
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(SearchStoryViewController.searchStory), userInfo: userInfor, repeats: false)
+    }
+    
+    func searchStory(timer: NSTimer!){
+        let info = timer.userInfo
+        let key = info?.valueForKey("value") as? String ?? ""
+        
+        let rd = "0"
+        let cate = "0000000000000000000000000000000000000"
+        let status = "0"
+        let order = "0"
+
         let param = NSMutableDictionary()
-        let originalUrl = NSString(format: "%@%@",UrlSearch,key)
+       let originalUrl = String(format:UrlSearch,key,rd ?? "",status ?? "",order ?? "",cate ?? "",self.currentPage)
         let urlString :String = originalUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         param.setValue(urlString, forKey: keyUrl)
-        BaseWebservice.shareInstance().getData(param, isShowIndicator: true) { [weak self](result) in
+        ws = LoadImgWebservice()
+        ws?.getData(param, isShowIndicator: false) {[weak self] (result) in
             
-            //test
-            if appdelegate.isTest  == true {
-                self?.arrStory?.removeAll()
-                self?.arrStory = self?.arrTest()
-                self?.tbView.reloadData()
-                if self?.arrStory?.count > 0 {
-                    self?.vEmpty.hidden = true
-                }else{
-                    self?.vEmpty.hidden = false
-                }
-                return
-            }
-            //
+            self?.arrStory?.removeAll(keepCapacity: false)
+           
             let doc = TFHpple(HTMLData: result)
-            let elements = doc.searchWithXPathQuery("//div[@class='game-medium']")
             
-            self?.arrStory  = [StoryInfoModel]()
             
+            let elements = doc.searchWithXPathQuery("//div[@class='mangaresultitem']")
+//                         print("elements")
+//                        print(elements)
             for eleItem in elements {
-                let e = eleItem as! TFHppleElement
-                if e.children.count > 1 {
-                    if let temp = e.children[1] as? TFHppleElement {
+                let e0 = eleItem as! TFHppleElement
+                for eleItem0 in e0.children {
+                    let e = eleItem0 as! TFHppleElement
+                    //            print(e.attributes["class"])
+                    //                                print("e.raw")
+                    //            print(e.content)
+                    if e.attributes["class"]?.isEqualToString("mangaresultinner") == true   {
+                        //                      print("e.content")
+                        //                      print(e.content)
                         let itemStory = StoryInfoModel()
-                        let origin = temp.objectForKey("href") ?? ""
-                        let urlString :String = origin.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                        itemStory.storyUrl = urlString
-                        
-                        for item in temp.children {
-                            
-                            
-                            itemStory.storyName = item.objectForKey("title")
-                            let origin = item.objectForKey("src") ?? ""
-                             let urlString :String = origin.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                            itemStory.storyImgUrl =   urlString.stringByReplacingOccurrencesOfString("..", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
- 
-                            
+                        for eleItem1 in e.children {
+                            let e1 =  eleItem1 as! TFHppleElement
+                            if e1.attributes["class"]?.isEqualToString("imgsearchresults") == true   {
+                                
+                                if let href = e1.objectForKey("style") {
+                                    
+                                    let imgUrlArr = href.characters.split{$0 == "'"}.map(String.init)
+                                    if imgUrlArr.count >= 2 {
+                                        
+                                        itemStory.storyImgUrl = imgUrlArr[1]
+                                    }
+                                    
+                                }
+                                
+                            }else if  e1.attributes["class"]?.isEqualToString("result_info c4") == true  {
+                                for eleItem2 in e1.children {
+                                    let e2 =  eleItem2 as! TFHppleElement
+                                    if e2.attributes["class"]?.isEqualToString("manga_name") == true{
+                                        for eleItem3 in e2.children {
+                                            let e3 =  eleItem3 as! TFHppleElement
+                                            for eleItem4 in e3.children {
+                                                let e5 =  eleItem4 as! TFHppleElement
+                                                //                                                print("e5.content")
+                                                //                                                 if e5.raw != nil {
+                                                //                                                print(e5.raw)
+                                                //                                                }
+                                                for eleItem6 in e5.children {
+                                                    let e6 =  eleItem6 as! TFHppleElement
+                                                    
+                                                    if e6.raw != nil {
+                                                        //                                                        print("e6.content")
+                                                        //                                                        print(e6.raw)
+                                                        if let href = e6.objectForKey("href") {
+                                                            itemStory.storyUrl = href
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                                if e5.raw != nil {
+                                                    itemStory.storyName = e5.content
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        
                         self?.arrStory?.append(itemStory)
-                        
                     }
                 }
                 
             }
             
-            if self?.arrStory?.count > 0 {
-                self?.vEmpty.hidden = true
-            }else{
-                 self?.vEmpty.hidden = false
-            }
             self?.tbView.reloadData()
-            
         }
     }
    
-    func arrTest()->[StoryInfoModel]{
-        var result = [StoryInfoModel]()
-        
-        let itemNew5 = StoryInfoModel()
-        itemNew5.storyName = "Boy's Life"
-        itemNew5.storyUrl = "/241659-boys-life.html"
-        itemNew5.storyImgUrl = "/uploads/truyen/Boys-Life.jpg"
-        result.append(itemNew5)
-        
-        let itemNew2 = StoryInfoModel()
-        itemNew2.storyName = "The Historian"
-        itemNew2.storyUrl = "/241337-the-historian.html"
-        itemNew2.storyImgUrl = "/uploads/truyen/The-Historian.jpg"
-        result.append(itemNew2)
-        
-        let itemNew = StoryInfoModel()
-        itemNew.storyName = "Airport"
-        itemNew.storyUrl = "/241269-airport.html"
-        itemNew.storyImgUrl = "/uploads/truyen/Airport.jpg"
-        result.append(itemNew)
-        
-       
-        
-        let itemNew3 = StoryInfoModel()
-        itemNew3.storyName = "Teenage Mermaid"
-        itemNew3.storyUrl = "/241217-teenage-mermaid.html"
-        itemNew3.storyImgUrl = "/uploads/truyen/Teenage-Mermaid.jpg"
-        result.append(itemNew3)
-        
-        let itemNew7 = StoryInfoModel()
-        itemNew7.storyName = "Questing Beast"
-        itemNew7.storyUrl = "/241519-questing-beast.html"
-        itemNew7.storyImgUrl = "/uploads/truyen/Questing-Beast.jpg"
-        result.append(itemNew7)
-        
-        let itemNew4 = StoryInfoModel()
-        itemNew4.storyName = "Our Lady of Darkness"
-        itemNew4.storyUrl = "/241960-our-lady-of-darkness.html"
-        itemNew4.storyImgUrl = "/uploads/truyen/Our-Lady-of-Darkness.jpg"
-        result.append(itemNew4)
-       
-        
-        let itemNew6 = StoryInfoModel()
-        itemNew6.storyName = "Of Swine and Roses"
-        itemNew6.storyUrl = "/241518-of-swine-and-roses.html"
-        itemNew6.storyImgUrl = "/uploads/truyen/Of-Swine-and-Roses.jpg"
-        result.append(itemNew6)
-        
-        
-        
-        return result
-    }
+    
     
     
 }
 
 
 extension SearchStoryViewController : UITextFieldDelegate  {
-   
+    
     @IBAction func btnCancelTouch(sender: AnyObject) {
         self.cancel = true
         self.navigationController?.popViewControllerAnimated(true)
@@ -179,10 +169,23 @@ extension SearchStoryViewController : UITextFieldDelegate  {
         return true
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        
+        var stringSearch:NSString = textField.text!
+        stringSearch = stringSearch.stringByReplacingCharactersInRange(range, withString: string)
+        
+        if stringSearch != "" && cancel == false{
+            self.searchAfterDelay(textField.text ?? "")
+        }
+        return true
+        
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         let search = textField.text ?? ""
         if search != "" && cancel == false{
-            self.searchStoryWithKey(textField.text ?? "")
+            self.searchAfterDelay(textField.text ?? "")
         }
     }
     

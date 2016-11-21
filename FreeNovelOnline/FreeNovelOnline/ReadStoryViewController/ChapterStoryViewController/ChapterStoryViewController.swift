@@ -18,7 +18,7 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     var arrChapter:[Item]?
     var chapSelected:Int = 0
     var arrPhoto:[SKPhoto]?
-    
+    var ws:LoadImgWebservice?
     
     
     override func viewDidLoad() {
@@ -128,7 +128,8 @@ extension ChapterStoryViewController {
         let param = NSMutableDictionary()
         
         param.setValue(url , forKey: keyUrl)
-        BaseWebservice.shareInstance().getData(param, isShowIndicator: true) {[weak self] (result) in
+//         ws = LoadImgWebservice()
+         BaseWebservice.shareInstance().getData(param, isShowIndicator: true) {[weak self] (result) in
             
             let doc = TFHpple(HTMLData: result)
             
@@ -162,12 +163,13 @@ extension ChapterStoryViewController {
             let photoTemp = SKPhoto(url: item)
             arrPhoto?.append(photoTemp)
         }
- 
+        if arrPhoto?.count > 0 {
         let photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
         photoBrowser.initializePageIndex(0)
         photoBrowser.delegate = self
         self.presentViewController(photoBrowser, animated: true) {
             
+        }
         }
     }
     

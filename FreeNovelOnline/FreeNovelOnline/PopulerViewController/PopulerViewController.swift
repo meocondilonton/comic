@@ -43,7 +43,7 @@ class PopulerViewController: BaseViewController {
             self.loadData(url   ,isRefresh: true)
             let title = item.storyName ?? ""
             self.fakeNavi.lblTitle.text =  title
-            
+            self.fakeNavi.stringDes = "All"
         }
         
     }
@@ -82,14 +82,7 @@ class PopulerViewController: BaseViewController {
         if isRefresh == true {
             self.collectionViewStory.setContentOffset(CGPointMake(0, -20), animated: true)
         }
-        //test
-        if appdelegate.isTest  == true {
-            self.arrStory?.removeAll()
-            self.arrStory = self.arrTest()
-            self.collectionViewStory.reloadData()
-            
-            return
-        }
+      
         
         let param = NSMutableDictionary()
         param.setValue(url, forKey: keyUrl)
@@ -232,164 +225,9 @@ extension PopulerViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func arrTest()->[StoryInfoModel]{
-        var result = [StoryInfoModel]()
-        
-        let itemNew = StoryInfoModel()
-        itemNew.storyName = "Airport"
-        itemNew.storyUrl = "/241269-airport.html"
-        itemNew.storyImgUrl = "/uploads/truyen/Airport.jpg"
-        result.append(itemNew)
-        
-        let itemNew2 = StoryInfoModel()
-        itemNew2.storyName = "The Historian"
-        itemNew2.storyUrl = "/241337-the-historian.html"
-        itemNew2.storyImgUrl = "/uploads/truyen/The-Historian.jpg"
-        result.append(itemNew2)
-        
-        let itemNew3 = StoryInfoModel()
-        itemNew3.storyName = "Teenage Mermaid"
-        itemNew3.storyUrl = "/241217-teenage-mermaid.html"
-        itemNew3.storyImgUrl = "/uploads/truyen/Teenage-Mermaid.jpg"
-        result.append(itemNew3)
-        
-        let itemNew4 = StoryInfoModel()
-        itemNew4.storyName = "Our Lady of Darkness"
-        itemNew4.storyUrl = "/241960-our-lady-of-darkness.html"
-        itemNew4.storyImgUrl = "/uploads/truyen/Our-Lady-of-Darkness.jpg"
-        result.append(itemNew4)
-        
-        let itemNew5 = StoryInfoModel()
-        itemNew5.storyName = "Boy's Life"
-        itemNew5.storyUrl = "/241659-boys-life.html"
-        itemNew5.storyImgUrl = "/uploads/truyen/Boys-Life.jpg"
-        result.append(itemNew5)
-        
-        let itemNew6 = StoryInfoModel()
-        itemNew6.storyName = "Of Swine and Roses"
-        itemNew6.storyUrl = "/241518-of-swine-and-roses.html"
-        itemNew6.storyImgUrl = "/uploads/truyen/Of-Swine-and-Roses.jpg"
-        result.append(itemNew6)
-        
-        let itemNew7 = StoryInfoModel()
-        itemNew7.storyName = "Questing Beast"
-        itemNew7.storyUrl = "/241519-questing-beast.html"
-        itemNew7.storyImgUrl = "/uploads/truyen/Questing-Beast.jpg"
-        result.append(itemNew7)
-        
-        return result
-    }
     
-    func arrFilterDTO()->[StoryInfoModel] {
-        var result = [StoryInfoModel]()
-        
-        let itemNew = StoryInfoModel()
-        itemNew.storyName = "NEW BOOKS"
-        itemNew.storyUrl = "/"
-        itemNew.storyImgUrl = "new"
-        result.append(itemNew)
-        
-        let itemHot = StoryInfoModel()
-        itemHot.storyName = "Nonfiction"
-        itemHot.storyUrl = "/genre/nonfiction-16"
-        itemHot.storyImgUrl = "hot"
-        result.append(itemHot)
-        
-        let itemRomance = StoryInfoModel()
-        itemRomance.storyName = "Love & Romance"
-        itemRomance.storyUrl = "/genre/love-romance-1"
-        itemRomance.storyImgUrl = "romanovel"
-        result.append(itemRomance)
-        
-        let itemYAdult = StoryInfoModel()
-        itemYAdult.storyName = "Children"
-        itemYAdult.storyUrl = "/genre/children-10"
-        itemYAdult.storyImgUrl = "young"
-        result.append(itemYAdult)
-        
-        let itemAdventure = StoryInfoModel()
-        itemAdventure.storyName = "Action & Adventure"
-        itemAdventure.storyUrl = "/genre/action-adventure-9"
-        itemAdventure.storyImgUrl = "adventure"
-        result.append(itemAdventure)
-        
-        let itemFantasy = StoryInfoModel()
-        itemFantasy.storyName = "Fantasy"
-        itemFantasy.storyUrl = "/genre/fantasy-6"
-        itemFantasy.storyImgUrl = "fantasy"
-        result.append(itemFantasy)
-        
-        
-        let itemHorror = StoryInfoModel()
-        itemHorror.storyName = "Horror"
-        itemHorror.storyUrl = "/genre/horror-7"
-        itemHorror.storyImgUrl = "horror"
-        result.append(itemHorror)
-        
-        let itemMystery = StoryInfoModel()
-        itemMystery.storyName = "Mystery"
-        itemMystery.storyUrl = "/genre/mystery-3"
-        itemMystery.storyImgUrl = "mystery"
-        result.append(itemMystery)
-        
-        let itemScience = StoryInfoModel()
-        itemScience.storyName = "Science Fiction"
-        itemScience.storyUrl = "/genre/science-fiction-5"
-        itemScience.storyImgUrl = "science"
-        result.append(itemScience)
-        
-        let itemWestern = StoryInfoModel()
-        itemWestern.storyName = "Western"
-        itemWestern.storyUrl = "/genre/western-2"
-        itemWestern.storyImgUrl = "western"
-        result.append(itemWestern)
-        
-        let itemChristian = StoryInfoModel()
-        itemChristian.storyName = "Drama"
-        itemChristian.storyUrl = "/genre/drama-11"
-        itemChristian.storyImgUrl = "christian"
-        result.append(itemChristian)
-        
-        let itemHistorical = StoryInfoModel()
-        itemHistorical.storyName = "Historical"
-        itemHistorical.storyUrl = "/genre/historical-fiction-8"
-        itemHistorical.storyImgUrl = "historical"
-        result.append(itemHistorical)
-        
-        let itemHumorous = StoryInfoModel()
-        itemHumorous.storyName = "Comedy"
-        itemHumorous.storyUrl = "/genre/comedy-12"
-        itemHumorous.storyImgUrl = "humorous"
-        result.append(itemHumorous)
-        
-        let itemThriller = StoryInfoModel()
-        itemThriller.storyName = "Thriller"
-        itemThriller.storyUrl = "/genre/thriller-4"
-        itemThriller.storyImgUrl = "thriller"
-        result.append(itemThriller)
-        
-        let itemPoetry = StoryInfoModel()
-        itemPoetry.storyName = "Poetry"
-        itemPoetry.storyUrl = "/genre/poetry-13"
-        itemPoetry.storyImgUrl = "thriller"
-        result.append(itemPoetry)
-        
-        
-        let itemClassic = StoryInfoModel()
-        itemClassic.storyName = "Classic Authors"
-        itemClassic.storyUrl = "/genre/classic-authors-14"
-        itemClassic.storyImgUrl = "thriller"
-        result.append(itemClassic)
-        
-        let itemLiterature = StoryInfoModel()
-        itemLiterature.storyName = "Literature"
-        itemLiterature.storyUrl = "/genre/literature-15"
-        itemLiterature.storyImgUrl = "thriller"
-        result.append(itemLiterature)
-        
-        
-        return result
-    }
+    
+    
 }
 extension PopulerViewController {
     override func setUpNavigationBar() {
@@ -400,6 +238,8 @@ extension PopulerViewController {
         //        print(self.fakeNavi.frame)
         self.navigationController?.navigationBar.addSubview(self.fakeNavi)
         self.fakeNavi.lblTitle.text =  "Discover"
+        self.fakeNavi.rightBtn2.hidden = true
+        self.fakeNavi.rightBtn1.hidden = true
         self.fakeNavi.naviHandleBlock = {[weak self] (type: NaviButtonClickType) -> () in
             if (type == .LeftFirst) {
                 self?.goToFilter()

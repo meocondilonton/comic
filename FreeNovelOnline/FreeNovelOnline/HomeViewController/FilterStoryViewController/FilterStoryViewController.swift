@@ -110,12 +110,9 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         categoryListTag.delegate = self
         
-//        print("categoryListTag.rows")
-//        print(categoryListTag.rows)
-//        print("tagViewHeight")
-//        print(categoryListTag.tagViewHeight)
+ 
         
-        contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight + categoryListTag.paddingY)
+        contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight +   categoryListTag.marginY)
         
         typeListTag.alignment = .Center
         typeListTag.addTag("Both(Manga and Manhwa)").numTag =  0
@@ -124,12 +121,9 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         typeListTag.delegate = self
         
-        print("typeListTag.rows")
-        print(typeListTag.rows)
-        print("typeListTag.tagViewHeight")
-        print(typeListTag.tagViewHeight)
+ 
         
-        contraitType.constant = CGFloat(typeListTag.rows) * (typeListTag.tagViewHeight + typeListTag.paddingY)
+        contraitType.constant = CGFloat(typeListTag.rows) * (typeListTag.tagViewHeight +  typeListTag.marginY)
         
         statusListTag.alignment = .Center
         statusListTag.addTag("Both(Ongoing and Complete)").numTag =  0
@@ -138,7 +132,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         statusListTag.delegate = self
         
-        contraitStatus.constant = CGFloat(statusListTag.rows) * (statusListTag.tagViewHeight + statusListTag.paddingY )
+        contraitStatus.constant = CGFloat(statusListTag.rows) * (statusListTag.tagViewHeight +   statusListTag.marginY)
         
         sortOrder.alignment = .Center
         sortOrder.addTag("Similarity").numTag =  0
@@ -147,7 +141,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         sortOrder.delegate = self
         
-        contraitSort.constant = CGFloat(sortOrder.rows) * (sortOrder.tagViewHeight + sortOrder.paddingY )
+        contraitSort.constant = CGFloat(sortOrder.rows) * (sortOrder.tagViewHeight    + sortOrder.marginY )
         
         
         categoryListTag.tag = kTagCategoryListTag
@@ -169,7 +163,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                 }
             }
             let cate = self.param!.valueForKey(keycategoryparam) as? String ?? "0"
-            var indexCount = 1
+            var indexCount = 37
             for item in cate.characters {
                 if item == "1" {
                     for tag in categoryListTag.tagViews {
@@ -183,7 +177,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                     }
 
                 }
-                indexCount += 1
+                indexCount -= 1
             }
             
           
@@ -220,6 +214,7 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
             
         }
     }
+    
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == kTagCategoryListTag {
             for tag in sender.tagViews {
@@ -230,10 +225,10 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
             categorySelectName = title
             for tag in sender.tagViews {
                if tag.selected == true {
-                   arrParamCate[tag.numTag - 1] = 1 //tag.numTag
+                   arrParamCate[arrParamCate.count - 1  - (tag.numTag - 1)] = 1 //tag.numTag
                 
                }else{
-                  arrParamCate[tag.numTag - 1] = 0
+                  arrParamCate[arrParamCate.count - 1 - (tag.numTag - 1)] = 0
                 }
             }
             

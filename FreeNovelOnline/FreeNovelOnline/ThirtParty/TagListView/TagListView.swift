@@ -180,7 +180,7 @@ public class TagListView: UIView {
         }
     }
     
-    public dynamic var textFont: UIFont = UIFont.systemFontOfSize(12) {
+    public dynamic var textFont: UIFont = UIFont.systemFontOfSize(17) {
         didSet {
             for tagView in tagViews {
                 tagView.textFont = textFont
@@ -231,11 +231,11 @@ public class TagListView: UIView {
         for (index, tagView) in tagViews.enumerate() {
             tagView.frame.size = tagView.intrinsicContentSize()
             tagViewHeight = tagView.frame.height
-            print("frame.width")
-               print(frame.width)
-            print("frame.size.width")
-            print(frame.size.width)
-            if currentRowTagCount == 0 || currentRowWidth + tagView.frame.size.width > SCREEN_WIDTH {
+//            print("frame.width")
+//               print(frame.width)
+//            print("frame.size.width")
+//            print(frame.size.width)
+            if currentRowTagCount == 0 || currentRowWidth + tagView.frame.size.width > SCREEN_WIDTH - 30 {
                 currentRow += 1
                 currentRowWidth = 0
                 currentRowTagCount = 0

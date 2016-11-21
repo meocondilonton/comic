@@ -31,7 +31,8 @@ class PopulerViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
         
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+       
+        
         
         
     }
@@ -410,13 +411,21 @@ extension PopulerViewController {
             }
         }
         
-        
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.fakeNavi.hidden = false
+          self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
         
     }
     

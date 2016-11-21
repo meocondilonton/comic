@@ -36,7 +36,7 @@ class HomeViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
        
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+//        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         
        
     }
@@ -233,6 +233,9 @@ class HomeViewController: BaseViewController {
         }
         
            self?.collectionViewStory.reloadData()
+        if isRefresh {
+             self?.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
+        }
         }
     }
     
@@ -266,69 +269,19 @@ extension HomeViewController {
 //            let title = result.storyName ?? ""
 //            self?.fakeNavi.lblTitle.text =  title
             self?.updateHeader(false, isTittle: false)
-            self?.collectionViewStory.scrollsToTop = true
+           
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-//    func arrTest()->[StoryInfoModel]{
-//         var result = [StoryInfoModel]()
-//        
-//        let itemNew = StoryInfoModel()
-//        itemNew.storyName = "Airport"
-//        itemNew.storyUrl = "/241269-airport.html"
-//        itemNew.storyImgUrl = "/uploads/truyen/Airport.jpg"
-//        result.append(itemNew)
-//        
-//        let itemNew2 = StoryInfoModel()
-//        itemNew2.storyName = "The Historian"
-//        itemNew2.storyUrl = "/241337-the-historian.html"
-//        itemNew2.storyImgUrl = "/uploads/truyen/The-Historian.jpg"
-//        result.append(itemNew2)
-//        
-//        let itemNew3 = StoryInfoModel()
-//        itemNew3.storyName = "Teenage Mermaid"
-//        itemNew3.storyUrl = "/241217-teenage-mermaid.html"
-//        itemNew3.storyImgUrl = "/uploads/truyen/Teenage-Mermaid.jpg"
-//        result.append(itemNew3)
-//        
-//        let itemNew4 = StoryInfoModel()
-//        itemNew4.storyName = "Our Lady of Darkness"
-//        itemNew4.storyUrl = "/241960-our-lady-of-darkness.html"
-//        itemNew4.storyImgUrl = "/uploads/truyen/Our-Lady-of-Darkness.jpg"
-//        result.append(itemNew4)
-//        
-//        let itemNew5 = StoryInfoModel()
-//        itemNew5.storyName = "Boy's Life"
-//        itemNew5.storyUrl = "/241659-boys-life.html"
-//        itemNew5.storyImgUrl = "/uploads/truyen/Boys-Life.jpg"
-//        result.append(itemNew5)
-//        
-//        let itemNew6 = StoryInfoModel()
-//        itemNew6.storyName = "Of Swine and Roses"
-//        itemNew6.storyUrl = "/241518-of-swine-and-roses.html"
-//        itemNew6.storyImgUrl = "/uploads/truyen/Of-Swine-and-Roses.jpg"
-//        result.append(itemNew6)
-//        
-//        let itemNew7 = StoryInfoModel()
-//        itemNew7.storyName = "Questing Beast"
-//        itemNew7.storyUrl = "/241519-questing-beast.html"
-//        itemNew7.storyImgUrl = "/uploads/truyen/Questing-Beast.jpg"
-//        result.append(itemNew7)
-//        
-//        return result
-//    }
-    
-    
+
 }
 extension HomeViewController {
-    override func setUpNavigationBar() {
+      override func setUpNavigationBar() {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, kHeightDiscoverNavibar + 20  )
         self.fakeNavi = CommonMainNavigationView(frame: CGRectMake(0, -20, self.view.frame.size.width, kHeightDiscoverNavibar + 20  ))
-//        print(self.fakeNavi.frame)
-        
+ 
         self.navigationController?.navigationBar.addSubview(self.fakeNavi)
         self.fakeNavi.lblTitle.text =  "Discover"
         self.fakeNavi.naviHandleBlock = {[weak self] (type: NaviButtonClickType) -> () in
@@ -342,16 +295,23 @@ extension HomeViewController {
             }
         }
         
-       
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+ 
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.fakeNavi.hidden = false
+          self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
         
     }
- 
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+
+    }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

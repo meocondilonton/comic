@@ -209,18 +209,17 @@ extension PopulerViewController {
     
     func goToFilter() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("FilterStoryViewController") as! FilterStoryViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FilterPopularStoryViewController") as! FilterPopularStoryViewController
         vc.hidesBottomBarWhenPushed = true
 //        vc.arrType = self.arrFilterDTO()
         vc.block = {[weak self] (result)->() in
-//            let url = String(format: "%@%@",BaseUrl,result.storyUrl ?? "")
-//            self?.loadData(url,isRefresh: true)
-//            let pa = NSMutableDictionary()
-//            pa.setObject(result, forKey: "story")
-//            Utils.saveFilterParams(pa)
-//            let title = result.storyName ?? ""
-//            self?.fakeNavi.lblTitle.text =  title
-//            self?.collectionViewStory.scrollsToTop = true
+            let category =  result.valueForKey(keycategorynameparam) as? String
+            let loseCase = category?.lowercaseString
+            let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
+            let url = String(format: "%@%@",BaseUrl, path ?? "")
+            self?.loadData(url,isRefresh: true)
+ 
+            
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -303,7 +302,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.arrStory?.count ?? 0
         //        print("numbook: \(count)")
-        numAd = count/12
+        numAd = count/knumAdd
         return (count + numAd) ?? 0
         
     }
@@ -313,7 +312,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if indexPath.item % 12 == 0  && indexPath.item > 0 {
+        if indexPath.item % knumAdd == 0  && indexPath.item > 0 {
             return CGSizeMake(self.view.frame.size.width - 40, self.view.frame.size.width - 40)
         }else{
             return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.25/3.0)
@@ -326,7 +325,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
             if cell!.isKindOfClass(HomeCollectionViewCell) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
-                let numAdCurrent =  indexPath.item/12
+                let numAdCurrent =  indexPath.item/knumAdd
                 let arrIndex = indexPath.item - numAdCurrent
                 let storyInfo = self.arrStory![arrIndex]
                 
@@ -347,9 +346,9 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let numAdCurrent =  indexPath.item/12
+        let numAdCurrent =  indexPath.item/knumAdd
         
-        if indexPath.item % 12 == 0 &&   indexPath.item > 0{
+        if indexPath.item % knumAdd == 0 &&   indexPath.item > 0{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeAdCollectionViewCell", forIndexPath: indexPath) as! HomeAdCollectionViewCell
             cell.adView.adUnitID = adUnitLarge
             cell.adView.rootViewController = self

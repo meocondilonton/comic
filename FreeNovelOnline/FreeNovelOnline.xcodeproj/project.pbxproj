@@ -92,6 +92,7 @@
 		503B51E45ED24B313301309B /* Pods_FreeNovelOnline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F238141F722D9679E61A18 /* Pods_FreeNovelOnline.framework */; };
 		E28F8F19CB218239C28E93DB /* Pods_FreeNovelOnlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88F9EF63B328D187013E62A /* Pods_FreeNovelOnlineTests.framework */; };
 		E2C711BB3B9BE26850FE1CAB /* Pods_FreeNovelOnlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808C806CF29AB0282F29F2 /* Pods_FreeNovelOnlineUITests.framework */; };
+		FD2ED7671DE43E5C007C1949 /* FilterPopularStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7661DE43E5C007C1949 /* FilterPopularStoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +218,7 @@
 		6FFD8046260BF01F1A441EB8 /* Pods-FreeNovelOnlineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeNovelOnlineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreeNovelOnlineUITests/Pods-FreeNovelOnlineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B88F9EF63B328D187013E62A /* Pods_FreeNovelOnlineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeNovelOnlineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58BA13EC4E4EAF05C7D793D /* Pods-FreeNovelOnlineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreeNovelOnlineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FreeNovelOnlineUITests/Pods-FreeNovelOnlineUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD2ED7661DE43E5C007C1949 /* FilterPopularStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPopularStoryViewController.swift; sourceTree = "<group>"; };
 		FE808C806CF29AB0282F29F2 /* Pods_FreeNovelOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeNovelOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -563,6 +565,7 @@
 		41DFC2BD1DC1BF5A00239CC2 /* PopulerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FD2ED7661DE43E5C007C1949 /* FilterPopularStoryViewController.swift */,
 				41DFC2BE1DC1BF5A00239CC2 /* PopulerViewController.swift */,
 			);
 			path = PopulerViewController;
@@ -971,6 +974,7 @@
 				414327ED1D87EDB200015F2F /* RequestModel.swift in Sources */,
 				41CB6B391D85367200B95660 /* SearchStoryViewController.swift in Sources */,
 				41BEF35A1DC835D100BED5A2 /* SKPhotoBrowser.swift in Sources */,
+				FD2ED7671DE43E5C007C1949 /* FilterPopularStoryViewController.swift in Sources */,
 				41BEF34D1DC835D100BED5A2 /* SKAnimator.swift in Sources */,
 				41E8399C1D7D49FC0004804E /* DetailInfoStoryHeaderCell.swift in Sources */,
 				414327E91D87AD0C00015F2F /* DatabaseHelper.swift in Sources */,

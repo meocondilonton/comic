@@ -1472,7 +1472,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ej6-bB-w68">
-                                                <rect key="frame" x="15" y="0.0" width="345" height="1"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                                 <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="FvZ-aM-7Bn"/>
@@ -1492,9 +1492,9 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="ej6-bB-w68" secondAttribute="trailing" constant="15" id="AO3-vR-rgT"/>
+                                            <constraint firstAttribute="trailing" secondItem="ej6-bB-w68" secondAttribute="trailing" id="AO3-vR-rgT"/>
                                             <constraint firstAttribute="height" constant="45" id="AxE-oB-GlS"/>
-                                            <constraint firstItem="ej6-bB-w68" firstAttribute="leading" secondItem="2Dj-H5-LXr" secondAttribute="leading" constant="15" id="htg-d7-0iQ"/>
+                                            <constraint firstItem="ej6-bB-w68" firstAttribute="leading" secondItem="2Dj-H5-LXr" secondAttribute="leading" id="htg-d7-0iQ"/>
                                             <constraint firstItem="ej6-bB-w68" firstAttribute="top" secondItem="2Dj-H5-LXr" secondAttribute="top" id="ti9-vp-86i"/>
                                         </constraints>
                                     </view>

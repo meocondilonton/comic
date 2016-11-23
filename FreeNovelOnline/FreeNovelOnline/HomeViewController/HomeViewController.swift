@@ -126,17 +126,7 @@ class HomeViewController: BaseViewController {
         let status = param.valueForKey(keystatusparam) as? String
         let order = param.valueForKey(keyorderparam) as? String
         let url = String(format:UrlSearch,"",rd ?? "",status ?? "",order ?? "",cate ?? "",self.currentPage*kPageNumber)
- //        if self.currentLink == url {
-//            if self.collectionViewStory.mj_header.isRefreshing() == true {
-//                self.collectionViewStory.mj_header.endRefreshing()
-//            }
-//            if self.collectionViewStory.mj_footer.isRefreshing() == true {
-//                self.collectionViewStory.mj_footer.endRefreshing()
-//            }
-//            return
-//        }else{
-//            self.currentLink = url
-//        }
+ 
         
         if self.collectionViewStory.mj_header.isRefreshing() == true {
             self.collectionViewStory.mj_header.endRefreshing()
@@ -309,6 +299,12 @@ extension HomeViewController {
 
 
 extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
+    
+    override func scrollToTop() {
+        super.scrollToTop()
+        self.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
+    }
+    
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in

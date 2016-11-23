@@ -147,7 +147,7 @@ class FilterPopularStoryViewController: BaseViewController ,TagListViewDelegate 
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        if sender.tag == kTagCategoryListTag {
+        
             for tag in sender.tagViews {
                 tag.selected = (tag == tagView)
                 
@@ -168,24 +168,7 @@ class FilterPopularStoryViewController: BaseViewController ,TagListViewDelegate 
                 category = String(format:"%@%d",category,item)
                 
             }
-        }else{
-            var stringValue = "0"
-                for tag in sender.tagViews {
-                        tag.selected = (tag == tagView)
-                    if tag.selected == true {
-                        stringValue = "\( tag.numTag)"
-                    }
-                    }
-            
-             if sender.tag == kTagStatusListTag {
-                status = stringValue
-             }else if sender.tag == kTagSortOrderTag{
-                  order = stringValue
-             }else if  sender.tag == kTagTypeListTag{
-                 rd = stringValue
-            }
-        }
- 
+  
     }
 
 }

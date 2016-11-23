@@ -30,11 +30,15 @@ class StoryTableViewCell2: UITableViewCell {
 
     
     func uodateData( data:StoryFullInfoModel ) {
+     
+        
         if let imgUrl = data.storyImgUrl {
-            let originalUrl = String(format: "%@%@", BaseUrl,imgUrl)
+            let originalUrl = String(format: "%@",imgUrl)
+            
             let imgCoverUrl = NSURL(string: originalUrl)
             self.imgCover.sd_setImageWithURL(imgCoverUrl, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.RetryFailed)
         }
+        
         self.lblRelativeDate.text = NSDate(timeIntervalSince1970: data.timeSaved).relativeTime ?? ""
         self.lblRelativeDate.textColor = textGrayColor
         self.lblContent.text =  data.storyName ?? ""

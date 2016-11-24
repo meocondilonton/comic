@@ -25,7 +25,7 @@ class StoryFullInfoModel: StoryInfoModel {
     var storyCurrentIndex:Int = 0
     var timeSaved:Double = 0
     var currentChapter:Int = 0
-    var chapterOffset:Double = 0
+   
     var storyRate:String?
     var storyIsRead:Bool = false
     var storyAlterName:String?

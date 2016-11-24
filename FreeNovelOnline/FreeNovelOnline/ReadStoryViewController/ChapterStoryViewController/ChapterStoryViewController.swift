@@ -15,15 +15,21 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     @IBOutlet weak var tbView: UITableView!
     
     var block:((Int)->())?
-    var arrChapter:[Item]?
     var chapSelected:Int = 0
+    var currentPhoto:Int = 0
     var arrPhoto:[SKPhoto]?
     var ws:LoadImgWebservice?
-    
+    var storyFullInfo:StoryFullInfoModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadChapterData(String(format:"%@%@",BaseUrl, arrChapter![self.chapSelected].itemUrl!) )
+        self.chapSelected = self.storyFullInfo.currentChapter
+        self.currentPhoto =  self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
+        self.loadChapterData(String(format:"%@%@",BaseUrl, self.storyFullInfo.storyChapter![self.chapSelected].itemUrl!) )
+        
+        let moveToIndexPath = NSIndexPath(forRow: self.chapSelected, inSection: 0)
+         self.tbView.scrollToRowAtIndexPath(moveToIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,8 +39,9 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     
     func updateChapter(arrChapter:[Item]?,chapSelected:Int, block:((Int)->())?){
         self.chapSelected = chapSelected
+        self.currentPhoto = self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
         self.block = block
-        self.arrChapter = arrChapter
+       self.storyFullInfo.storyChapter = arrChapter
         self.tbView.reloadData()
     }
     
@@ -66,7 +73,7 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arrChapter?.count ?? 0
+        return self.storyFullInfo.storyChapter?.count ?? 0
         
     }
     
@@ -98,7 +105,7 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ChapterTableViewCell", forIndexPath: indexPath) as! ChapterTableViewCell
         let arrIndex = indexPath.row
-        cell.updateData(self.arrChapter?[arrIndex])
+        cell.updateData(self.storyFullInfo.storyChapter?[arrIndex])
         if indexPath.row ==  self.chapSelected {
             cell.setCellSelect(true )
         }else{
@@ -116,7 +123,8 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
 
         }
           self.chapSelected = indexPath.row
-          self.loadChapterData(String(format:"%@%@",BaseUrl, arrChapter![self.chapSelected].itemUrl!) )
+          self.currentPhoto = 0
+          self.loadChapterData(String(format:"%@%@",BaseUrl, self.storyFullInfo.storyChapter![self.chapSelected].itemUrl!) )
     }
  
 }
@@ -136,13 +144,13 @@ extension ChapterStoryViewController {
             //read top
             let elements = doc.searchWithXPathQuery("//select[@id='pageMenu']")
            
-            self?.arrChapter![self?.chapSelected ?? 0].arrImg = [String]()
+            self?.storyFullInfo.storyChapter![self?.chapSelected ?? 0].arrImg = [String]()
             for eleItem in elements {
                 let e = eleItem as! TFHppleElement
                 for item in e.children {
                     
                     if let link = item.objectForKey("value") {
-                         self?.arrChapter![self?.chapSelected ?? 0].arrImg?.append(link as! String)
+                         self?.storyFullInfo.storyChapter![self?.chapSelected ?? 0].arrImg?.append(link as! String)
                         
                     }
                 }
@@ -158,14 +166,14 @@ extension ChapterStoryViewController {
     
     func loadPhotoBrowser(){
                arrPhoto = [SKPhoto]()
-        for item in (self.arrChapter![self.chapSelected].arrImg)! {
-            //            let photoTemp = SKPhoto(url: "https://i4.mangareader.net/naruto/1/naruto-1564774.jpg" )
+        for item in (self.storyFullInfo.storyChapter![self.chapSelected].arrImg)! {
+           
             let photoTemp = SKPhoto(url: item)
             arrPhoto?.append(photoTemp)
         }
         if arrPhoto?.count > 0 {
         let photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
-        photoBrowser.initializePageIndex(0)
+        photoBrowser.initializePageIndex(self.currentPhoto)
         photoBrowser.delegate = self
         self.presentViewController(photoBrowser, animated: true) {
             
@@ -193,7 +201,18 @@ extension ChapterStoryViewController {
         }
         }
     
-    
+    func willDismissAtPageIndex(index: Int) {
+        print("dismis at \(index)")
+        self.currentPhoto = index
+        self.storyFullInfo.currentChapter = self.chapSelected
+        self.storyFullInfo.storyChapter![self.chapSelected].imgOffset = self.currentPhoto
+        DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
+        
+    }
+    func didScrollToIndex(index: Int) {
+          print("scroll to  \(index)")
+         self.currentPhoto = index
+    }
 }
 
 

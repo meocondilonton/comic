@@ -127,15 +127,24 @@ class HomeViewController: BaseViewController {
         let order = param.valueForKey(keyorderparam) as? String
         let url = String(format:UrlSearch,"",rd ?? "",status ?? "",order ?? "",cate ?? "",self.currentPage*kPageNumber)
  
-        
+     
         if self.collectionViewStory.mj_header.isRefreshing() == true {
-            self.collectionViewStory.mj_header.endRefreshing()
+//            self.collectionViewStory.mj_header.endRefreshing()
+            self.collectionViewStory.mj_header.endRefreshingWithCompletionBlock({
+                if isRefresh == true  {
+                    self.scrollToTop()
+                }
+            })
         }
         if self.collectionViewStory.mj_footer.isRefreshing() == true {
-            self.collectionViewStory.mj_footer.endRefreshing()
+            self.collectionViewStory.mj_footer.endRefreshingWithCompletionBlock({
+                if isRefresh == true  {
+                    self.scrollToTop()
+                }
+            })
         }
       
- 
+    
         
         let paramSend = NSMutableDictionary()
         paramSend.setValue(url, forKey: keyUrl)
@@ -216,9 +225,7 @@ class HomeViewController: BaseViewController {
         }
         
            self?.collectionViewStory.reloadData()
-        if isRefresh {
-             self?.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
-        }
+      
         }
     }
     
@@ -302,7 +309,8 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
     override func scrollToTop() {
         super.scrollToTop()
-        self.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
+      
+        self.collectionViewStory.setContentOffset(CGPointMake(0, -26), animated: true)
     }
     
     func setupLoadMoreAndPullRefresh() {
@@ -317,11 +325,9 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         header.setTitle("Pull To Refresh", forState: MJRefreshState.Idle)
         self.collectionViewStory.mj_header = header
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] () -> Void in
-            if let owner  = self {
                   self?.currentPage += 1
                  self?.loadData((self?.param)!, isRefresh: false)
-            }
-            
+           
             })
         
         footer.setTitle("Loading Data...", forState: MJRefreshState.Refreshing)
@@ -332,7 +338,6 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.arrStory?.count ?? 0
-//        print("numbook: \(count)")
         numAd = count/knumAdd
         return (count + numAd) ?? 0
  

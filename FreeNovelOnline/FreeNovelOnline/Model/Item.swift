@@ -14,5 +14,6 @@ class Item: NSObject {
     var arrImg:[String]?
     //for database
      var itemKey:String?
+     var imgOffset:Int = 0
     
 }

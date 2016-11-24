@@ -10,7 +10,6 @@
 		4105496C1D8021BC004F39E5 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4105496B1D8021BC004F39E5 /* FRHyperLabel.m */; };
 		4105496F1D8024D0004F39E5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105496E1D8024D0004F39E5 /* Utils.swift */; };
 		410549711D8112D2004F39E5 /* UIVerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410549701D8112D2004F39E5 /* UIVerticalAlignLabel.swift */; };
-		410549751D817A7E004F39E5 /* ReadStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410549741D817A7E004F39E5 /* ReadStoryViewController.swift */; };
 		410549781D817AB5004F39E5 /* ChapterStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410549771D817AB5004F39E5 /* ChapterStoryViewController.swift */; };
 		4105497D1D8264AB004F39E5 /* UINavigationBar+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105497A1D8264AB004F39E5 /* UINavigationBar+Custom.swift */; };
 		4105497E1D8264AB004F39E5 /* CommonMainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105497B1D8264AB004F39E5 /* CommonMainNavigationView.swift */; };
@@ -120,7 +119,6 @@
 		4105496B1D8021BC004F39E5 /* FRHyperLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRHyperLabel.m; sourceTree = "<group>"; };
 		4105496E1D8024D0004F39E5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		410549701D8112D2004F39E5 /* UIVerticalAlignLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVerticalAlignLabel.swift; sourceTree = "<group>"; };
-		410549741D817A7E004F39E5 /* ReadStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadStoryViewController.swift; sourceTree = "<group>"; };
 		410549771D817AB5004F39E5 /* ChapterStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterStoryViewController.swift; sourceTree = "<group>"; };
 		4105497A1D8264AB004F39E5 /* UINavigationBar+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Custom.swift"; sourceTree = "<group>"; };
 		4105497B1D8264AB004F39E5 /* CommonMainNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMainNavigationView.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				410549761D817AA2004F39E5 /* ChapterStoryViewController */,
-				410549741D817A7E004F39E5 /* ReadStoryViewController.swift */,
 				41DFC2BB1DC040DA00239CC2 /* LoadImageManager.swift */,
 			);
 			path = ReadStoryViewController;
@@ -945,7 +942,6 @@
 				41BEF3581DC835D100BED5A2 /* SKPhoto.swift in Sources */,
 				4105497E1D8264AB004F39E5 /* CommonMainNavigationView.swift in Sources */,
 				41BEF34A1DC835D100BED5A2 /* UIImage+Rotation.swift in Sources */,
-				410549751D817A7E004F39E5 /* ReadStoryViewController.swift in Sources */,
 				41BEF3541DC835D100BED5A2 /* SKIndicatorView.swift in Sources */,
 				41BEF3561DC835D100BED5A2 /* SKMesurement.swift in Sources */,
 				41B86E9B1D9B45F600B277B4 /* DetailInfoStoryFootererCell.swift in Sources */,

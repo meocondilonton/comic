@@ -77,9 +77,11 @@ extension TabbarViewController {
         
           let populer = getVc("Main", titleName: "Popular" ,className: "PopulerViewController" ,imageName:"community" ,imageActive:"community")
       
-        let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
+         let latest = getVc("Main", titleName: "Lastest Release", className: "LastestUpdateViewController",imageName:"community" ,imageActive:"community")
         
-//        let saved = getVc("Main", titleName: "Saved", className: "SavedViewController",imageName:"community" ,imageActive:"community")
+         let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
+        
+       
         
         
         
@@ -88,7 +90,7 @@ extension TabbarViewController {
         self.tabBar.backgroundColor = bgLightGrayColor
         
         
-        return [home, populer, recent]
+        return [home, populer,latest, recent]
     }
     
     

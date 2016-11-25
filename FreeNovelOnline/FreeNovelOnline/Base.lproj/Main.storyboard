@@ -33,7 +33,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="CtE-za-jFG" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="10" width="190" height="250"/>
+                                        <rect key="frame" x="93" y="10" width="190" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="250"/>
@@ -93,7 +93,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeAdCollectionViewCell" id="P3t-Lg-stG" customClass="HomeAdCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="270" width="190" height="222"/>
+                                        <rect key="frame" x="93" y="270" width="190" height="222"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="222"/>
@@ -166,7 +166,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HomeCollectionViewCell" reuseIdentifier="HomeCollectionViewCell" id="Zm8-Og-WAy" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="10" width="190" height="222"/>
+                                        <rect key="frame" x="93" y="10" width="190" height="222"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="222"/>
@@ -226,7 +226,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeAdCollectionViewCell" id="MGO-J7-8Kr" customClass="HomeAdCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="242" width="190" height="222"/>
+                                        <rect key="frame" x="93" y="242" width="190" height="222"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="222"/>
@@ -334,7 +334,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aTd-o4-iVU" id="sg2-id-G5B">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwM-J0-HAb">
@@ -508,7 +508,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xXG-gP-oAw" id="Oxx-xA-KPJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZJ-xI-WNo" customClass="UIVerticalAlignLabel" customModule="FreeNovelOnline" customModuleProvider="target">
@@ -582,7 +582,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZH1-f1-RjB" id="s91-2K-iWS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVu-OL-25s">
@@ -619,7 +619,7 @@
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VfT-dA-mLR" id="X8w-YG-MLe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPp-Za-I1L" customClass="GADNativeExpressAdView">
@@ -685,7 +685,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0rp-Ih-8s9" id="ghV-cV-m1V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AS0-we-nQb">
@@ -878,7 +878,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="ruF-eP-4G5" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="10" width="190" height="250"/>
+                                        <rect key="frame" x="93" y="10" width="190" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="250"/>
@@ -938,7 +938,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeAdCollectionViewCell" id="ty6-gy-6Xn" customClass="HomeAdCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="92.5" y="270" width="190" height="222"/>
+                                        <rect key="frame" x="93" y="270" width="190" height="222"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="222"/>
@@ -1565,6 +1565,105 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2v-jJ-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1367.2" y="142.57871064467767"/>
+        </scene>
+        <!--Lastest Update View Controller-->
+        <scene sceneID="avj-vE-DRv">
+            <objects>
+                <viewController storyboardIdentifier="LastestUpdateViewController" id="dPB-Nh-wsW" customClass="LastestUpdateViewController" customModule="FreeNovelOnline" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bxk-To-4vG"/>
+                        <viewControllerLayoutGuide type="bottom" id="prM-ya-zW9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OTb-1r-De9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G41-Gl-hSS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StoryTableViewCell2" rowHeight="80" id="co5-aS-26H" customClass="StoryTableViewCell3" customModule="FreeNovelOnline" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="co5-aS-26H" id="RfC-YX-XN3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m9M-vR-Rze">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-DM-L3H">
+                                                    <rect key="frame" x="15" y="2" width="270" height="31"/>
+                                                    <color key="backgroundColor" red="0.94901960780000005" green="0.3921568627" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNY-QQ-bC2">
+                                                    <rect key="frame" x="15" y="35" width="352" height="36"/>
+                                                    <color key="backgroundColor" red="0.94901960780000005" green="0.3921568627" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByB-EF-PXQ">
+                                                    <rect key="frame" x="290" y="2" width="77" height="32"/>
+                                                    <color key="backgroundColor" red="0.094117647060000004" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="77" id="WbP-6k-HIf"/>
+                                                        <constraint firstAttribute="height" constant="32" id="anb-Tt-CRV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="ByB-EF-PXQ" firstAttribute="leading" secondItem="dDu-DM-L3H" secondAttribute="trailing" constant="5" id="2Fy-R7-3uW"/>
+                                                <constraint firstAttribute="trailing" secondItem="ByB-EF-PXQ" secondAttribute="trailing" constant="8" id="CIS-Ql-NY8"/>
+                                                <constraint firstItem="dDu-DM-L3H" firstAttribute="leading" secondItem="RfC-YX-XN3" secondAttribute="leading" constant="15" id="KIi-Kr-2MK"/>
+                                                <constraint firstItem="dDu-DM-L3H" firstAttribute="top" secondItem="RfC-YX-XN3" secondAttribute="top" constant="2" id="KqQ-XB-2B5"/>
+                                                <constraint firstItem="WNY-QQ-bC2" firstAttribute="leading" secondItem="RfC-YX-XN3" secondAttribute="leading" constant="15" id="Krs-2y-CSa"/>
+                                                <constraint firstItem="WNY-QQ-bC2" firstAttribute="top" secondItem="ByB-EF-PXQ" secondAttribute="bottom" constant="1" id="Lt3-od-Fy2"/>
+                                                <constraint firstAttribute="trailing" secondItem="WNY-QQ-bC2" secondAttribute="trailing" constant="8" id="Zag-q8-Dbf"/>
+                                                <constraint firstItem="WNY-QQ-bC2" firstAttribute="top" secondItem="dDu-DM-L3H" secondAttribute="bottom" constant="2" id="gZ7-L3-D7I"/>
+                                                <constraint firstAttribute="bottom" secondItem="WNY-QQ-bC2" secondAttribute="bottom" constant="8" id="s07-Gv-XOD"/>
+                                                <constraint firstItem="ByB-EF-PXQ" firstAttribute="top" secondItem="RfC-YX-XN3" secondAttribute="top" constant="2" id="yO1-gZ-mnB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="bgView" destination="m9M-vR-Rze" id="X4e-wF-m9r"/>
+                                            <outlet property="lblChap" destination="WNY-QQ-bC2" id="Ljp-5V-iRN"/>
+                                            <outlet property="lblContent" destination="dDu-DM-L3H" id="9Hr-KD-dk7"/>
+                                            <outlet property="lblRelativeDate" destination="ByB-EF-PXQ" id="fe0-YY-sr0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="dPB-Nh-wsW" id="Pjg-u8-lgV"/>
+                                    <outlet property="delegate" destination="dPB-Nh-wsW" id="lAe-fR-fAC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="G41-Gl-hSS" firstAttribute="top" secondItem="OTb-1r-De9" secondAttribute="top" id="6LA-Yz-UL2"/>
+                            <constraint firstItem="G41-Gl-hSS" firstAttribute="leading" secondItem="OTb-1r-De9" secondAttribute="leading" id="EiA-XQ-oaO"/>
+                            <constraint firstItem="prM-ya-zW9" firstAttribute="top" secondItem="G41-Gl-hSS" secondAttribute="bottom" id="iM2-V7-PNw"/>
+                            <constraint firstAttribute="trailing" secondItem="G41-Gl-hSS" secondAttribute="trailing" id="mun-Xl-iRN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tbView" destination="G41-Gl-hSS" id="IaM-R9-H6O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AB7-7c-QPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="626.39999999999998" y="356.67166416791605"/>
         </scene>
     </scenes>
     <resources>

@@ -19,11 +19,12 @@ class PopulerViewController: BaseViewController {
     
     @IBOutlet weak var collectionViewStory: UICollectionView!
     var arrStory:[StoryInfoModel]? = [StoryInfoModel]()
-    var previousLink:String = ""
-    var nextLink:String = ""
-    var currentPage:Int = 1
-    var currentLink:String = ""
+ 
+    var currentPage:Int = 0
+ 
     var numAd:Int = 0
+    var param:NSMutableDictionary?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,45 +32,36 @@ class PopulerViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
         
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+       
+        
         
         
     }
     
     func getDefaultData() { // get hot book list
         if let item = getPriviosParam() {
-            let url = String(format: "%@%@",BaseUrl,item.storyUrl ?? "")
+            let url = String(format: "%@%@",BaseUrl,item.valueForKey(keycategoryparam) as? String ?? "")
+           
             self.loadData(url   ,isRefresh: true)
-            let title = item.storyName ?? ""
-            self.fakeNavi.lblTitle.text =  title
-            self.fakeNavi.stringDes = "All"
+            let title = item.valueForKey(keycategorynameparam)
+            self.fakeNavi.stringDes = title as? String ?? ""
+             self.fakeNavi.lblTitle.text = "Popular"
         }
         
     }
     
-    func getPriviosParam() -> StoryInfoModel?{
+    func getPriviosParam() -> NSMutableDictionary?{
+        param = NSMutableDictionary()
         
-        let item = StoryInfoModel()
-        item.storyImgUrl = ""
-        item.storyUrl = "/popular"
-        item.storyName = "Popular"
-        
-        return item
+        param!.setValue( "/popular", forKey: keycategoryparam)
+        param!.setValue( "All", forKey: keycategorynameparam)
+ 
+        return param
         
     }
     
     func loadData(url:String , isRefresh:Bool )  {
-        if self.currentLink == url {
-            if self.collectionViewStory.mj_header.isRefreshing() == true {
-                self.collectionViewStory.mj_header.endRefreshing()
-            }
-            if self.collectionViewStory.mj_footer.isRefreshing() == true {
-                self.collectionViewStory.mj_footer.endRefreshing()
-            }
-            return
-        }else{
-            self.currentLink = url
-        }
+        
         
         if self.collectionViewStory.mj_header.isRefreshing() == true {
             self.collectionViewStory.mj_header.endRefreshing()
@@ -79,14 +71,14 @@ class PopulerViewController: BaseViewController {
         }
         
         if isRefresh == true {
-            self.collectionViewStory.setContentOffset(CGPointMake(0, -20), animated: true)
+            self.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
         }
       
         
         let param = NSMutableDictionary()
         param.setValue(url, forKey: keyUrl)
-        print("url")
-        print(url)
+//        print("url")
+//        print(url)
         BaseWebservice.shareInstance().getData(param, isShowIndicator: true) {[weak self] (result) in
             if isRefresh == true {
                 self?.arrStory?.removeAll(keepCapacity: false)
@@ -133,8 +125,8 @@ class PopulerViewController: BaseViewController {
                                                     let e6 =  eleItem6 as! TFHppleElement
                                                     
                                                     if e6.raw != nil {
-                                                        print("e6.content")
-                                                        print(e6.raw)
+//                                                        print("e6.content")
+//                                                        print(e6.raw)
                                                         if let href = e6.objectForKey("href") {
                                                             itemStory.storyUrl = href
                                                         }
@@ -160,32 +152,7 @@ class PopulerViewController: BaseViewController {
                 }
                 
             }
-            
-            //paging
-            let elementsPaging = doc.searchWithXPathQuery("//ul[@class='pg-ul']")
-            for eleItem in elementsPaging {
-                let e = eleItem as! TFHppleElement
-                
-                for item in e.children {
-                    
-                    for item2 in item.children {
-                        let origin = item2.objectForKey("href") ?? ""
-                        let keyclass = item2.objectForKey("class") ?? ""
-                        self?.nextLink = origin
-                        if keyclass == "active" {
-                            //                         print(item2.content)
-                            self?.currentPage = Int(item2.content) ?? 1
-                            if (self?.currentPage  == 1){
-                                self?.previousLink = url
-                            }
-                        }
-                        
-                    }
-                    
-                }
-            }
-            
-            
+ 
             
             self?.collectionViewStory.reloadData()
         }
@@ -208,18 +175,21 @@ extension PopulerViewController {
     
     func goToFilter() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("FilterStoryViewController") as! FilterStoryViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("FilterPopularStoryViewController") as! FilterPopularStoryViewController
         vc.hidesBottomBarWhenPushed = true
-//        vc.arrType = self.arrFilterDTO()
+        vc.param = self.param
         vc.block = {[weak self] (result)->() in
-//            let url = String(format: "%@%@",BaseUrl,result.storyUrl ?? "")
-//            self?.loadData(url,isRefresh: true)
-//            let pa = NSMutableDictionary()
-//            pa.setObject(result, forKey: "story")
-//            Utils.saveFilterParams(pa)
-//            let title = result.storyName ?? ""
-//            self?.fakeNavi.lblTitle.text =  title
-//            self?.collectionViewStory.scrollsToTop = true
+            self?.param = result
+            let category =  result.valueForKey(keycategorynameparam) as? String
+            self?.fakeNavi.stringDes = category  ?? ""
+            let loseCase = category?.lowercaseString
+            let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
+            self?.currentPage = 0
+            let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+           
+            self?.loadData(url,isRefresh: true)
+ 
+            
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -250,13 +220,21 @@ extension PopulerViewController {
             }
         }
         
-        
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.fakeNavi.hidden = false
+          self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
         
     }
     
@@ -268,10 +246,23 @@ extension PopulerViewController {
 
 
 extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
+    
+    override func scrollToTop() {
+        super.scrollToTop()
+        self.collectionViewStory.setContentOffset(CGPointMake(0, -24), animated: true)
+    }
+    
+    
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in
-            self?.getDefaultData()
+            let category =   self?.param?.valueForKey(keycategorynameparam) as? String
+            let loseCase = category?.lowercaseString
+            let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
+            self?.currentPage = 0
+            let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+            self?.loadData(url, isRefresh: false)
+            
             })
         header.lastUpdatedTimeLabel!.hidden = true
         header.setTitle("Release To Refresh", forState: MJRefreshState.Pulling)
@@ -280,7 +271,13 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
         self.collectionViewStory.mj_header = header
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] () -> Void in
             if let owner  = self {
-                owner.loadData(owner.nextLink, isRefresh: false)
+               
+                let category =   self?.param?.valueForKey(keycategorynameparam) as? String
+                let loseCase = category?.lowercaseString
+                let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
+                self?.currentPage += 1
+                let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+                owner.loadData(url, isRefresh: false)
             }
             
             })
@@ -294,7 +291,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.arrStory?.count ?? 0
         //        print("numbook: \(count)")
-        numAd = count/12
+        numAd = count/knumAdd
         return (count + numAd) ?? 0
         
     }
@@ -304,7 +301,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if indexPath.item % 12 == 0  && indexPath.item > 0 {
+        if indexPath.item % knumAdd == 0  && indexPath.item > 0 {
             return CGSizeMake(self.view.frame.size.width - 40, self.view.frame.size.width - 40)
         }else{
             return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.25/3.0)
@@ -317,7 +314,7 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
             if cell!.isKindOfClass(HomeCollectionViewCell) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
-                let numAdCurrent =  indexPath.item/12
+                let numAdCurrent =  indexPath.item/knumAdd
                 let arrIndex = indexPath.item - numAdCurrent
                 let storyInfo = self.arrStory![arrIndex]
                 
@@ -338,9 +335,9 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let numAdCurrent =  indexPath.item/12
+        let numAdCurrent =  indexPath.item/knumAdd
         
-        if indexPath.item % 12 == 0 &&   indexPath.item > 0{
+        if indexPath.item % knumAdd == 0 &&   indexPath.item > 0{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeAdCollectionViewCell", forIndexPath: indexPath) as! HomeAdCollectionViewCell
             cell.adView.adUnitID = adUnitLarge
             cell.adView.rootViewController = self

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabbarViewController: UITabBarController {
+class TabbarViewController: UITabBarController ,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,22 @@ class TabbarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
+   {
+    if viewController == self.selectedViewController {
+        if let nav = self.selectedViewController as? UINavigationController {
+            if nav.viewControllers.count > 0 {
+                if let vc = nav.viewControllers.first as? BaseViewController {
+                    vc.scrollToTop()
+                }
+            }
+        }
+    }
+    
+      return true
+    }
+    
 }
 
 extension TabbarViewController {
@@ -36,6 +51,7 @@ extension TabbarViewController {
             separate.backgroundColor = UIColor(red: 143.0/255.0, green: 166.0/255.0, blue: 198.0/255.0, alpha: 0.2)
             tabBar.addSubview(separate)
         }
+        self.delegate = self
     }
     
     func getListScreens() -> [UIViewController]! {
@@ -61,9 +77,11 @@ extension TabbarViewController {
         
           let populer = getVc("Main", titleName: "Popular" ,className: "PopulerViewController" ,imageName:"community" ,imageActive:"community")
       
-        let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
+         let latest = getVc("Main", titleName: "Lastest Release", className: "LastestUpdateViewController",imageName:"community" ,imageActive:"community")
         
-//        let saved = getVc("Main", titleName: "Saved", className: "SavedViewController",imageName:"community" ,imageActive:"community")
+         let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
+        
+       
         
         
         
@@ -72,8 +90,9 @@ extension TabbarViewController {
         self.tabBar.backgroundColor = bgLightGrayColor
         
         
-        return [home, populer, recent]
+        return [home, populer,latest, recent]
     }
+    
     
     
 }

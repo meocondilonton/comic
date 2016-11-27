@@ -196,6 +196,9 @@ extension BaseViewController {
         self.view.endEditing(true)
     }
     
+    func scrollToTop(){
+        
+    }
  
 }
 

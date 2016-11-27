@@ -230,20 +230,13 @@ class DetailInfoStoryViewController: BaseViewController {
         vc.navigationController?.hidesBarsOnTap = true
         vc.hidesBottomBarWhenPushed = true
         vc.chapSelected = 1
-        vc.arrChapter = self.storyFullInfo.storyChapter
+        vc.storyFullInfo = self.storyFullInfo
         vc.block = {[weak self] (index) in
             if index < self?.storyFullInfo?.storyChapter?.count {
                 
             }
         }
        
-//            vc.updateChapter(self.storyFullInfo.storyChapter, chapSelected:1) {[weak self] (index) in
-//                if index < self?.storyFullInfo?.storyChapter?.count {
-//                    self?.chapterIndex = index
-//                    self?.chapterOffset = 0
-//                    self?.loadChapterData(String(format:"%@%@",BaseUrl,(self?.storyFullInfo?.storyChapter![self?.chapterIndex ?? 0].itemUrl)!))
-//                }
-//        }
          self.navigationController?.pushViewController(vc, animated: true)
     }
     

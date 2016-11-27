@@ -36,7 +36,7 @@ class BaseWebservice: NSObject , NSURLConnectionDelegate{
         if self.block != nil {
             self.isLoadFromCache = true
             self.block!(result?.result)
-//            SVProgressHUD.dismiss()
+ 
         }
         return true
     }

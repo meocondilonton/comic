@@ -104,7 +104,7 @@ class DatabaseHelper: NSObject {
         let storyDescription = Expression<String>("storyDescription")
         let timeSaved = Expression<Double>("timeSaved")
         let currentChapter =  Expression<Int>("currentChapter")
-        let chapterOffset = Expression<Double>("chapterOffset")
+        let chapterOffset = Expression<Int>("chapterOffset")
         let storyRate =  Expression<String>("storyRate")
         let storyIsRead = Expression<Int>("storyIsRead")
         
@@ -125,7 +125,6 @@ class DatabaseHelper: NSObject {
                 itemStory.storyDescription = item[storyDescription]
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
-                itemStory.chapterOffset = item[chapterOffset]
                 itemStory.storyRate = item[storyRate]
                 
                 arrStory.append(itemStory)
@@ -153,7 +152,7 @@ class DatabaseHelper: NSObject {
           let storyDescription = Expression<String>("storyDescription")
           let timeSaved = Expression<Double>("timeSaved")
           let currentChapter =  Expression<Int>("currentChapter")
-          let chapterOffset = Expression<Double>("chapterOffset")
+          let chapterOffset = Expression<Int>("chapterOffset")
           let storyRate =  Expression<String>("storyRate")
         
         var arrStory =  [StoryFullInfoModel] ()
@@ -173,7 +172,6 @@ class DatabaseHelper: NSObject {
                 itemStory.storyDescription = item[storyDescription]
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
-                itemStory.chapterOffset = item[chapterOffset]
                 itemStory.storyRate = item[storyRate]
                 
                 arrStory.append(itemStory)
@@ -200,7 +198,7 @@ class DatabaseHelper: NSObject {
         let storyDescription = Expression<String>("storyDescription")
          let timeSaved = Expression<Double>("timeSaved")
         let currentChapter =  Expression<Int>("currentChapter")
-        let chapterOffset = Expression<Double>("chapterOffset")
+        let chapterOffset = Expression<Int>("chapterOffset")
           let storyRate =  Expression<String>("storyRate")
         
         let query  = storyFullInfoSaved.filter(  storyName == storyNameStr)
@@ -221,7 +219,6 @@ class DatabaseHelper: NSObject {
                 itemStory.storyDescription = item[storyDescription]
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
-                itemStory.chapterOffset = item[chapterOffset]
                 itemStory.storyRate = item[storyRate]
                 
                 let id = item[id]
@@ -277,7 +274,7 @@ class DatabaseHelper: NSObject {
         let storyDescription = Expression<String>("storyDescription")
         let timeSaved = Expression<Double>("timeSaved")
         let currentChapter =  Expression<Int>("currentChapter")
-        let chapterOffset = Expression<Double>("chapterOffset")
+        let chapterOffset = Expression<Int>("chapterOffset")
         let storyRate =  Expression<String>("storyRate")
         
         let query  = storyTable.filter(  storyName == storyModel.storyName ?? "")
@@ -292,7 +289,7 @@ class DatabaseHelper: NSObject {
                //update time
                  let isSave = storyModel.isSaved == true ? 1:0
                  let storyIsReaded = storyModel.storyIsRead == true ? 1:0
-                if try db.run(query.update(timeSaved <- storyModel.timeSaved  ,isSaved <- isSave  ,storyIsRead <- storyIsReaded  , currentChapter <-  storyModel.currentChapter  ,chapterOffset <-  storyModel.chapterOffset, storyRate <-  (storyModel.storyRate ?? "0"))) > 0 {
+                if try db.run(query.update(timeSaved <- storyModel.timeSaved  ,isSaved <- isSave  ,storyIsRead <- storyIsReaded  , currentChapter <-  storyModel.currentChapter , storyRate <-  (storyModel.storyRate ?? "0"))) > 0 {
                     print("updated row storyTable")
                 } else {
                     print("row storyTable not found")
@@ -301,7 +298,7 @@ class DatabaseHelper: NSObject {
             }else{
                 let isSave = storyModel.isSaved == true ? 1:0
                 let storyIsReaded = storyModel.storyIsRead == true ? 1:0
-                let insert = storyTable.insert(storyImgUrl <- (storyModel.storyImgUrl ?? ""), storyName <- (storyModel.storyName ?? ""),storyUrl <- (storyModel.storyUrl ?? ""),isSaved <- isSave,storyIsRead <- storyIsReaded  ,storyView <- (storyModel.storyView ?? ""),storyCurrentIndex <- (storyModel.storyCurrentIndex ?? 0) , storyDescription <- (storyModel.storyDescription ?? "") ,timeSaved <-  storyModel.timeSaved  ,currentChapter <-  storyModel.currentChapter  ,chapterOffset <-  storyModel.chapterOffset, storyRate <-  (storyModel.storyRate ?? "0"))
+                let insert = storyTable.insert(storyImgUrl <- (storyModel.storyImgUrl ?? ""), storyName <- (storyModel.storyName ?? ""),storyUrl <- (storyModel.storyUrl ?? ""),isSaved <- isSave,storyIsRead <- storyIsReaded  ,storyView <- (storyModel.storyView ?? ""),storyCurrentIndex <- (storyModel.storyCurrentIndex ?? 0) , storyDescription <- (storyModel.storyDescription ?? "") ,timeSaved <-  storyModel.timeSaved  ,currentChapter <-  storyModel.currentChapter , storyRate <-  (storyModel.storyRate ?? "0"))
                 let rowId = try db.run(insert)
                 
                 if storyModel.storyAuthor != nil {
@@ -347,10 +344,10 @@ class DatabaseHelper: NSObject {
         let itemName = Expression<String>("itemName")
         let itemUrl = Expression<String>("itemUrl")
         let itemKey = Expression<String>("itemKey")
- 
+        let imgOffset = Expression<Int>("imgOffset")
         do {
  
-                let insert = itemTable.insert(itemName <- (item.itemName ?? ""), itemUrl <- (item.itemUrl ?? ""),itemKey <- (item.itemKey ?? "")  )
+                let insert = itemTable.insert(itemName <- (item.itemName ?? ""), itemUrl <- (item.itemUrl ?? ""),itemKey <- (item.itemKey ?? "") ,imgOffset <- item.imgOffset   )
                 _ = try db.run(insert)
                 print("insert row cacheRequest")
             
@@ -366,7 +363,7 @@ class DatabaseHelper: NSObject {
         let itemName = Expression<String>("itemName")
         let itemUrl = Expression<String>("itemUrl")
         let itemKey = Expression<String>("itemKey")
-
+        let imgOffset = Expression<Int>("imgOffset")
         
         var arrItem =  [Item] ()
         
@@ -380,6 +377,7 @@ class DatabaseHelper: NSObject {
                  itemModel.itemKey = item[itemKey]
                  itemModel.itemUrl = item[itemUrl]
                  itemModel.itemName = item[itemName]
+                 itemModel.imgOffset = item[imgOffset]
                 
                 
                 arrItem.append(itemModel)

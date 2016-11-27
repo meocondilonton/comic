@@ -8,34 +8,18 @@
 
 import UIKit
 
-let kTagTypeListTag = 1
-let kTagStatusListTag = 2
-let kTagCategoryListTag = 3
-let kTagSortOrderTag = 4
-
-let keywordparam = "keywordparam"
-let keycategoryparam = "keycategoryparam"
-let keytypeparam = "keytypeparam"
-let keystatusparam = "keystatusparam"
-let keyorderparam = "keyorderparam"
-let keycategorynameparam = "keycategorynameparam"
 
 
-class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
+
+class FilterPopularStoryViewController: BaseViewController ,TagListViewDelegate {
 
  
-    @IBOutlet weak var typeListTag: TagListView!
-    @IBOutlet weak var statusListTag: TagListView!
+   
     @IBOutlet weak var categoryListTag: TagListView!
-    @IBOutlet weak var sortOrder: TagListView!
+ 
+    @IBOutlet weak var contraitHeightListTag: NSLayoutConstraint!
     
-    @IBOutlet weak var contraitType: NSLayoutConstraint!
-    
-    @IBOutlet weak var contraitStatus: NSLayoutConstraint!
-    
-    @IBOutlet weak var contraitCategory: NSLayoutConstraint!
-    
-    @IBOutlet weak var contraitSort: NSLayoutConstraint!
+  
     
     
      var arrParamCate = [0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0   ,0,0,0  ,0,0,0 ,0]
@@ -110,42 +94,9 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
         
         categoryListTag.delegate = self
    
-        contraitCategory.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight +   categoryListTag.marginY)
+      
         
-        typeListTag.alignment = .Center
-        typeListTag.addTag("Both(Manga and Manhwa)").numTag =  0
-        typeListTag.addTag("Manhwa(Reading Left to Right").numTag =  1
-        typeListTag.addTag("Manga(Reading Right to Left").numTag =  2
-        
-        typeListTag.delegate = self
-        
- 
-        
-        contraitType.constant = CGFloat(typeListTag.rows) * (typeListTag.tagViewHeight +  typeListTag.marginY)
-        
-        statusListTag.alignment = .Center
-        statusListTag.addTag("Both(Ongoing and Complete)").numTag =  0
-        statusListTag.addTag("Ongoing").numTag =  1
-        statusListTag.addTag("Complete").numTag =  2
-        
-        statusListTag.delegate = self
-        
-        contraitStatus.constant = CGFloat(statusListTag.rows) * (statusListTag.tagViewHeight +   statusListTag.marginY)
-        
-        sortOrder.alignment = .Center
-        sortOrder.addTag("Similarity").numTag =  0
-        sortOrder.addTag("Alphabetical").numTag =  1
-        sortOrder.addTag("Popularity").numTag =  2
-        
-        sortOrder.delegate = self
-        
-        contraitSort.constant = CGFloat(sortOrder.rows) * (sortOrder.tagViewHeight    + sortOrder.marginY )
-        
-        
-        categoryListTag.tag = kTagCategoryListTag
-        sortOrder.tag = kTagSortOrderTag
-        typeListTag.tag = kTagTypeListTag
-        statusListTag.tag =  kTagStatusListTag
+        contraitHeightListTag.constant = CGFloat(categoryListTag.rows) * (categoryListTag.tagViewHeight +   categoryListTag.marginY)
         
         
         self.updatePreviousSlection()
@@ -153,14 +104,8 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
     
     func updatePreviousSlection(){
         if self.param != nil {
-            let rd = Int(self.param!.valueForKey(keytypeparam) as? String ?? "0")
-            for tag in typeListTag.tagViews {
-                tag.selected = (tag.numTag == rd)
-                if tag.selected == true {
-                    self.rd = "\( tag.numTag)"
-                }
-            }
-            let cate = self.param!.valueForKey(keycategoryparam) as? String ?? "0"
+            
+            let cate = self.param!.valueForKey(keycategoryparam) as? String ?? ""
             var indexCount = 37
             for item in cate.characters {
                 if item == "1" {
@@ -194,27 +139,15 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                 
             }
             
-            let status = Int(self.param!.valueForKey(keystatusparam) as? String ?? "0")
-            for tag in statusListTag.tagViews {
-                tag.selected = (tag.numTag == status)
-                if tag.selected == true {
-                    self.status = "\( tag.numTag)"
-                }
-            }
+         
  
-            let order = Int(self.param!.valueForKey(keyorderparam) as? String ?? "0")
-            for tag in sortOrder.tagViews {
-                tag.selected = (tag.numTag == order)
-                if tag.selected == true {
-                    self.order = "\( tag.numTag)"
-                }
-            }
+         
             
         }
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        if sender.tag == kTagCategoryListTag {
+        
             for tag in sender.tagViews {
                 tag.selected = (tag == tagView)
                 
@@ -235,30 +168,13 @@ class FilterStoryViewController: BaseViewController ,TagListViewDelegate {
                 category = String(format:"%@%d",category,item)
                 
             }
-        }else{
-            var stringValue = "0"
-                for tag in sender.tagViews {
-                        tag.selected = (tag == tagView)
-                    if tag.selected == true {
-                        stringValue = "\( tag.numTag)"
-                    }
-                    }
-            
-             if sender.tag == kTagStatusListTag {
-                status = stringValue
-             }else if sender.tag == kTagSortOrderTag{
-                  order = stringValue
-             }else if  sender.tag == kTagTypeListTag{
-                 rd = stringValue
-            }
-        }
-//        print("Tag pressed: \(title), \(sender)")
+  
     }
 
 }
 
 
-extension FilterStoryViewController {
+extension FilterPopularStoryViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -285,9 +201,6 @@ extension FilterStoryViewController {
     override func btnSaveTouch() {
         super.btnSaveTouch()
         self.param?.setValue(category, forKey: keycategoryparam)
-        self.param?.setValue(rd, forKey: keytypeparam)
-        self.param?.setValue(status, forKey: keystatusparam)
-        self.param?.setValue(order, forKey: keyorderparam)
         self.param?.setValue("", forKey: keywordparam)
         self.param?.setValue(categorySelectName, forKey: keycategorynameparam)
        

@@ -11,6 +11,8 @@ import MJRefresh
 import GoogleMobileAds
 
 let kHeightDiscoverNavibar:CGFloat = 78
+let kPageNumber = 30
+let knumAdd = 20
 class HomeViewController: BaseViewController {
     
     var fakeNavi: CommonMainNavigationView!
@@ -21,7 +23,7 @@ class HomeViewController: BaseViewController {
     var arrStory:[StoryInfoModel]? = [StoryInfoModel]()
     var previousLink:String = ""
     var nextLink:String = ""
-    var currentPage:Int = 1
+    var currentPage:Int = 0
     
     var param:NSMutableDictionary?
 //    var currentLink:String = ""
@@ -36,14 +38,14 @@ class HomeViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
        
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+//        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         
        
     }
 
     func getDefaultData() { // get hot book list
         
-        
+        self.currentPage = 0
         self.param = self.getPriviosParam()
         self.loadData(self.param!,isRefresh: true)
         self.updateHeader(false, isTittle: false)
@@ -123,27 +125,26 @@ class HomeViewController: BaseViewController {
         let cate = param.valueForKey(keycategoryparam) as? String
         let status = param.valueForKey(keystatusparam) as? String
         let order = param.valueForKey(keyorderparam) as? String
-        let url = String(format:UrlSearch,"",rd ?? "",status ?? "",order ?? "",cate ?? "",self.currentPage)
- //        if self.currentLink == url {
-//            if self.collectionViewStory.mj_header.isRefreshing() == true {
-//                self.collectionViewStory.mj_header.endRefreshing()
-//            }
-//            if self.collectionViewStory.mj_footer.isRefreshing() == true {
-//                self.collectionViewStory.mj_footer.endRefreshing()
-//            }
-//            return
-//        }else{
-//            self.currentLink = url
-//        }
-        
+        let url = String(format:UrlSearch,"",rd ?? "",status ?? "",order ?? "",cate ?? "",self.currentPage*kPageNumber)
+ 
+     
         if self.collectionViewStory.mj_header.isRefreshing() == true {
-            self.collectionViewStory.mj_header.endRefreshing()
+//            self.collectionViewStory.mj_header.endRefreshing()
+            self.collectionViewStory.mj_header.endRefreshingWithCompletionBlock({
+                if isRefresh == true  {
+                    self.scrollToTop()
+                }
+            })
         }
         if self.collectionViewStory.mj_footer.isRefreshing() == true {
-            self.collectionViewStory.mj_footer.endRefreshing()
+            self.collectionViewStory.mj_footer.endRefreshingWithCompletionBlock({
+                if isRefresh == true  {
+                    self.scrollToTop()
+                }
+            })
         }
       
- 
+    
         
         let paramSend = NSMutableDictionary()
         paramSend.setValue(url, forKey: keyUrl)
@@ -224,6 +225,7 @@ class HomeViewController: BaseViewController {
         }
         
            self?.collectionViewStory.reloadData()
+      
         }
     }
     
@@ -248,32 +250,23 @@ extension HomeViewController {
         vc.hidesBottomBarWhenPushed = true
         vc.param = self.param
         vc.block = {[weak self] (result)->() in
-            
+            self?.currentPage = 0
             self?.param = result
             self?.loadData(result,isRefresh: true)
-//            let pa = NSMutableDictionary()
-//            pa.setObject(result, forKey: "story")
-//            Utils.saveFilterParams(pa)
-//            let title = result.storyName ?? ""
-//            self?.fakeNavi.lblTitle.text =  title
             self?.updateHeader(false, isTittle: false)
-            self?.collectionViewStory.scrollsToTop = true
+           
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-
-    
-    
+ 
 }
 extension HomeViewController {
-    override func setUpNavigationBar() {
+      override func setUpNavigationBar() {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, kHeightDiscoverNavibar + 20  )
         self.fakeNavi = CommonMainNavigationView(frame: CGRectMake(0, -20, self.view.frame.size.width, kHeightDiscoverNavibar + 20  ))
-//        print(self.fakeNavi.frame)
-        
+ 
         self.navigationController?.navigationBar.addSubview(self.fakeNavi)
         self.fakeNavi.lblTitle.text =  "Discover"
         self.fakeNavi.naviHandleBlock = {[weak self] (type: NaviButtonClickType) -> () in
@@ -287,16 +280,23 @@ extension HomeViewController {
             }
         }
         
-       
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+ 
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.fakeNavi.hidden = false
+          self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
         
     }
- 
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionViewStory.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+
+    }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -306,10 +306,18 @@ extension HomeViewController {
 
 
 extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
+    
+    override func scrollToTop() {
+        super.scrollToTop()
+      
+        self.collectionViewStory.setContentOffset(CGPointMake(0, -26), animated: true)
+    }
+    
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in
-                self?.getDefaultData()
+                self?.currentPage = 0
+                self?.loadData((self?.param)!, isRefresh: true)
             })
         header.lastUpdatedTimeLabel!.hidden = true
         header.setTitle("Release To Refresh", forState: MJRefreshState.Pulling)
@@ -317,10 +325,9 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         header.setTitle("Pull To Refresh", forState: MJRefreshState.Idle)
         self.collectionViewStory.mj_header = header
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] () -> Void in
-            if let owner  = self {
-//                 owner.loadData(owner.nextLink, isRefresh: false)
-            }
-            
+                  self?.currentPage += 1
+                 self?.loadData((self?.param)!, isRefresh: false)
+           
             })
         
         footer.setTitle("Loading Data...", forState: MJRefreshState.Refreshing)
@@ -331,8 +338,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.arrStory?.count ?? 0
-//        print("numbook: \(count)")
-        numAd = count/12
+        numAd = count/knumAdd
         return (count + numAd) ?? 0
  
     }
@@ -342,7 +348,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if indexPath.item % 12 == 0  && indexPath.item > 0 {
+        if indexPath.item % knumAdd == 0  && indexPath.item > 0 {
              return CGSizeMake(self.view.frame.size.width - 40, self.view.frame.size.width - 40)
         }else{
             return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.25/3.0)
@@ -355,7 +361,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
             if cell!.isKindOfClass(HomeCollectionViewCell) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
-                  let numAdCurrent =  indexPath.item/12
+                  let numAdCurrent =  indexPath.item/knumAdd
                 let arrIndex = indexPath.item - numAdCurrent
                 let storyInfo = self.arrStory![arrIndex]
                 
@@ -376,9 +382,9 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-          let numAdCurrent =  indexPath.item/12
+          let numAdCurrent =  indexPath.item/knumAdd
         
-        if indexPath.item % 12 == 0 &&   indexPath.item > 0{
+        if indexPath.item % knumAdd == 0 &&   indexPath.item > 0{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeAdCollectionViewCell", forIndexPath: indexPath) as! HomeAdCollectionViewCell
             cell.adView.adUnitID = adUnitLarge
             cell.adView.rootViewController = self

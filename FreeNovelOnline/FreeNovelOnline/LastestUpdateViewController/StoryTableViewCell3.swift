@@ -9,14 +9,15 @@
 import UIKit
 import SDWebImage
 
-class StoryTableViewCell2: UITableViewCell {
+class StoryTableViewCell3: UITableViewCell {
 
     @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var imgCover: UIImageView!
-    
+   
     @IBOutlet weak var lblContent: UILabel!
     
+    @IBOutlet weak var lblChap: UILabel!
     @IBOutlet weak var lblRelativeDate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,14 +31,6 @@ class StoryTableViewCell2: UITableViewCell {
 
     
     func uodateData( data:StoryFullInfoModel ) {
-     
-        
-        if let imgUrl = data.storyImgUrl {
-            let originalUrl = String(format: "%@",imgUrl)
-            
-            let imgCoverUrl = NSURL(string: originalUrl)
-            self.imgCover.sd_setImageWithURL(imgCoverUrl, placeholderImage: UIImage(named: "placeholder"), options: SDWebImageOptions.RetryFailed)
-        }
         
         self.lblRelativeDate.text = NSDate(timeIntervalSince1970: data.timeSaved).relativeTime ?? ""
         self.lblRelativeDate.textColor = textGrayColor

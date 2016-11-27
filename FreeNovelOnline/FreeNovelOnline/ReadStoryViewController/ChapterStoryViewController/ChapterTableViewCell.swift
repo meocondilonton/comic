@@ -25,7 +25,7 @@ class ChapterTableViewCell: UITableViewCell {
     
     func setCellSelect(isSelect:Bool){
         if isSelect == true {
-            self.bgView.backgroundColor = textWhiteBlurColor
+            self.bgView.backgroundColor =  UIColor(red: 0.0 / 255.0, green: 0.0 / 255.0, blue: 205.0 / 255.0, alpha: 255.0 / 255.0)
         }else{
             self.bgView.backgroundColor = UIColor.clearColor()
         }

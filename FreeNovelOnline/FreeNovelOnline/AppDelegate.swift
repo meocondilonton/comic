@@ -16,10 +16,10 @@ let UrlSearch = "http://www.mangareader.net/search/?w=%@&rd=%@&status=%@&order=%
 
 let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-let adUnitSmall = "ca-app-pub-4050289509193246/2685942210"
-let adUnitMedium = "ca-app-pub-4050289509193246/7116141818"
-let adUnitLarge = "ca-app-pub-4050289509193246/8592875011"
-let adUnitFullScreen = "ca-app-pub-4050289509193246/1069608215"
+let adUnitSmall = "ca-app-pub-4050289509193246/9115751018"
+let adUnitMedium = "ca-app-pub-4050289509193246/1592484219"
+let adUnitLarge = "ca-app-pub-4050289509193246/3069217418"
+let adUnitFullScreen = "ca-app-pub-4050289509193246/4545950615"
 
 
 @UIApplicationMain
@@ -40,11 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GADInterstitialDelegate{
         self.window?.rootViewController = loading
         self.window?.makeKeyAndVisible()
         
-        var dicSetting = Utils.getSettingReader()
         
-        let currentLight =  Float(dicSetting.valueForKey(keyLight) as! String)!
-         UIScreen.mainScreen().brightness = CGFloat(currentLight)
-        
+                
         interstitial = createAndLoadInterstitial()
         
         return true

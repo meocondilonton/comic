@@ -77,7 +77,7 @@ extension TabbarViewController {
         
           let populer = getVc("Main", titleName: "Popular" ,className: "PopulerViewController" ,imageName:"community" ,imageActive:"community")
       
-         let latest = getVc("Main", titleName: "Lastest Release", className: "LastestUpdateViewController",imageName:"community" ,imageActive:"community")
+         let latest = getVc("Main", titleName: "Lastest Release", className: "LastestUpdateViewController",imageName:"quickchat" ,imageActive:"quickchat")
         
          let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
         

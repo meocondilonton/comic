@@ -21,6 +21,7 @@ class DetailInfoStoryViewController: BaseViewController {
     var storyFullInfo:StoryFullInfoModel!
     var header:DetailInfoStoryHeaderCell!
     var footer:DetailInfoStoryFootererCell!
+    var isFromLastRelease:Bool = false
     
     var downloadProcess:Float = 0
     
@@ -222,13 +223,12 @@ class DetailInfoStoryViewController: BaseViewController {
         self.storyFullInfo.timeSaved = NSDate().timeIntervalSince1970
         self.storyFullInfo.storyIsRead = true
         DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier("ReadStoryViewController") as! ReadStoryViewController
-//        vc.storyFullInfo = self.storyFullInfo
+ 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
         vc.navigationController?.hidesBarsOnTap = true
         vc.hidesBottomBarWhenPushed = true
+        vc.isFromLastRelease = self.isFromLastRelease
         vc.chapSelected = 1
         vc.storyFullInfo = self.storyFullInfo
         vc.block = {[weak self] (index) in

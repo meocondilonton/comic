@@ -18,26 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_novel" translatesAutoresizingMaskIntoConstraints="NO" id="pRn-WP-0IY">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="abm-A0-OTm"/>
-                                    <constraint firstAttribute="width" constant="160" id="gag-zk-7P2"/>
-                                </constraints>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashicon" translatesAutoresizingMaskIntoConstraints="NO" id="pRn-WP-0IY"/>
                         </subviews>
-                        <color key="backgroundColor" red="0.85490196080000003" green="0.92941176469999998" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pRn-WP-0IY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="0Gz-kT-ME7"/>
-                            <constraint firstItem="pRn-WP-0IY" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="f3o-2X-hb8"/>
+                            <constraint firstAttribute="trailing" secondItem="pRn-WP-0IY" secondAttribute="trailing" constant="60" id="Cit-l3-ZH4"/>
+                            <constraint firstItem="pRn-WP-0IY" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="141" id="Z3l-KH-WfW"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="pRn-WP-0IY" secondAttribute="bottom" constant="161" id="jz6-mP-jHr"/>
+                            <constraint firstItem="pRn-WP-0IY" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="59" id="wGD-T3-01s"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="icon_novel" width="160" height="160"/>
+        <image name="splashicon" width="368" height="480"/>
     </resources>
 </document>

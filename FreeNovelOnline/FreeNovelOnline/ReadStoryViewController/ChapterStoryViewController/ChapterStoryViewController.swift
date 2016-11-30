@@ -20,15 +20,25 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     var arrPhoto:[SKPhoto]?
     var ws:LoadImgWebservice?
     var storyFullInfo:StoryFullInfoModel!
+    var isFromLastRelease:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chapSelected = self.storyFullInfo.currentChapter
-        self.currentPhoto =  self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
+        if self.chapSelected < self.storyFullInfo.storyChapter?.count {
+            self.currentPhoto =  self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
+        }else{
+              self.currentPhoto =  0
+        }
+        if isFromLastRelease == false {
         self.loadChapterData(String(format:"%@%@",BaseUrl, self.storyFullInfo.storyChapter![self.chapSelected].itemUrl!) )
+            let moveToIndexPath = NSIndexPath(forRow: self.chapSelected, inSection: 0)
+            self.tbView.scrollToRowAtIndexPath(moveToIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        }else{
+            self.tbView.setContentOffset(CGPointMake(0, CGFloat.max), animated: true)
+        }
         
-        let moveToIndexPath = NSIndexPath(forRow: self.chapSelected, inSection: 0)
-         self.tbView.scrollToRowAtIndexPath(moveToIndexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+       
         
     }
     
@@ -111,18 +121,23 @@ extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource
         }else{
             cell.setCellSelect(false )
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let idex = NSIndexPath(forRow:  self.chapSelected, inSection: 0)
+        var idex = NSIndexPath(forRow:  self.chapSelected, inSection: 0)
         if let cell = tableView.cellForRowAtIndexPath(idex) as? ChapterTableViewCell {
             cell.setCellSelect(false )
 
         }
           self.chapSelected = indexPath.row
+         idex = NSIndexPath(forRow:  self.chapSelected, inSection: 0)
+        if let cell = tableView.cellForRowAtIndexPath(idex) as? ChapterTableViewCell {
+            cell.setCellSelect(true )
+            
+        }
           self.currentPhoto = 0
           self.loadChapterData(String(format:"%@%@",BaseUrl, self.storyFullInfo.storyChapter![self.chapSelected].itemUrl!) )
     }

@@ -21,6 +21,7 @@ class DetailInfoStoryViewController: BaseViewController {
     var storyFullInfo:StoryFullInfoModel!
     var header:DetailInfoStoryHeaderCell!
     var footer:DetailInfoStoryFootererCell!
+    var isFromLastRelease:Bool = false
     
     var downloadProcess:Float = 0
     
@@ -59,7 +60,11 @@ class DetailInfoStoryViewController: BaseViewController {
         
         param.setValue(url , forKey: keyUrl)
         BaseWebservice.shareInstance().getData(param, isShowIndicator: true) {[weak self] (result) in
-            
+            if result != nil {
+                 self?.header.btnRead.hidden = false
+            }else{
+                self?.header.btnRead.hidden = true
+            }
             let doc = TFHpple(HTMLData: result)
             
             //read top
@@ -218,26 +223,36 @@ class DetailInfoStoryViewController: BaseViewController {
                     return
                 }
  
-        
-        self.storyFullInfo.timeSaved = NSDate().timeIntervalSince1970
-        self.storyFullInfo.storyIsRead = true
-        DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier("ReadStoryViewController") as! ReadStoryViewController
-//        vc.storyFullInfo = self.storyFullInfo
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
-        vc.navigationController?.hidesBarsOnTap = true
-        vc.hidesBottomBarWhenPushed = true
-        vc.chapSelected = 1
-        vc.storyFullInfo = self.storyFullInfo
-        vc.block = {[weak self] (index) in
-            if index < self?.storyFullInfo?.storyChapter?.count {
+         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) { // 1
+            
+            self.storyFullInfo.timeSaved = NSDate().timeIntervalSince1970
+            self.storyFullInfo.storyIsRead = true
+            
+            DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
+            dispatch_async(dispatch_get_main_queue()) { // 2
                 
+                 SVProgressHUD.dismiss()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("ChapterStoryViewController") as! ChapterStoryViewController
+                vc.navigationController?.hidesBarsOnTap = true
+                vc.hidesBottomBarWhenPushed = true
+                vc.isFromLastRelease = self.isFromLastRelease
+                vc.chapSelected = 1
+                vc.storyFullInfo = self.storyFullInfo
+                vc.block = {[weak self] (index) in
+                    if index < self?.storyFullInfo?.storyChapter?.count {
+                        
+                    }
+                }
+                
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
        
-         self.navigationController?.pushViewController(vc, animated: true)
+       
+ 
+     
     }
     
     func saveStory(){

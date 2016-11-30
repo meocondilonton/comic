@@ -72,6 +72,12 @@ extension RecentViewController {
 }
 
 extension RecentViewController :UITableViewDelegate , UITableViewDataSource {
+    override func scrollToTop() {
+        super.scrollToTop()
+        self.tbView.setContentOffset(CGPointMake(0, 0), animated: true)
+    }
+    
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

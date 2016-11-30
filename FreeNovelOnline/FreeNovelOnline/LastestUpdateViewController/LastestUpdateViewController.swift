@@ -11,8 +11,8 @@ import MJRefresh
 
 
 class LastestUpdateViewController: BaseViewController {
-  var arrStory:[StoryFullInfoModel]? = [StoryFullInfoModel]()
-    
+  var arrStory:[StoryInfoModel]? = [StoryInfoModel]()
+    var nextPage:String?
    
     @IBOutlet weak var tbView: UITableView!
     
@@ -21,6 +21,9 @@ class LastestUpdateViewController: BaseViewController {
        
         self.tbView.tableFooterView = UIView()
         self.setupLoadMoreAndPullRefresh()
+        
+        let url = String(format: "%@/latest/",BaseUrl  )
+        self.loadData(url, isRefresh: true)
      
     }
     
@@ -56,72 +59,66 @@ class LastestUpdateViewController: BaseViewController {
                 let e0 = eleItem as! TFHppleElement
 //                print("e0.raw")
 //                 print(e0.raw)
+                 let itemStory = StoryInfoModel()
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
                                 print(e.attributes["class"])
                     
                     for eleItem in e.children {
+                      
                         let e1 =  eleItem as! TFHppleElement
+                      
                     if e1.attributes["class"]?.isEqualToString("chapter") == true   {
-                                              print("e.content")
-                                              print(e1.content)
-                        let itemStory = StoryInfoModel()
-                        for eleItem1 in e1.children {
-                            let e1 =  eleItem1 as! TFHppleElement
-                            if e1.attributes["class"]?.isEqualToString("imgsearchresults") == true   {
-                                
-                                if let href = e1.objectForKey("style") {
-                                    
-                                    let imgUrlArr = href.characters.split{$0 == "'"}.map(String.init)
-                                    if imgUrlArr.count >= 2 {
-                                        
-                                        itemStory.storyImgUrl = imgUrlArr[1]
-                                    }
-                                    
-                                }
-                                
-                            }else if  e1.attributes["class"]?.isEqualToString("result_info c2") == true  {
-                                for eleItem2 in e1.children {
-                                    let e2 =  eleItem2 as! TFHppleElement
-                                    if e2.attributes["class"]?.isEqualToString("manga_name") == true{
-                                        for eleItem3 in e2.children {
-                                            let e3 =  eleItem3 as! TFHppleElement
-                                            for eleItem4 in e3.children {
-                                                let e5 =  eleItem4 as! TFHppleElement
-                                                for eleItem6 in e5.children {
-                                                    let e6 =  eleItem6 as! TFHppleElement
-                                                    
-                                                    if e6.raw != nil {
-                                                        //                                                        print("e6.content")
-                                                        //                                                        print(e6.raw)
-                                                        if let href = e6.objectForKey("href") {
-                                                            itemStory.storyUrl = href
-                                                        }
-                                                        
-                                                    }
-                                                }
-                                                if e5.raw != nil {
-                                                    //                                                  print("e5.content")
-                                                    //                                                      print(e5.raw)
-                                                    //                                                     if let href = e5.objectForKey("href") {
-                                                    //                                                         itemStory.storyUrl = href
-                                                    //                                                    }
-                                                    itemStory.storyName = e5.content
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            itemStory.storyName = e1.content
+                           self?.arrStory?.append(itemStory)
+                        if let href = e1.objectForKey("href") {
+                            itemStory.storyUrl = href
                         }
+
+                    }else if ( e1.attributes["class"]?.isEqualToString("chaptersrec") == true) {
+                        if  itemStory.storyRecentUpdate != nil {
+                            
+                            itemStory.storyRecentUpdate = String(format: "%@\n%@", itemStory.storyRecentUpdate ?? "" ,e1.content)
+                        }else{
+                              itemStory.storyRecentUpdate =  e1.content
                         }
-//                        self?.arrStory?.append(itemStory)
-                    }
+                        
+                        }
+                        
+                        
                 }
+                     if e.attributes["class"]?.isEqualToString("c1") == true   {
+                        itemStory.storyDateUpdate = e.content
+                         print( itemStory.storyDateUpdate)
+                    }
                 
             }
+            }
             
-            
+            let elementsPage = doc.searchWithXPathQuery("//div[@id='sp']")
+            var arrPage = [String]()
+            for eleItem in elementsPage {
+                let e0 = eleItem as! TFHppleElement
+                //                print("e0.raw")
+                //                 print(e0.raw)
+               
+                for eleItem0 in e0.children {
+                    let e = eleItem0 as! TFHppleElement
+                    print(e.attributes["class"])
+                     if let href = e.objectForKey("href") {
+//                           print("href")
+//                           print(href)
+                        arrPage.append(href)
+                    }
+                    
+                    
+                }
+            }
+            if arrPage.count > 1 {
+               self?.nextPage =  arrPage[arrPage.count - 2]
+                print(" self?.nextPage")
+                print( self?.nextPage)
+            }
             self?.tbView.reloadData()
         }
     }
@@ -129,7 +126,8 @@ class LastestUpdateViewController: BaseViewController {
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in
-            
+            let url = String(format: "%@/latest",BaseUrl   )
+            self?.loadData(url, isRefresh: true)
             })
         header.lastUpdatedTimeLabel!.hidden = true
         header.setTitle("Release To Refresh", forState: MJRefreshState.Pulling)
@@ -138,7 +136,8 @@ class LastestUpdateViewController: BaseViewController {
         self.tbView.mj_header = header
     
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] () -> Void in
- 
+            let url = String(format: "%@%@",BaseUrl , self?.nextPage ?? "" )
+            self?.loadData(url, isRefresh: false)
             })
         
         footer.setTitle("Loading Data...", forState: MJRefreshState.Refreshing)
@@ -154,8 +153,7 @@ extension LastestUpdateViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-         let url = String(format: "%@/latest/",BaseUrl  )
-        self.loadData(url, isRefresh: true)
+        
     }
     
     override func setUpNavigationBar() {
@@ -168,6 +166,12 @@ extension LastestUpdateViewController {
 }
 
 extension LastestUpdateViewController :UITableViewDelegate , UITableViewDataSource {
+    override func scrollToTop() {
+        super.scrollToTop()
+        
+        self.tbView.setContentOffset(CGPointMake(0, 0), animated: true)
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -210,7 +214,7 @@ extension LastestUpdateViewController :UITableViewDelegate , UITableViewDataSour
             let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
             
             let storyInfo = self.arrStory![indexPath.item]
-            
+            vc.isFromLastRelease = true
             vc.storyFullInfo = StoryFullInfoModel()
             vc.storyFullInfo.storyImgUrl = storyInfo.storyImgUrl
             vc.storyFullInfo.storyName = storyInfo.storyName

@@ -30,11 +30,11 @@ class StoryTableViewCell3: UITableViewCell {
     }
 
     
-    func uodateData( data:StoryFullInfoModel ) {
+    func uodateData( data:StoryInfoModel ) {
         
-        self.lblRelativeDate.text = NSDate(timeIntervalSince1970: data.timeSaved).relativeTime ?? ""
+        self.lblRelativeDate.text = data.storyDateUpdate ?? ""
         self.lblRelativeDate.textColor = textGrayColor
         self.lblContent.text =  data.storyName ?? ""
-        
+        self.lblChap.text = data.storyRecentUpdate ?? ""
     }
 }

@@ -185,11 +185,16 @@ extension PopulerViewController {
             let loseCase = category?.lowercaseString
             let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
             self?.currentPage = 0
-            let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
-           
-            self?.loadData(url,isRefresh: true)
- 
+            var url = "";
+            if path != "all" {
+                url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+              
+            }else{
+                url = String(format: "%@/popular/%d",BaseUrl,  (self?.currentPage)!*kPageNumber )
+                
+            }
             
+              self?.loadData(url,isRefresh: true)
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -260,7 +265,14 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
             let loseCase = category?.lowercaseString
             let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
             self?.currentPage = 0
-            let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+            var url = "";
+            if path != "" {
+                url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+                
+            }else{
+                url = String(format: "%@/popular/%d",BaseUrl,  (self?.currentPage)!*kPageNumber )
+                
+            }
             self?.loadData(url, isRefresh: false)
             
             })
@@ -276,7 +288,14 @@ extension PopulerViewController: UICollectionViewDelegate,UICollectionViewDataSo
                 let loseCase = category?.lowercaseString
                 let path =  loseCase?.stringByReplacingOccurrencesOfString(" ", withString: "-")
                 self?.currentPage += 1
-                let url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+                var url = "";
+                if path != "all" {
+                    url = String(format: "%@/popular/%@/%d",BaseUrl, path ?? "",  (self?.currentPage)!*kPageNumber )
+                    
+                }else{
+                    url = String(format: "%@/popular/%d",BaseUrl,  (self?.currentPage)!*kPageNumber )
+                    
+                }
                 owner.loadData(url, isRefresh: false)
             }
             

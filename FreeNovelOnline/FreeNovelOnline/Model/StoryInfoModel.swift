@@ -15,13 +15,16 @@ class StoryInfoModel: NSObject , NSCoding {
     var storyUrl:String?
     var isSaved:Bool = false
     var isSelect:Bool = false
+    var storyRecentUpdate:String?
+    var storyDateUpdate:String?
     
     required init?(coder decoder:NSCoder) {
         super.init()
            self.storyUrl = decoder.decodeObjectForKey("storyUrl") as? String
            self.storyImgUrl = decoder.decodeObjectForKey("storyImgUrl") as? String
            self.storyName = decoder.decodeObjectForKey("storyName") as? String
-        self.isSaved = decoder.decodeBoolForKey("isSaved")
+           self.isSaved = decoder.decodeBoolForKey("isSaved")
+           self.storyRecentUpdate = decoder.decodeObjectForKey("storyRecentUpdate") as? String
     }
     
     required override init() {
@@ -34,7 +37,7 @@ class StoryInfoModel: NSObject , NSCoding {
          aCoder.encodeObject(self.storyName, forKey: "storyName")
          aCoder.encodeObject(self.storyUrl, forKey: "storyUrl")
          aCoder.encodeBool(self.isSaved, forKey: "isSaved")
-        
+          aCoder.encodeObject(self.storyRecentUpdate, forKey: "storyRecentUpdate")
     }
     
 }

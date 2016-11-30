@@ -25,7 +25,11 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chapSelected = self.storyFullInfo.currentChapter
-        self.currentPhoto =  self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
+        if self.chapSelected < self.storyFullInfo.storyChapter?.count {
+            self.currentPhoto =  self.storyFullInfo.storyChapter![self.chapSelected].imgOffset
+        }else{
+              self.currentPhoto =  0
+        }
         if isFromLastRelease == false {
         self.loadChapterData(String(format:"%@%@",BaseUrl, self.storyFullInfo.storyChapter![self.chapSelected].itemUrl!) )
             let moveToIndexPath = NSIndexPath(forRow: self.chapSelected, inSection: 0)

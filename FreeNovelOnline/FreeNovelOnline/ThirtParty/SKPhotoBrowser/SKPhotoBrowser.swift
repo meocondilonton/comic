@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 public let SKPHOTO_LOADING_DID_END_NOTIFICATION = "photoLoadingDidEndNotification"
 
 // MARK: - SKPhotoBrowser
-public class SKPhotoBrowser: UIViewController {
-    
+ public   class SKPhotoBrowser: UIViewController , GADInterstitialDelegate {
+    var timer:NSTimer?
+    var interstitial: GADInterstitial!
     let pageIndexTagOffset: Int = 1000
     
     private var closeButton: SKCloseButton!
@@ -115,6 +117,7 @@ public class SKPhotoBrowser: UIViewController {
         configureToolbar()
         
         animator.willPresent(self)
+          interstitial = createAndLoadInterstitial()
     }
 
     
@@ -127,6 +130,11 @@ public class SKPhotoBrowser: UIViewController {
             photo.index = i
             i = i + 1
         }
+        
+        if timer != nil {
+            timer?.invalidate()
+        }
+        
     }
     
     override public func viewWillLayoutSubviews() {
@@ -148,6 +156,7 @@ public class SKPhotoBrowser: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         isViewActive = true
+          self.showAdAfterDelay()
     }
     
     // MARK: - Notification
@@ -218,6 +227,41 @@ public class SKPhotoBrowser: UIViewController {
         delegate?.willDismissAtPageIndex?(currentPageIndex)
         animator.willDismiss(self)
     }
+    
+    func showAdAfterDelay(){
+        if timer != nil {
+            timer?.invalidate()
+        }
+        timer = NSTimer.scheduledTimerWithTimeInterval(60*60*7, target: self, selector: #selector(SKPhotoBrowser.ShowAd), userInfo: nil, repeats: true)
+    }
+    func ShowAd(timer: NSTimer?) {
+        showInteristitial()
+    }
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: adUnitFullScreen)
+        let request = GADRequest()
+        interstitial.delegate = self
+        interstitial.loadRequest(request)
+        return interstitial
+    }
+    
+    
+    public func interstitialDidDismissScreen(ad: GADInterstitial!) {
+        interstitial = createAndLoadInterstitial()
+    }
+    
+    func showInteristitial(){
+        if interstitial.isReady {
+            
+                interstitial.presentFromRootViewController( self )
+           
+            
+        } else {
+            print("Ad wasn't ready")
+        }
+    }
+    
 }
 
 // MARK: - Public Function For Customizing Buttons

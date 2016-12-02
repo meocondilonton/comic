@@ -336,7 +336,7 @@ extension DetailInfoStoryViewController :UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.view.frame.size.width
+        return 375
     }
     
     

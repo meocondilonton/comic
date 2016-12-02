@@ -20,6 +20,8 @@ let adUnitSmall = "ca-app-pub-4050289509193246/9115751018"
 let adUnitMedium = "ca-app-pub-4050289509193246/1592484219"
 let adUnitLarge = "ca-app-pub-4050289509193246/3069217418"
 let adUnitFullScreen = "ca-app-pub-4050289509193246/4545950615"
+let adUnitFullScreen2 = "ca-app-pub-4050289509193246/6481525414"
+
 
 
 @UIApplicationMain
@@ -48,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,GADInterstitialDelegate{
     }
 
     func createAndLoadInterstitial() -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: adUnitFullScreen)
+        let interstitial = GADInterstitial(adUnitID: adUnitFullScreen2)
         let request = GADRequest()
         interstitial.delegate = self
         interstitial.loadRequest(request)

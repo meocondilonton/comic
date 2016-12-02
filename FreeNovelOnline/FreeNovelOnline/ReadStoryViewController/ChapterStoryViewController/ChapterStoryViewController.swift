@@ -8,9 +8,9 @@
 
 import UIKit
 import MFSideMenu
-import GoogleMobileAds
 
-class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
+
+class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate {
     
     @IBOutlet weak var tbView: UITableView!
     
@@ -21,6 +21,8 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
     var ws:LoadImgWebservice?
     var storyFullInfo:StoryFullInfoModel!
     var isFromLastRelease:Bool = false
+    var photoBrowser:SKPhotoBrowser?
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class ChapterStoryViewController: BaseViewController ,SKPhotoBrowserDelegate{
             self.tbView.setContentOffset(CGPointMake(0, CGFloat.max), animated: true)
         }
         
-       
+      
         
     }
     
@@ -70,11 +72,23 @@ extension ChapterStoryViewController {
         navigationItem.title = titleStory
         
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+      
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+      
+        
+    }
     
    override func btnBackTouch() {
     
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+   
 }
 
 extension ChapterStoryViewController :UITableViewDelegate, UITableViewDataSource{
@@ -187,10 +201,10 @@ extension ChapterStoryViewController {
             arrPhoto?.append(photoTemp)
         }
         if arrPhoto?.count > 0 {
-        let photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
-        photoBrowser.initializePageIndex(self.currentPhoto)
-        photoBrowser.delegate = self
-        self.presentViewController(photoBrowser, animated: true) {
+         photoBrowser = SKPhotoBrowser(photos: arrPhoto!)
+        photoBrowser?.initializePageIndex(self.currentPhoto)
+        photoBrowser?.delegate = self
+        self.presentViewController(photoBrowser!, animated: true) {
             
         }
         }
@@ -202,7 +216,7 @@ extension ChapterStoryViewController {
         for item in arrPath {
              dispatch_group_enter(group)
              item.loadUnderlyingImageAndNotify({
-                  print("loadToCacheImg" + item.photoURL)
+//                  print("loadToCacheImg" + item.photoURL)
                  dispatch_group_leave(group)
              })
  
@@ -211,13 +225,13 @@ extension ChapterStoryViewController {
  
         dispatch_group_notify(group, dispatch_get_main_queue()) {
             // This block will be executed when all tasks are complete
-            print("loadToCacheImg complete")
+//            print("loadToCacheImg complete")
            
         }
         }
     
     func willDismissAtPageIndex(index: Int) {
-        print("dismis at \(index)")
+//        print("dismis at \(index)")
         self.currentPhoto = index
         self.storyFullInfo.currentChapter = self.chapSelected
         self.storyFullInfo.storyChapter![self.chapSelected].imgOffset = self.currentPhoto
@@ -225,7 +239,7 @@ extension ChapterStoryViewController {
         
     }
     func didScrollToIndex(index: Int) {
-          print("scroll to  \(index)")
+//          print("scroll to  \(index)")
          self.currentPhoto = index
     }
 }

@@ -62,7 +62,7 @@ class LastestUpdateViewController: BaseViewController {
                  let itemStory = StoryInfoModel()
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
-                                print(e.attributes["class"])
+//                                print(e.attributes["class"])
                     
                     for eleItem in e.children {
                       
@@ -89,7 +89,7 @@ class LastestUpdateViewController: BaseViewController {
                 }
                      if e.attributes["class"]?.isEqualToString("c1") == true   {
                         itemStory.storyDateUpdate = e.content
-                         print( itemStory.storyDateUpdate)
+//                         print( itemStory.storyDateUpdate)
                     }
                 
             }
@@ -104,7 +104,7 @@ class LastestUpdateViewController: BaseViewController {
                
                 for eleItem0 in e0.children {
                     let e = eleItem0 as! TFHppleElement
-                    print(e.attributes["class"])
+//                    print(e.attributes["class"])
                      if let href = e.objectForKey("href") {
 //                           print("href")
 //                           print(href)
@@ -116,8 +116,8 @@ class LastestUpdateViewController: BaseViewController {
             }
             if arrPage.count > 1 {
                self?.nextPage =  arrPage[arrPage.count - 2]
-                print(" self?.nextPage")
-                print( self?.nextPage)
+//                print(" self?.nextPage")
+//                print( self?.nextPage)
             }
             self?.tbView.reloadData()
         }

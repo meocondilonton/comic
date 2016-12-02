@@ -62,8 +62,10 @@ class DetailInfoStoryViewController: BaseViewController {
         BaseWebservice.shareInstance().getData(param, isShowIndicator: true) {[weak self] (result) in
             if result != nil {
                  self?.header.btnRead.hidden = false
+                 self?.header.btnBookmark.hidden = false
             }else{
                 self?.header.btnRead.hidden = true
+                 self?.header.btnBookmark.hidden = false
             }
             let doc = TFHpple(HTMLData: result)
             
@@ -261,37 +263,16 @@ class DetailInfoStoryViewController: BaseViewController {
             return
         }
         self.storyFullInfo.isSaved = true
+        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) { // 1
+
         DatabaseHelper.shareInstall().inSertStoryFullInfoSaved(self.storyFullInfo)
-        
-        
-        let dispatch_group = dispatch_group_create()
-        
-        SVProgressHUD.showProgress(0, status: "Loading" ,maskType:.Gradient )
-        var i:Float = 0
-        for item in self.storyFullInfo.storyChapter! {
-            i += 1
-            dispatch_group_enter(dispatch_group)
-            let param = NSMutableDictionary()
-            
-            let url = String(format: "%@%@",BaseUrl,item.itemUrl ?? "")
-            param.setValue(url , forKey: keyUrl)
-            param.setValue("\(i)" , forKey: "index")
-            BaseWebservice().getData(param, isShowIndicator: false, block: {[weak self] (result) in
-                dispatch_group_leave(dispatch_group)
-                if let owner = self {
-                    owner.downloadProcess += Float(( 1 / Float(owner.storyFullInfo.storyChapter!.count))   )
-//                    print( owner.downloadProcess)
-                    
-                    SVProgressHUD.showProgress( owner.downloadProcess, status: "Loading" ,maskType:.Gradient)
-                }
-                })
+          dispatch_async(dispatch_get_main_queue()) { // 2
+             SVProgressHUD.dismiss()
+             self.header.btnBookmark.hidden = true
+            }
         }
         
-        
-        dispatch_group_notify(dispatch_group, dispatch_get_main_queue()) {
-            SVProgressHUD.dismiss()
-            
-        }
         
     }
     

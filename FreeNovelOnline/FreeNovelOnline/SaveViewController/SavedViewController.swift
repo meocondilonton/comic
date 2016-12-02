@@ -73,8 +73,8 @@ extension SavedViewController {
             navigationController?.navigationBar.setDefault(UINavigationBar.State.BackAndDelete, vc: self)
             navigationItem.title = "Select Story"
         }else{
-            navigationController?.navigationBar.setDefault(UINavigationBar.State.Edit, vc: self)
-            navigationItem.title = "Saved"
+            navigationController?.navigationBar.setDefault(UINavigationBar.State.Empty, vc: self)
+            navigationItem.title = "Bookmark"
         }
         
         
@@ -101,6 +101,11 @@ extension SavedViewController {
 }
 
 extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
+    override func scrollToTop() {
+        super.scrollToTop()
+        self.collectionViewStory.setContentOffset(CGPointMake(0, 0), animated: true)
+    }
+    
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in

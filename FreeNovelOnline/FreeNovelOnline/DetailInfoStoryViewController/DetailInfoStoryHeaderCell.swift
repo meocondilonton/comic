@@ -27,6 +27,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
     @IBOutlet weak var lblAlterNameStory: UILabel!
     
  
+    @IBOutlet weak var btnBookmark: UIButton!
     @IBOutlet weak var btnRead: UIButton!
 
  
@@ -84,6 +85,14 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         self.btnRead.layer.cornerRadius = 5
         self.btnRead.layer.masksToBounds = true
         
+        if info.isSaved == true {
+           self.btnBookmark.hidden = true
+        }else{
+            
+            self.btnBookmark.layer.cornerRadius = 5
+            self.btnBookmark.layer.masksToBounds = true
+            self.btnBookmark.hidden = false
+        }
     }
    
     @IBAction func btnReadTouch(sender: AnyObject) {
@@ -92,6 +101,11 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         }
     }
     
+    @IBAction func btnBookmark(sender: AnyObject) {
+        if self.block != nil {
+            self.block!(1)
+        }
+    }
   
     
 

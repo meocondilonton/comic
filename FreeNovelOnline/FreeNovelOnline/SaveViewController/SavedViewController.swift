@@ -13,8 +13,8 @@ import GoogleMobileAds
 
 class SavedViewController: BaseViewController {
     
+    @IBOutlet weak var tbView: UITableView!
     @IBOutlet weak var vEmpty: UIView!
-    @IBOutlet weak var collectionViewStory: UICollectionView!
     @IBOutlet weak var btnGotoBook: UIButton!
     
     
@@ -37,7 +37,7 @@ class SavedViewController: BaseViewController {
        
        
         
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        self.tbView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
     
     
@@ -52,8 +52,8 @@ class SavedViewController: BaseViewController {
         }
         
          if !editMode {
-        self.collectionViewStory.mj_header.endRefreshing()
-        self.collectionViewStory.reloadData()
+        self.tbView.mj_header.endRefreshing()
+        self.tbView.reloadData()
         }
     }
     
@@ -103,7 +103,7 @@ extension SavedViewController {
 extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
     override func scrollToTop() {
         super.scrollToTop()
-        self.collectionViewStory.setContentOffset(CGPointMake(0, 0), animated: true)
+        self.tbView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     func setupLoadMoreAndPullRefresh() {
@@ -115,7 +115,7 @@ extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSour
         header.setTitle("Release To Refresh", forState: MJRefreshState.Pulling)
         header.setTitle("Refreshing Data...", forState: MJRefreshState.Refreshing)
         header.setTitle("Pull To Refresh", forState: MJRefreshState.Idle)
-        self.collectionViewStory.mj_header = header
+        self.tbView.mj_header = header
         
     }
     
@@ -138,19 +138,7 @@ extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.collectionViewStory.cellForItemAtIndexPath(indexPath) as! HomeCollectionViewCell
-        if editMode == true {
-            if self.arrStory![indexPath.item].isSelect == true {
-                numSelect -= 1
-            }else{
-                numSelect += 1
-            }
-            navigationItem.title = "\(numSelect) selected"
-            self.arrStory![indexPath.item].isSelect = !self.arrStory![indexPath.item].isSelect
-            cell.selectToDelete(self.arrStory![indexPath.item].isSelect)
-          
-        }else{
-
+        
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
  
@@ -165,12 +153,12 @@ extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSour
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
          
-        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCollectionViewCell", forIndexPath: indexPath) as! HomeCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("StoryTableViewCell2", forIndexPath: indexPath) as! StoryTableViewCell2
         let arrIndex = indexPath.item
             cell.isEdit = self.arrStory![indexPath.item].isSelect
             cell.updateData(self.arrStory![arrIndex])

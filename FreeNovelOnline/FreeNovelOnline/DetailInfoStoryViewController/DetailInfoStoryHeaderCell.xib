@@ -31,9 +31,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uts-wd-Ecz" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="47" width="200" height="21"/>
+                    <rect key="frame" x="170" y="47" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="HTx-je-fhd"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="HTx-je-fhd"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="author">
@@ -46,9 +46,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvh-gT-YOa" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="70" width="200" height="14"/>
+                    <rect key="frame" x="170" y="63" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="7N1-GC-WfJ"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="7N1-GC-WfJ"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="category">
@@ -61,9 +61,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn3-5e-Ua4" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="86" width="200" height="21"/>
+                    <rect key="frame" x="170" y="79" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="BPL-Ww-2D4"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="BPL-Ww-2D4"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="status">
@@ -76,9 +76,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agk-HA-TUF" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="109" width="200" height="21"/>
+                    <rect key="frame" x="170" y="95" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="lec-Fb-UYV"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="lec-Fb-UYV"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Reading Direction:">
@@ -116,7 +116,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12J-w0-mJc">
                     <rect key="frame" x="170" y="33" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="gPL-YP-qXE"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="gPL-YP-qXE"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Alternate Name:">

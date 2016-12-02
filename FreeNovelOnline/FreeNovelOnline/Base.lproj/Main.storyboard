@@ -29,7 +29,7 @@
                                     <size key="itemSize" width="190" height="222"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="CtE-za-jFG" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
@@ -39,11 +39,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bag-AH-0tg">
-                                                    <rect key="frame" x="8" y="8" width="174" height="201"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bag-AH-0tg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="209"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label dfd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-Er-V1I">
-                                                    <rect key="frame" x="8" y="210" width="174" height="40"/>
+                                                    <rect key="frame" x="0.0" y="210" width="190" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="IxC-W0-hK3"/>
@@ -70,7 +70,7 @@
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="bag-AH-0tg" secondAttribute="trailing" constant="8" id="1H2-5p-tDG"/>
+                                            <constraint firstAttribute="trailing" secondItem="bag-AH-0tg" secondAttribute="trailing" id="1H2-5p-tDG"/>
                                             <constraint firstItem="Iey-HW-fwh" firstAttribute="top" secondItem="CtE-za-jFG" secondAttribute="top" id="2VF-O6-i5O"/>
                                             <constraint firstAttribute="bottom" secondItem="pMT-Er-V1I" secondAttribute="bottom" id="2vA-GJ-15D"/>
                                             <constraint firstAttribute="trailing" secondItem="LCX-G7-TTt" secondAttribute="trailing" id="EpB-3J-SR1"/>
@@ -79,10 +79,10 @@
                                             <constraint firstItem="Iey-HW-fwh" firstAttribute="leading" secondItem="CtE-za-jFG" secondAttribute="leading" id="O11-wk-Tsm"/>
                                             <constraint firstAttribute="trailing" secondItem="Iey-HW-fwh" secondAttribute="trailing" id="PS4-7C-5dP"/>
                                             <constraint firstItem="pMT-Er-V1I" firstAttribute="top" secondItem="bag-AH-0tg" secondAttribute="bottom" constant="1" id="UEQ-yb-6tF"/>
-                                            <constraint firstItem="bag-AH-0tg" firstAttribute="top" secondItem="CtE-za-jFG" secondAttribute="top" constant="8" id="Ulq-JI-NT4"/>
-                                            <constraint firstItem="pMT-Er-V1I" firstAttribute="leading" secondItem="CtE-za-jFG" secondAttribute="leading" constant="8" id="hAF-EW-a2i"/>
-                                            <constraint firstItem="bag-AH-0tg" firstAttribute="leading" secondItem="CtE-za-jFG" secondAttribute="leading" constant="8" id="lXa-cG-tHE"/>
-                                            <constraint firstAttribute="trailing" secondItem="pMT-Er-V1I" secondAttribute="trailing" constant="8" id="xnQ-c0-B5L"/>
+                                            <constraint firstItem="bag-AH-0tg" firstAttribute="top" secondItem="CtE-za-jFG" secondAttribute="top" id="Ulq-JI-NT4"/>
+                                            <constraint firstItem="pMT-Er-V1I" firstAttribute="leading" secondItem="CtE-za-jFG" secondAttribute="leading" id="hAF-EW-a2i"/>
+                                            <constraint firstItem="bag-AH-0tg" firstAttribute="leading" secondItem="CtE-za-jFG" secondAttribute="leading" id="lXa-cG-tHE"/>
+                                            <constraint firstAttribute="trailing" secondItem="pMT-Er-V1I" secondAttribute="trailing" id="xnQ-c0-B5L"/>
                                         </constraints>
                                         <size key="customSize" width="190" height="250"/>
                                         <connections>
@@ -504,15 +504,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailInfoStoryTableViewCell" id="xXG-gP-oAw" customClass="DetailInfoStoryTableViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailInfoStoryTableViewCell" rowHeight="60" id="xXG-gP-oAw" customClass="DetailInfoStoryTableViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xXG-gP-oAw" id="Oxx-xA-KPJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M66-RM-yu6">
+                                                    <rect key="frame" x="17" y="5" width="358" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="akL-Fj-N6f"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZJ-xI-WNo" customClass="UIVerticalAlignLabel" customModule="FreeNovelOnline" customModuleProvider="target">
-                                                    <rect key="frame" x="17" y="17" width="341" height="10"/>
+                                                    <rect key="frame" x="17" y="26" width="338" height="16.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -521,9 +530,12 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="M66-RM-yu6" firstAttribute="top" secondItem="Oxx-xA-KPJ" secondAttribute="top" constant="5" id="1KS-Wt-ZeI"/>
+                                                <constraint firstItem="eZJ-xI-WNo" firstAttribute="top" secondItem="M66-RM-yu6" secondAttribute="bottom" id="5a6-TB-j6g"/>
                                                 <constraint firstAttribute="bottom" secondItem="eZJ-xI-WNo" secondAttribute="bottom" constant="17" id="Dcf-Po-yjM"/>
-                                                <constraint firstAttribute="trailing" secondItem="eZJ-xI-WNo" secondAttribute="trailing" constant="17" id="ahf-oH-9HN"/>
-                                                <constraint firstItem="eZJ-xI-WNo" firstAttribute="top" secondItem="Oxx-xA-KPJ" secondAttribute="top" constant="17" id="bS6-3o-iYQ"/>
+                                                <constraint firstItem="M66-RM-yu6" firstAttribute="leading" secondItem="Oxx-xA-KPJ" secondAttribute="leading" constant="17" id="Oy8-zM-N7T"/>
+                                                <constraint firstAttribute="trailing" secondItem="eZJ-xI-WNo" secondAttribute="trailing" constant="20" id="ahf-oH-9HN"/>
+                                                <constraint firstAttribute="trailing" secondItem="M66-RM-yu6" secondAttribute="trailing" id="uZA-p1-Y26"/>
                                                 <constraint firstItem="eZJ-xI-WNo" firstAttribute="leading" secondItem="Oxx-xA-KPJ" secondAttribute="leading" constant="17" id="yxg-yu-9C4"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -558,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxd-h3-8mS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1272" y="-39"/>
+            <point key="canvasLocation" x="1271.2" y="-39.130434782608695"/>
         </scene>
         <!--Chapter Story View Controller-->
         <scene sceneID="KfX-8k-Tdg">
@@ -874,7 +886,7 @@
                                     <size key="itemSize" width="190" height="222"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="ruF-eP-4G5" customClass="HomeCollectionViewCell" customModule="FreeNovelOnline" customModuleProvider="target">
@@ -884,11 +896,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k2g-Ll-boW">
-                                                    <rect key="frame" x="8" y="8" width="174" height="201"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k2g-Ll-boW">
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="209"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label dfd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKY-p3-8Vb">
-                                                    <rect key="frame" x="8" y="210" width="174" height="40"/>
+                                                    <rect key="frame" x="0.0" y="210" width="190" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="umu-rG-ez1"/>
@@ -919,15 +931,15 @@
                                             <constraint firstItem="KKY-p3-8Vb" firstAttribute="top" secondItem="k2g-Ll-boW" secondAttribute="bottom" constant="1" id="1mc-di-CCe"/>
                                             <constraint firstAttribute="trailing" secondItem="VRl-KP-aD0" secondAttribute="trailing" id="8n6-es-aWe"/>
                                             <constraint firstAttribute="trailing" secondItem="RnT-6d-WoO" secondAttribute="trailing" id="FKj-Wl-gGl"/>
-                                            <constraint firstItem="k2g-Ll-boW" firstAttribute="leading" secondItem="ruF-eP-4G5" secondAttribute="leading" constant="8" id="HYn-vz-SZC"/>
-                                            <constraint firstAttribute="trailing" secondItem="KKY-p3-8Vb" secondAttribute="trailing" constant="8" id="czE-ed-KV4"/>
-                                            <constraint firstItem="k2g-Ll-boW" firstAttribute="top" secondItem="ruF-eP-4G5" secondAttribute="top" constant="8" id="dFf-nH-BJu"/>
+                                            <constraint firstItem="k2g-Ll-boW" firstAttribute="leading" secondItem="ruF-eP-4G5" secondAttribute="leading" id="HYn-vz-SZC"/>
+                                            <constraint firstAttribute="trailing" secondItem="KKY-p3-8Vb" secondAttribute="trailing" id="czE-ed-KV4"/>
+                                            <constraint firstItem="k2g-Ll-boW" firstAttribute="top" secondItem="ruF-eP-4G5" secondAttribute="top" id="dFf-nH-BJu"/>
                                             <constraint firstItem="RnT-6d-WoO" firstAttribute="top" secondItem="ruF-eP-4G5" secondAttribute="top" id="jZB-Qi-nov"/>
                                             <constraint firstItem="VRl-KP-aD0" firstAttribute="leading" secondItem="ruF-eP-4G5" secondAttribute="leading" id="li6-kK-z4Z"/>
                                             <constraint firstItem="VRl-KP-aD0" firstAttribute="top" secondItem="ruF-eP-4G5" secondAttribute="top" id="oMN-tA-RIS"/>
-                                            <constraint firstAttribute="trailing" secondItem="k2g-Ll-boW" secondAttribute="trailing" constant="8" id="vze-Ik-3aI"/>
+                                            <constraint firstAttribute="trailing" secondItem="k2g-Ll-boW" secondAttribute="trailing" id="vze-Ik-3aI"/>
                                             <constraint firstAttribute="bottom" secondItem="VRl-KP-aD0" secondAttribute="bottom" id="xUH-pP-qzy"/>
-                                            <constraint firstItem="KKY-p3-8Vb" firstAttribute="leading" secondItem="ruF-eP-4G5" secondAttribute="leading" constant="8" id="y1e-jj-Ed5"/>
+                                            <constraint firstItem="KKY-p3-8Vb" firstAttribute="leading" secondItem="ruF-eP-4G5" secondAttribute="leading" id="y1e-jj-Ed5"/>
                                         </constraints>
                                         <size key="customSize" width="190" height="250"/>
                                         <connections>

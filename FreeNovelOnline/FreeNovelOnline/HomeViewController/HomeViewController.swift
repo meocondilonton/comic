@@ -38,8 +38,7 @@ class HomeViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
        
-//        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        
+ 
        
     }
 

@@ -94,6 +94,7 @@
 		FD2ED7671DE43E5C007C1949 /* FilterPopularStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7661DE43E5C007C1949 /* FilterPopularStoryViewController.swift */; };
 		FD2ED7951DE7D6DA007C1949 /* LastestUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7931DE7D6DA007C1949 /* LastestUpdateViewController.swift */; };
 		FD2ED7961DE7D6DA007C1949 /* StoryTableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7941DE7D6DA007C1949 /* StoryTableViewCell3.swift */; };
+		FD484A4B1DF5471D009FB630 /* StoryTableViewCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD484A4A1DF5471D009FB630 /* StoryTableViewCell4.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +222,7 @@
 		FD2ED7661DE43E5C007C1949 /* FilterPopularStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPopularStoryViewController.swift; sourceTree = "<group>"; };
 		FD2ED7931DE7D6DA007C1949 /* LastestUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastestUpdateViewController.swift; sourceTree = "<group>"; };
 		FD2ED7941DE7D6DA007C1949 /* StoryTableViewCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell3.swift; sourceTree = "<group>"; };
+		FD484A4A1DF5471D009FB630 /* StoryTableViewCell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell4.swift; sourceTree = "<group>"; };
 		FE808C806CF29AB0282F29F2 /* Pods_FreeNovelOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeNovelOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -483,6 +485,7 @@
 		4197927A1D7426200068BBD5 /* SavedViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FD484A4A1DF5471D009FB630 /* StoryTableViewCell4.swift */,
 				4197927D1D7426580068BBD5 /* SavedViewController.swift */,
 			);
 			name = SavedViewController;
@@ -973,6 +976,7 @@
 				419792751D740C480068BBD5 /* BaseViewController.swift in Sources */,
 				41BEF3521DC835D100BED5A2 /* SKDetectingImageView.swift in Sources */,
 				41BEF3681DC98EE400BED5A2 /* TagView.swift in Sources */,
+				FD484A4B1DF5471D009FB630 /* StoryTableViewCell4.swift in Sources */,
 				41CB6B321D82C82500B95660 /* ChapterTableViewCell.swift in Sources */,
 				41CB6B3E1D85496300B95660 /* FilterStoryViewController.swift in Sources */,
 				41E839A21D7D87F50004804E /* Item.swift in Sources */,

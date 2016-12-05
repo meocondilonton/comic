@@ -107,6 +107,9 @@ class DatabaseHelper: NSObject {
         let chapterOffset = Expression<Int>("chapterOffset")
         let storyRate =  Expression<String>("storyRate")
         let storyIsRead = Expression<Int>("storyIsRead")
+        let storyAlterName =  Expression<String>("storyAlterName")
+        let storyReadingDerection =  Expression<String>("storyReadingDerection")
+        
         
         var arrStory =  [StoryFullInfoModel] ()
         let query  = storyFullInfoSaved.filter(storyIsRead == 1).order(timeSaved.desc).limit(50)
@@ -126,6 +129,9 @@ class DatabaseHelper: NSObject {
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
                 itemStory.storyRate = item[storyRate]
+                itemStory.storyAlterName = item[storyAlterName]
+                itemStory.storyReadingDerection = item[storyReadingDerection]
+                
                 
                 arrStory.append(itemStory)
                 
@@ -141,12 +147,12 @@ class DatabaseHelper: NSObject {
         
         let storyFullInfoSaved = Table("storyfullinfosaved")
         
-         let id = Expression<Int>("_id")
-         let storyImgUrl = Expression<String>("storyImgUrl")
-         let storyName = Expression<String>("storyName")
+          let id = Expression<Int>("_id")
+          let storyImgUrl = Expression<String>("storyImgUrl")
+          let storyName = Expression<String>("storyName")
           let storyUrl = Expression<String>("storyUrl")
           let isSaved = Expression<Int>("isSaved")
-         let storyIsRead = Expression<Int>("storyIsRead")
+          let storyIsRead = Expression<Int>("storyIsRead")
           let storyView = Expression<String>("storyView")
           let storyCurrentIndex = Expression<Int>("storyCurrentIndex")
           let storyDescription = Expression<String>("storyDescription")
@@ -154,9 +160,12 @@ class DatabaseHelper: NSObject {
           let currentChapter =  Expression<Int>("currentChapter")
           let chapterOffset = Expression<Int>("chapterOffset")
           let storyRate =  Expression<String>("storyRate")
+          let storyAlterName =  Expression<String>("storyAlterName")
+          let storyReadingDerection =  Expression<String>("storyReadingDerection")
+        
         
         var arrStory =  [StoryFullInfoModel] ()
-         let query  = storyFullInfoSaved.filter(  isSaved == 1)
+         let query  = storyFullInfoSaved.filter(  isSaved == 1).order(timeSaved.desc)
         do {
             for item in try db.prepare(query) {
 //                print("Xid: \(item[id]) ")
@@ -173,6 +182,37 @@ class DatabaseHelper: NSObject {
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
                 itemStory.storyRate = item[storyRate]
+                itemStory.storyAlterName = item[storyAlterName]
+                itemStory.storyReadingDerection = item[storyReadingDerection]
+                
+                let id = item[id]
+                
+                let keyCategory = String(format:"%@%d",keyStoryCategory,id )
+                let arrCategory = self.getListItem(keyCategory)
+                itemStory.storyCategory = arrCategory
+                
+                let keyChapter = String(format:"%@%d",keyStoryChapter,id )
+                let arrChapter = self.getListItem(keyChapter)
+                itemStory.storyChapter = arrChapter
+                
+                let keyAuthor = String(format:"%@%d",keyStoryAuthor,id )
+                let arrAuthor = self.getListItem(keyAuthor)
+                if arrAuthor.count > 0 {
+                    itemStory.storyAuthor = arrAuthor[0]
+                }
+                
+                let keyStatus = String(format:"%@%d",keyStoryStatus,id )
+                let arrStatus = self.getListItem(keyStatus)
+                if arrStatus.count > 0 {
+                    itemStory.storyStatus = arrStatus[0]
+                }
+                
+                let keySeries = String(format:"%@%d",keyStorySeries,id )
+                let arrSeries = self.getListItem(keySeries)
+                if arrSeries.count > 0 {
+                    itemStory.storySeries = arrSeries[0]
+                }
+
                 
                 arrStory.append(itemStory)
                 
@@ -199,7 +239,9 @@ class DatabaseHelper: NSObject {
          let timeSaved = Expression<Double>("timeSaved")
         let currentChapter =  Expression<Int>("currentChapter")
         let chapterOffset = Expression<Int>("chapterOffset")
-          let storyRate =  Expression<String>("storyRate")
+        let storyRate =  Expression<String>("storyRate")
+        let storyAlterName =  Expression<String>("storyAlterName")
+        let storyReadingDerection =  Expression<String>("storyReadingDerection")
         
         let query  = storyFullInfoSaved.filter(  storyName == storyNameStr)
             .limit(1)
@@ -220,6 +262,8 @@ class DatabaseHelper: NSObject {
                 itemStory.timeSaved = item[timeSaved]
                 itemStory.currentChapter = item[currentChapter]
                 itemStory.storyRate = item[storyRate]
+                itemStory.storyAlterName = item[storyAlterName]
+                itemStory.storyReadingDerection = item[storyReadingDerection]
                 
                 let id = item[id]
                 
@@ -276,6 +320,9 @@ class DatabaseHelper: NSObject {
         let currentChapter =  Expression<Int>("currentChapter")
         let chapterOffset = Expression<Int>("chapterOffset")
         let storyRate =  Expression<String>("storyRate")
+        let storyAlterName =  Expression<String>("storyAlterName")
+        let storyReadingDerection =  Expression<String>("storyReadingDerection")
+        
         
         let query  = storyTable.filter(  storyName == storyModel.storyName ?? "")
             .limit(1)
@@ -298,7 +345,7 @@ class DatabaseHelper: NSObject {
             }else{
                 let isSave = storyModel.isSaved == true ? 1:0
                 let storyIsReaded = storyModel.storyIsRead == true ? 1:0
-                let insert = storyTable.insert(storyImgUrl <- (storyModel.storyImgUrl ?? ""), storyName <- (storyModel.storyName ?? ""),storyUrl <- (storyModel.storyUrl ?? ""),isSaved <- isSave,storyIsRead <- storyIsReaded  ,storyView <- (storyModel.storyView ?? ""),storyCurrentIndex <- (storyModel.storyCurrentIndex ?? 0) , storyDescription <- (storyModel.storyDescription ?? "") ,timeSaved <-  storyModel.timeSaved  ,currentChapter <-  storyModel.currentChapter , storyRate <-  (storyModel.storyRate ?? "0"))
+                let insert = storyTable.insert(storyImgUrl <- (storyModel.storyImgUrl ?? ""), storyName <- (storyModel.storyName ?? ""),storyUrl <- (storyModel.storyUrl ?? ""),isSaved <- isSave,storyIsRead <- storyIsReaded  ,storyView <- (storyModel.storyView ?? ""),storyCurrentIndex <- (storyModel.storyCurrentIndex ?? 0) , storyDescription <- (storyModel.storyDescription ?? "") ,timeSaved <-  storyModel.timeSaved  ,currentChapter <-  storyModel.currentChapter , storyRate <-  (storyModel.storyRate ?? "0"), storyAlterName <- (storyModel.storyAlterName ?? "") , storyReadingDerection <- (storyModel.storyReadingDerection ?? "") )
                 let rowId = try db.run(insert)
                 
                 if storyModel.storyAuthor != nil {

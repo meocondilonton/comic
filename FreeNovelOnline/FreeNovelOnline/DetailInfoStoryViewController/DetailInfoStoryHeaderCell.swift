@@ -47,7 +47,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         let nomalTextFont = UIFont.systemFontOfSize(12)
         
         let arrFont = [nomalTextFont, hyperTextFont]
-        let arrColor = [hyperTextColor,hyperTextColor]
+        let arrColor = [textGrayColor,hyperTextColor]
         
        
         
@@ -60,7 +60,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         let arrColorCategory = NSMutableArray()
         let arrCategory = NSMutableArray()
          arrFontCategory.addObject(nomalTextFont)
-         arrColorCategory.addObject(hyperTextColor)
+         arrColorCategory.addObject(textGrayColor)
          arrCategory.addObject("Genre: ")
         if  info.storyCategory?.count > 0 {
         for item in info.storyCategory! {

@@ -263,6 +263,7 @@ class DetailInfoStoryViewController: BaseViewController {
             return
         }
         self.storyFullInfo.isSaved = true
+        self.storyFullInfo.timeSaved = NSDate().timeIntervalSince1970
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) { // 1
 

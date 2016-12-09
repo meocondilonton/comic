@@ -95,6 +95,8 @@
 		FD2ED7951DE7D6DA007C1949 /* LastestUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7931DE7D6DA007C1949 /* LastestUpdateViewController.swift */; };
 		FD2ED7961DE7D6DA007C1949 /* StoryTableViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED7941DE7D6DA007C1949 /* StoryTableViewCell3.swift */; };
 		FD484A4B1DF5471D009FB630 /* StoryTableViewCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD484A4A1DF5471D009FB630 /* StoryTableViewCell4.swift */; };
+		FD5897531DFA87CD00A60D39 /* bubbleShooterAndroid-master.zip in Resources */ = {isa = PBXBuildFile; fileRef = FD5897521DFA87CD00A60D39 /* bubbleShooterAndroid-master.zip */; };
+		FD5897551DFA880B00A60D39 /* KM-Bubble-Shooter-master.zip in Resources */ = {isa = PBXBuildFile; fileRef = FD5897541DFA880B00A60D39 /* KM-Bubble-Shooter-master.zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +225,8 @@
 		FD2ED7931DE7D6DA007C1949 /* LastestUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastestUpdateViewController.swift; sourceTree = "<group>"; };
 		FD2ED7941DE7D6DA007C1949 /* StoryTableViewCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell3.swift; sourceTree = "<group>"; };
 		FD484A4A1DF5471D009FB630 /* StoryTableViewCell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell4.swift; sourceTree = "<group>"; };
+		FD5897521DFA87CD00A60D39 /* bubbleShooterAndroid-master.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "bubbleShooterAndroid-master.zip"; sourceTree = "<group>"; };
+		FD5897541DFA880B00A60D39 /* KM-Bubble-Shooter-master.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "KM-Bubble-Shooter-master.zip"; sourceTree = "<group>"; };
 		FE808C806CF29AB0282F29F2 /* Pods_FreeNovelOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreeNovelOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -280,6 +284,8 @@
 		4105496D1D8024BB004F39E5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FD5897541DFA880B00A60D39 /* KM-Bubble-Shooter-master.zip */,
+				FD5897521DFA87CD00A60D39 /* bubbleShooterAndroid-master.zip */,
 				4155D16F1D98F5EC00F92FBE /* NSDateHelper.swift */,
 				4105496E1D8024D0004F39E5 /* Utils.swift */,
 				41CB6B351D851AF700B95660 /* Constant.swift */,
@@ -782,6 +788,8 @@
 				41EEB90C1D926F8700CD27B2 /* SVProgressHUD.bundle in Resources */,
 				41B86E9C1D9B45F600B277B4 /* DetailInfoStoryFootererCell.xib in Resources */,
 				41698BAD1D65B7920017CA84 /* LaunchScreen.storyboard in Resources */,
+				FD5897531DFA87CD00A60D39 /* bubbleShooterAndroid-master.zip in Resources */,
+				FD5897551DFA880B00A60D39 /* KM-Bubble-Shooter-master.zip in Resources */,
 				41698BAA1D65B7920017CA84 /* Assets.xcassets in Resources */,
 				41698BA81D65B7920017CA84 /* Main.storyboard in Resources */,
 				41BEF3661DC98EE400BED5A2 /* Info.plist in Resources */,

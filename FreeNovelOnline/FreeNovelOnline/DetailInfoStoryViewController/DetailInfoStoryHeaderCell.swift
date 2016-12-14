@@ -27,6 +27,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
     @IBOutlet weak var lblAlterNameStory: UILabel!
     
  
+    @IBOutlet weak var btnBookmark: UIButton!
     @IBOutlet weak var btnRead: UIButton!
 
  
@@ -46,7 +47,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         let nomalTextFont = UIFont.systemFontOfSize(12)
         
         let arrFont = [nomalTextFont, hyperTextFont]
-        let arrColor = [hyperTextColor,hyperTextColor]
+        let arrColor = [textGrayColor,hyperTextColor]
         
        
         
@@ -59,7 +60,7 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         let arrColorCategory = NSMutableArray()
         let arrCategory = NSMutableArray()
          arrFontCategory.addObject(nomalTextFont)
-         arrColorCategory.addObject(hyperTextColor)
+         arrColorCategory.addObject(textGrayColor)
          arrCategory.addObject("Genre: ")
         if  info.storyCategory?.count > 0 {
         for item in info.storyCategory! {
@@ -84,6 +85,14 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         self.btnRead.layer.cornerRadius = 5
         self.btnRead.layer.masksToBounds = true
         
+        if info.isSaved == true {
+           self.btnBookmark.hidden = true
+        }else{
+            
+            self.btnBookmark.layer.cornerRadius = 5
+            self.btnBookmark.layer.masksToBounds = true
+            self.btnBookmark.hidden = false
+        }
     }
    
     @IBAction func btnReadTouch(sender: AnyObject) {
@@ -92,6 +101,11 @@ class DetailInfoStoryHeaderCell: UITableViewHeaderFooterView {
         }
     }
     
+    @IBAction func btnBookmark(sender: AnyObject) {
+        if self.block != nil {
+            self.block!(1)
+        }
+    }
   
     
 

@@ -38,8 +38,7 @@ class HomeViewController: BaseViewController {
         self.setupLoadMoreAndPullRefresh()
         self.getDefaultData()
        
-//        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        
+ 
        
     }
 
@@ -351,7 +350,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         if indexPath.item % knumAdd == 0  && indexPath.item > 0 {
              return CGSizeMake(self.view.frame.size.width - 40, self.view.frame.size.width - 40)
         }else{
-            return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.25/3.0)
+            return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.45/3.0)
         }
     }
     

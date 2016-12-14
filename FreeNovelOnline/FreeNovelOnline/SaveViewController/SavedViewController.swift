@@ -13,15 +13,14 @@ import GoogleMobileAds
 
 class SavedViewController: BaseViewController {
     
+    @IBOutlet weak var tbView: UITableView!
     @IBOutlet weak var vEmpty: UIView!
-    @IBOutlet weak var collectionViewStory: UICollectionView!
     @IBOutlet weak var btnGotoBook: UIButton!
     
     
      var arrStory:[StoryFullInfoModel]? = [StoryFullInfoModel]()
      var request:GADRequest!
      var numAd:Int = 0
-    var editMode:Bool = false
     var numSelect:Int = 0
     
     @IBAction func btnGoToBookTouch(sender: AnyObject) {
@@ -30,14 +29,11 @@ class SavedViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if !editMode {
-             self.setupLoadMoreAndPullRefresh()
-        }
-       
-       
-        
-        self.collectionViewStory.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+
+            self.setupLoadMoreAndPullRefresh()
+
+        self.tbView.tableFooterView = UIView()
+        self.tbView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
     
     
@@ -50,11 +46,10 @@ class SavedViewController: BaseViewController {
         }else{
             self.vEmpty.hidden = true
         }
-        
-         if !editMode {
-        self.collectionViewStory.mj_header.endRefreshing()
-        self.collectionViewStory.reloadData()
-        }
+
+        self.tbView.mj_header.endRefreshing()
+        self.tbView.reloadData()
+
     }
     
 }
@@ -69,13 +64,10 @@ extension SavedViewController {
     
     override func setUpNavigationBar() {
         super.setUpNavigationBar()
-        if editMode {
-            navigationController?.navigationBar.setDefault(UINavigationBar.State.BackAndDelete, vc: self)
-            navigationItem.title = "Select Story"
-        }else{
-            navigationController?.navigationBar.setDefault(UINavigationBar.State.Edit, vc: self)
-            navigationItem.title = "Saved"
-        }
+      
+            navigationController?.navigationBar.setDefault(UINavigationBar.State.Empty, vc: self)
+            navigationItem.title = "Bookmark"
+      
         
         
     }
@@ -90,17 +82,15 @@ extension SavedViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-   override func btnEditTouch() {
-        super.btnEditTouch()
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc = storyboard.instantiateViewControllerWithIdentifier("SavedViewController") as! SavedViewController
-    vc.editMode = true
-    self.navigationController?.pushViewController(vc, animated: true)
-    
-    }
+  
 }
 
-extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout  {
+extension SavedViewController:  UITableViewDelegate,UITableViewDataSource  {
+    override func scrollToTop() {
+        super.scrollToTop()
+        self.tbView.setContentOffset(CGPointMake(0, 0), animated: true)
+    }
+    
     func setupLoadMoreAndPullRefresh() {
         
         let header = MJRefreshNormalHeader(refreshingBlock: {[weak self] () -> Void in
@@ -110,47 +100,44 @@ extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSour
         header.setTitle("Release To Refresh", forState: MJRefreshState.Pulling)
         header.setTitle("Refreshing Data...", forState: MJRefreshState.Refreshing)
         header.setTitle("Pull To Refresh", forState: MJRefreshState.Idle)
-        self.collectionViewStory.mj_header = header
+        self.tbView.mj_header = header
         
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.arrStory?.count ?? 0
- 
         return count
-        
     }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+   
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
- 
-            return CGSizeMake(self.view.frame.size.width/3 - 20, self.view.frame.size.width*1.25/3.0)
- 
-        
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+           return 60
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.collectionViewStory.cellForItemAtIndexPath(indexPath) as! HomeCollectionViewCell
-        if editMode == true {
-            if self.arrStory![indexPath.item].isSelect == true {
-                numSelect -= 1
-            }else{
-                numSelect += 1
-            }
-            navigationItem.title = "\(numSelect) selected"
-            self.arrStory![indexPath.item].isSelect = !self.arrStory![indexPath.item].isSelect
-            cell.selectToDelete(self.arrStory![indexPath.item].isSelect)
-          
-        }else{
-
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        return UIView()
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell4", forIndexPath: indexPath) as! StoryTableViewCell4
+        if indexPath.row < self.arrStory?.count {
+            cell.uodateData(self.arrStory![indexPath.row])
+        }
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.row <= self.arrStory?.count {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("DetailInfoStoryViewController") as! DetailInfoStoryViewController
- 
-                let arrIndex = indexPath.item // - numAdCurrent
-                let storyInfo = self.arrStory![arrIndex]
+            
+            let storyInfo = self.arrStory![indexPath.item]
             
             vc.storyFullInfo = StoryFullInfoModel()
             vc.storyFullInfo.storyImgUrl = storyInfo.storyImgUrl
@@ -159,18 +146,7 @@ extension SavedViewController: UICollectionViewDelegate,UICollectionViewDataSour
             
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
-         
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCollectionViewCell", forIndexPath: indexPath) as! HomeCollectionViewCell
-        let arrIndex = indexPath.item
-            cell.isEdit = self.arrStory![indexPath.item].isSelect
-            cell.updateData(self.arrStory![arrIndex])
-        
-        return cell
- 
-    }
 }

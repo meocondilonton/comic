@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRl-jq-IJ1">
-                    <rect key="frame" x="10" y="10" width="150" height="229"/>
+                    <rect key="frame" x="10" y="10" width="150" height="190"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="y9i-VL-des"/>
                     </constraints>
@@ -31,9 +31,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uts-wd-Ecz" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="47" width="200" height="21"/>
+                    <rect key="frame" x="170" y="47" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="HTx-je-fhd"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="HTx-je-fhd"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="author">
@@ -46,9 +46,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvh-gT-YOa" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="70" width="200" height="14"/>
+                    <rect key="frame" x="170" y="63" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="7N1-GC-WfJ"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="7N1-GC-WfJ"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="category">
@@ -61,9 +61,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn3-5e-Ua4" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="86" width="200" height="21"/>
+                    <rect key="frame" x="170" y="79" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="BPL-Ww-2D4"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="BPL-Ww-2D4"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="status">
@@ -76,9 +76,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agk-HA-TUF" customClass="FRHyperLabel">
-                    <rect key="frame" x="170" y="109" width="200" height="21"/>
+                    <rect key="frame" x="170" y="95" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="lec-Fb-UYV"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="lec-Fb-UYV"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Reading Direction:">
@@ -92,9 +92,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QtU-bl-x8A">
-                    <rect key="frame" x="177" y="206" width="182" height="33"/>
+                    <rect key="frame" x="197.5" y="210" width="157.5" height="29"/>
                     <color key="backgroundColor" red="0.14117647059999999" green="0.79607843140000001" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Read">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -102,10 +102,21 @@
                         <action selector="btnReadTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zsm-s1-Uvj"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBr-t4-85h">
+                    <rect key="frame" x="20" y="211" width="157.5" height="28"/>
+                    <color key="backgroundColor" red="0.14117647059999999" green="0.79607843140000001" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Bookmark">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="btnBookmark:" destination="iN0-l3-epB" eventType="touchUpInside" id="Eq5-Ky-g6e"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12J-w0-mJc">
                     <rect key="frame" x="170" y="33" width="200" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="gPL-YP-qXE"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="gPL-YP-qXE"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Alternate Name:">
@@ -123,21 +134,24 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="12J-w0-mJc" secondAttribute="trailing" constant="5" id="4IS-QD-RZ4"/>
                 <constraint firstItem="Uts-wd-Ecz" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="4za-mJ-cEs"/>
-                <constraint firstAttribute="bottom" secondItem="GRl-jq-IJ1" secondAttribute="bottom" constant="11" id="5jM-Kg-RDE"/>
+                <constraint firstAttribute="bottom" secondItem="GRl-jq-IJ1" secondAttribute="bottom" constant="50" id="5jM-Kg-RDE"/>
                 <constraint firstItem="Fvh-gT-YOa" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="8AI-AX-Xup"/>
                 <constraint firstItem="12J-w0-mJc" firstAttribute="top" secondItem="N7B-3T-szF" secondAttribute="bottom" constant="2" id="AlP-gA-CQN"/>
                 <constraint firstAttribute="bottom" secondItem="QtU-bl-x8A" secondAttribute="bottom" constant="11" id="Da4-df-oPu"/>
-                <constraint firstAttribute="trailing" secondItem="QtU-bl-x8A" secondAttribute="trailing" constant="16" id="EeF-xn-juR"/>
+                <constraint firstAttribute="bottom" secondItem="xBr-t4-85h" secondAttribute="bottom" constant="11" id="Dxu-GS-XSB"/>
+                <constraint firstAttribute="trailing" secondItem="QtU-bl-x8A" secondAttribute="trailing" constant="20" id="EeF-xn-juR"/>
                 <constraint firstAttribute="trailing" secondItem="Fvh-gT-YOa" secondAttribute="trailing" constant="5" id="GoU-0c-ch4"/>
                 <constraint firstAttribute="trailing" secondItem="agk-HA-TUF" secondAttribute="trailing" constant="5" id="LZc-nH-Z3f"/>
-                <constraint firstItem="QtU-bl-x8A" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" priority="750" constant="17" id="M3N-gX-jSD"/>
                 <constraint firstAttribute="trailing" secondItem="Dn3-5e-Ua4" secondAttribute="trailing" constant="5" id="PrJ-Pb-9gm"/>
                 <constraint firstAttribute="trailing" secondItem="Uts-wd-Ecz" secondAttribute="trailing" constant="5" id="SUd-tA-Axc"/>
                 <constraint firstItem="Dn3-5e-Ua4" firstAttribute="top" secondItem="Fvh-gT-YOa" secondAttribute="bottom" constant="2" id="W67-4h-8KR"/>
                 <constraint firstItem="Uts-wd-Ecz" firstAttribute="top" secondItem="12J-w0-mJc" secondAttribute="bottom" id="YsK-wV-Q1H"/>
+                <constraint firstItem="xBr-t4-85h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="a1c-F0-joH"/>
                 <constraint firstItem="agk-HA-TUF" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="d92-5z-PQO"/>
                 <constraint firstItem="N7B-3T-szF" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="ezu-Xk-FeX"/>
                 <constraint firstItem="GRl-jq-IJ1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="f4b-QA-Bt4"/>
+                <constraint firstItem="QtU-bl-x8A" firstAttribute="leading" secondItem="xBr-t4-85h" secondAttribute="trailing" constant="20" id="fi7-DY-Ynw"/>
+                <constraint firstItem="xBr-t4-85h" firstAttribute="width" secondItem="QtU-bl-x8A" secondAttribute="width" id="frq-1A-DWG"/>
                 <constraint firstAttribute="trailing" secondItem="N7B-3T-szF" secondAttribute="trailing" constant="5" id="fxq-uX-jAa"/>
                 <constraint firstItem="Dn3-5e-Ua4" firstAttribute="leading" secondItem="GRl-jq-IJ1" secondAttribute="trailing" constant="10" id="gHS-TM-ldl"/>
                 <constraint firstItem="agk-HA-TUF" firstAttribute="top" secondItem="Dn3-5e-Ua4" secondAttribute="bottom" constant="2" id="nFO-OX-VHF"/>
@@ -148,6 +162,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnBookmark" destination="xBr-t4-85h" id="g7A-qS-AyM"/>
                 <outlet property="btnRead" destination="QtU-bl-x8A" id="zLa-Eg-4cD"/>
                 <outlet property="imgCover" destination="GRl-jq-IJ1" id="DKt-YI-0Kg"/>
                 <outlet property="lblAlterNameStory" destination="12J-w0-mJc" id="D1F-Bh-wtx"/>

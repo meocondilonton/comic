@@ -36,5 +36,6 @@ class StoryTableViewCell3: UITableViewCell {
         self.lblRelativeDate.textColor = textGrayColor
         self.lblContent.text =  data.storyName ?? ""
         self.lblChap.text = data.storyRecentUpdate ?? ""
+        self.lblChap.textColor = textGrayColor
     }
 }

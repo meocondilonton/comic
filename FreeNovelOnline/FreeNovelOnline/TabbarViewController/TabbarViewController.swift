@@ -79,6 +79,8 @@ extension TabbarViewController {
       
          let latest = getVc("Main", titleName: "Lastest Release", className: "LastestUpdateViewController",imageName:"quickchat" ,imageActive:"quickchat")
         
+           let favorite = getVc("Main", titleName: "Bookmark", className: "SavedViewController",imageName:"ROFMainTabBarIconFavorites-Selected" ,imageActive:"ROFMainTabBarIconFavorites-Selected")
+        
          let recent = getVc("Main", titleName: "Recent", className: "RecentViewController",imageName:"icon_save" ,imageActive:"icon_save")
         
        
@@ -90,7 +92,7 @@ extension TabbarViewController {
         self.tabBar.backgroundColor = bgLightGrayColor
         
         
-        return [home, populer,latest, recent]
+        return [home, populer,latest,favorite, recent]
     }
     
     
